@@ -23,6 +23,7 @@ public class Restaurant {
 	private boolean working;
 	private Location location;
 	private Image logo;
+	private boolean deleted;
 	
 	public Restaurant(String name, RestaurantType restaurantType, ArrayList<Article> articles, boolean working,
 			Location location, Image logo) {
@@ -33,6 +34,15 @@ public class Restaurant {
 		this.working = working;
 		this.location = location;
 		this.logo = logo;
+		this.deleted = false;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	public String getName() {

@@ -16,6 +16,7 @@ public class User {
 	protected String surname;
 	protected Gender gender;
 	protected Date dateOfBirth;
+	protected boolean deleted;
 	
 	public User(String username, String password, String name, String surname, Gender gender, Date dateOfBirth) {
 		super();
@@ -25,6 +26,7 @@ public class User {
 		this.surname = surname;
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
+		this.deleted = false;
 	}
 
 	public String getUsername() {

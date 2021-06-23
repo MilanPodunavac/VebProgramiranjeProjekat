@@ -16,6 +16,7 @@ public class Article {
 	private int size;
 	private String description;
 	private Image picture;
+	private boolean deleted;
 	
 	public Article(String name, double price, ArticleType articleType, Restaurant restaurant, int size,
 			String description, Image picture) {
@@ -27,6 +28,15 @@ public class Article {
 		this.size = size;
 		this.description = description;
 		this.picture = picture;
+		this.deleted = false;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	public String getName() {

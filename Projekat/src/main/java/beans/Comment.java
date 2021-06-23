@@ -6,6 +6,7 @@ public class Comment {
 	private Restaurant restaurant;
 	private String text;
 	private int grade; // 1 to 5
+	private boolean approved;
 	
 	public Comment(Customer customer, Restaurant restaurant, String text, int grade) {
 		super();
@@ -13,6 +14,7 @@ public class Comment {
 		this.restaurant = restaurant;
 		this.text = text;
 		this.grade = grade;
+		this.approved = false;
 	}
 
 	public Customer getCustomer() {
@@ -47,6 +49,12 @@ public class Comment {
 		this.grade = grade;
 	}
 	
-	
+	public boolean isApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
+	}
 	
 }
