@@ -12,6 +12,15 @@ public class Delivery {
    
    
    
+   public Delivery(String id, Date time, double totalCost, DeliveryStatus deliveryStatus, Customer customer) {
+	super();
+	this.id = id;
+	this.time = time;
+	this.totalCost = totalCost;
+	this.deliveryStatus = deliveryStatus;
+	this.customer = customer;
+   }
+
    public String getId() {
 	   return id;
    }
@@ -48,9 +57,9 @@ public class Delivery {
       return customer;
 	}
    
-   public void setCustomer(Customer newCustomer) {
-      if (this.customer == null || !this.customer.equals(newCustomer))
-      {
+	public void setCustomer(Customer newCustomer) {
+		if (this.customer == null || !this.customer.equals(newCustomer))
+		{
          if (this.customer != null)
          {
             Customer oldCustomer = this.customer;
