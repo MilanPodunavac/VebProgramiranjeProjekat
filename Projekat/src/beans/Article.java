@@ -4,17 +4,17 @@ import java.awt.Image;
 import java.util.*;
 
 public class Article {
-   private String name;
-   private double price;
-   private ArticleType articleType;
-   private int size;
-   private String description;
-   private Image picture;
-   private Restaurant restaurant;
-   private boolean deleted;
+	private String name;
+	private double price;
+	private ArticleType articleType;
+	private int size;
+	private String description;
+	private Image picture;
+	private Restaurant restaurant;
+	private boolean deleted;
    
-   public Article(String name, double price, ArticleType articleType, int size, String description, Image picture,
-		Restaurant restaurant) {
+	public Article(String name, double price, ArticleType articleType, int size, String description, Image picture,
+			Restaurant restaurant) {
 	super();
 	this.name = name;
 	this.price = price;
@@ -24,26 +24,26 @@ public class Article {
 	this.picture = picture;
 	this.restaurant = restaurant;
 	deleted = false;
-}
-public Restaurant getRestaurant() {
-      return restaurant;
-   }
-   public void setRestaurant(Restaurant newRestaurant) {
-      if (this.restaurant == null || !this.restaurant.equals(newRestaurant))
-      {
-         if (this.restaurant != null)
-         {
-            Restaurant oldRestaurant = this.restaurant;
-            this.restaurant = null;
-            oldRestaurant.removeArticles(this);
-         }
-         if (newRestaurant != null)
-         {
-            this.restaurant = newRestaurant;
-            this.restaurant.addArticles(this);
-         }
-      }
-   }
+	}
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+	public void setRestaurant(Restaurant newRestaurant) {
+		if (this.restaurant == null || !this.restaurant.equals(newRestaurant))
+		{
+			if (this.restaurant != null)
+			{
+				Restaurant oldRestaurant = this.restaurant;
+				this.restaurant = null;
+				oldRestaurant.removeArticles(this);
+			}
+			if (newRestaurant != null)
+			{
+				this.restaurant = newRestaurant;
+				this.restaurant.addArticles(this);
+			}
+		}
+	}
    
 	public String getName() {
 		return name;

@@ -3,18 +3,18 @@ package beans;
 import java.util.*;
 
 public class User {
-   protected String username;
-   protected String password;
-   protected String name;
-   protected String surname;
-   protected Gender gender;
-   protected Date dateOfBirth;
-   protected boolean deleted;
+	protected String username;
+	protected String password;
+	protected String name;
+	protected String surname;
+	protected Gender gender;
+	protected Date dateOfBirth;
+	protected boolean deleted;
    
-   public User() {
-	   deleted = false;
-   }
-   public User(String username, String password, String name, String surname, Gender gender, Date dateOfBirth) {
+	public User() {
+		deleted = false;
+	}
+	public User(String username, String password, String name, String surname, Gender gender, Date dateOfBirth) {
 		super();
 		this.username = username;
 		this.password = password;

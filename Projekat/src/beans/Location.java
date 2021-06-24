@@ -3,14 +3,14 @@ package beans;
 import java.util.*;
 
 public class Location {
-   private double latitude;
-   private double longitude;
-   private String streetName;
-   private int streetNumber;
-   private String cityName;
-   private int cityNumber;
+	private double latitude;
+	private double longitude;
+	private String streetName;
+	private int streetNumber;
+	private String cityName;
+	private int cityNumber;
    
-   public Location(double latitude, double longitude, String streetName, int streetNumber, String cityName,
+	public Location(double latitude, double longitude, String streetName, int streetNumber, String cityName,
 			int cityNumber) {
 		super();
 		this.latitude = latitude;

@@ -4,27 +4,27 @@ import java.awt.Image;
 import java.util.*;
 
 public class Restaurant {
-   private String name;
-   private boolean working;
-   private Image logo;
-   private boolean deleted;
-   private RestaurantType restaurantType;
-   private java.util.List<Article> articles;
-   private Location location;
+	private String name;
+	private boolean working;
+	private Image logo;
+	private boolean deleted;
+	private RestaurantType restaurantType;
+	private java.util.List<Article> articles;
+	private Location location;
    
    
    
    
-   public Restaurant(String name, boolean working, Image logo, boolean deleted, RestaurantType restaurantType,
-		List<Article> articles, Location location) {
-	super();
-	this.name = name;
-	this.working = working;
-	this.logo = logo;
-	this.deleted = deleted;
-	this.restaurantType = restaurantType;
-	this.articles = articles;
-	this.location = location;
+	public Restaurant(String name, boolean working, Image logo, boolean deleted, RestaurantType restaurantType,
+			List<Article> articles, Location location) {
+		super();
+		this.name = name;
+		this.working = working;
+		this.logo = logo;
+		this.deleted = deleted;
+		this.restaurantType = restaurantType;
+		this.articles = articles;
+		this.location = location;
    }
    
    
@@ -120,39 +120,39 @@ public class Restaurant {
 	}
    
 	public void addArticles(Article newArticle) {
-      if (newArticle == null)
-         return;
-      if (this.articles == null)
-         this.articles = new java.util.Vector<Article>();
-      if (!this.articles.contains(newArticle))
-      {
-         this.articles.add(newArticle);
-         newArticle.setRestaurant(this);      
-      }
+		if (newArticle == null)
+			return;
+		if (this.articles == null)
+			this.articles = new java.util.Vector<Article>();
+		if (!this.articles.contains(newArticle))
+		{
+			this.articles.add(newArticle);
+			newArticle.setRestaurant(this);      
+		}
 	}
    
 	public void removeArticles(Article oldArticle) {
-      if (oldArticle == null)
-         return;
-      if (this.articles != null)
-         if (this.articles.contains(oldArticle))
-         {
-            this.articles.remove(oldArticle);
-            oldArticle.setRestaurant((Restaurant)null);
-         }
-   }
+		if (oldArticle == null)
+			return;
+		if (this.articles != null)
+			if (this.articles.contains(oldArticle))
+			{
+				this.articles.remove(oldArticle);
+				oldArticle.setRestaurant((Restaurant)null);
+			}
+	}
    
 	public void removeAllArticles() {
-      if (articles != null)
-      {
-         Article oldArticle;
-         for (java.util.Iterator iter = getIteratorArticles(); iter.hasNext();)
-         {
-            oldArticle = (Article)iter.next();
-            iter.remove();
-            oldArticle.setRestaurant((Restaurant)null);
-         }
-      }
-   }
+		if (articles != null)
+		{
+			Article oldArticle;
+			for (java.util.Iterator iter = getIteratorArticles(); iter.hasNext();)
+			{
+				oldArticle = (Article)iter.next();
+				iter.remove();
+				oldArticle.setRestaurant((Restaurant)null);
+			}
+		}
+	}
 
 }
