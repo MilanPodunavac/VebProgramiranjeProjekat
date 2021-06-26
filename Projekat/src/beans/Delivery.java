@@ -2,11 +2,14 @@ package beans;
 
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 public class Delivery {
 	private String id;
 	private Date time;
 	private double totalCost;
-	private DeliveryStatus deliveryStatus;   
+	private DeliveryStatus deliveryStatus; 
+	@JsonBackReference
 	private Customer customer;
    
    

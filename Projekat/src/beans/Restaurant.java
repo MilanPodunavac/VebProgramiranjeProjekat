@@ -3,12 +3,15 @@ package beans;
 import java.awt.Image;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 public class Restaurant {
 	private String name;
 	private boolean working;
 	private Image logo;
 	private boolean deleted;
 	private RestaurantType restaurantType;
+	@JsonManagedReference
 	private java.util.List<Article> articles;
 	private Location location;
    

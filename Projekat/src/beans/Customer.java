@@ -2,14 +2,17 @@ package beans;
 
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 public class Customer extends User {
 	private int points;
+	@JsonManagedReference
 	private java.util.List<Delivery> deliveries;
 	private CustomerType customerType;
+	@JsonBackReference
 	private ShoppingCart shoppingCart;
-   
-   
- 
+
 	public Customer(int points, List<Delivery> deliveries, CustomerType customerType, ShoppingCart shoppingCart) {
 	   	super();
 		this.points = points;

@@ -3,6 +3,8 @@ package beans;
 import java.awt.Image;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 public class Article {
 	private String name;
 	private double price;
@@ -10,6 +12,7 @@ public class Article {
 	private int size;
 	private String description;
 	private Image picture;
+	@JsonBackReference
 	private Restaurant restaurant;
 	private boolean deleted;
    
