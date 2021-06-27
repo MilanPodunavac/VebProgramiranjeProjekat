@@ -13,13 +13,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import beans.Manager;
+import beans.Location;
+import beans.Restaurant;
 
-public class ManagerSerializer {
+public class RestaurantSerializer {
 
-	private final String imeFajla = "database" + File.separator + "managers.txt";
+private final String imeFajla = "database" + File.separator + "restaurants.txt";
 	
-	public ManagerSerializer(){
+	public RestaurantSerializer(){
 		File file = new File(imeFajla);
 		if(!file.exists()) {
 			try {
@@ -35,12 +36,12 @@ public class ManagerSerializer {
 		}
 	}
 	
-	public void Save(ArrayList<Manager> managers) {
+	public void Save(ArrayList<Restaurant> restaurants) {
 		try {
 			PrintWriter writer;
 			writer = new PrintWriter(imeFajla, "UTF-8");
 			try {
-				writer.println(new ObjectMapper().writeValueAsString(managers));
+				writer.println(new ObjectMapper().writeValueAsString(restaurants));
 			} catch (JsonProcessingException e) {
 				e.printStackTrace();
 			}
@@ -52,10 +53,10 @@ public class ManagerSerializer {
 		}
 	}
 	
-	public ArrayList<Manager> Load(){
-		ArrayList<Manager> managers = new ArrayList<Manager>();
+	public ArrayList<Restaurant> Load(){
+		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 		try {
-			managers = new ObjectMapper().readValue(new File(imeFajla), new TypeReference<ArrayList<Manager>>(){});
+			restaurants = new ObjectMapper().readValue(new File(imeFajla), new TypeReference<ArrayList<Restaurant>>(){});
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
@@ -63,45 +64,49 @@ public class ManagerSerializer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return managers;
+		return restaurants;
 	}
 	
-	public boolean Add(Manager manager) {
-		ArrayList<Manager> managers = Load();
-		boolean unique = CheckUnique(manager.getUsername());
+	public boolean Add(Restaurant restaurant) {
+		ArrayList<Restaurant> restaurants = Load();
+		boolean unique = CheckUnique(restaurant.getLocation(), restaurants);
 		if(unique) {
-			managers.add(manager);
-			Save(managers);
+			restaurants.add(restaurant);
+			Save(restaurants);
 		}
 		return unique;
 	}
 	
-	public boolean CheckUnique(String username) {
-		return new UsernameChecker().Check(username);
+	public boolean CheckUnique(Location location, ArrayList<Restaurant> restaurants) {
+		for(Restaurant r : restaurants) {
+			if(r.getLocation().equals(location)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
-	public boolean Update(Manager manager) {
-		ArrayList<Manager> managers = Load();
-		for(Manager m : managers) {
-			if(m.getUsername().equals(manager.getUsername())) {
-				m = manager;
-				Save(managers);
+	public boolean Update(Restaurant restaurant) {
+		ArrayList<Restaurant> restaurants = Load();
+		for(Restaurant r : restaurants) {
+			if(r.getLocation().equals(restaurant.getLocation())) {
+				r = restaurant;
+				Save(restaurants);
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	public boolean Delete(Manager manager) {
-		ArrayList<Manager> managers = Load();
-		for(Manager m : managers) {
-			if(m.getUsername().equals(manager.getUsername())) {
-				m.setDeleted(true);
-				Save(managers);
+	public boolean Delete(Restaurant restaurant) {
+		ArrayList<Restaurant> restaurants = Load();
+		for(Restaurant r : restaurants) {
+			if(r.getLocation().equals(restaurant.getLocation())) {
+				r.setDeleted(true);
+				Save(restaurants);
 				return true;
 			}
 		}
 		return false;
 	}
-
 }
