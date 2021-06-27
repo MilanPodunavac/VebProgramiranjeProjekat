@@ -13,8 +13,6 @@ public class Delivery {
 	private Customer customer;
    
    
-   
-   
 	public Delivery(String id, Date time, double totalCost, DeliveryStatus deliveryStatus, Customer customer) {
 		super();
 		this.id = id;
