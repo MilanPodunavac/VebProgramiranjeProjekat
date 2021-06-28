@@ -13,8 +13,13 @@ public class Customer extends User {
 	@JsonBackReference
 	private ShoppingCart shoppingCart;
 
-	public Customer(int points, List<Delivery> deliveries, CustomerType customerType, ShoppingCart shoppingCart) {
-	   	super();
+	public Customer() {
+		super();
+	}
+	
+	public Customer(String username, String password, String name, String surname, Gender gender, Date dateOfBirth,
+			int points, List<Delivery> deliveries, CustomerType customerType, ShoppingCart shoppingCart) {
+		super(username, password, name, surname, gender, dateOfBirth);
 		this.points = points;
 		this.deliveries = deliveries;
 		this.customerType = customerType;

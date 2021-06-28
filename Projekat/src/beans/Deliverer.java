@@ -5,6 +5,10 @@ import java.util.*;
 public class Deliverer extends User {
 	private java.util.List<Delivery> deliveries;
    
+	public Deliverer() {
+		super();
+	}
+	
 	public Deliverer(String username, String password, String name, String surname, Gender gender, Date dateOfBirth,
 			ArrayList<Delivery> deliveries) {
 		super(username, password, name, surname, gender, dateOfBirth);

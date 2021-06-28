@@ -16,15 +16,18 @@ public class Restaurant {
 	private Location location;
    
    
+	public Restaurant() {
+		super();
+	}
    
    
-	public Restaurant(String name, boolean working, Image logo, boolean deleted, RestaurantType restaurantType,
+	public Restaurant(String name, boolean working, Image logo, RestaurantType restaurantType,
 			List<Article> articles, Location location) {
 		super();
 		this.name = name;
 		this.working = working;
 		this.logo = logo;
-		this.deleted = deleted;
+		this.deleted = false;
 		this.restaurantType = restaurantType;
 		this.articles = articles;
 		this.location = location;

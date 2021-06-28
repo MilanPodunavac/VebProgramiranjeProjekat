@@ -5,6 +5,10 @@ import java.util.*;
 public class Manager extends User {
 	private Restaurant restaurant;
 	
+	public Manager() {
+		super();
+	}
+	
 	public Manager(String username, String password, String name, String surname, Gender gender, Date dateOfBirth,
 			Restaurant restaurant) {
 		super(username, password, name, surname, gender, dateOfBirth);

@@ -8,6 +8,6 @@ public enum DeliveryStatus {
    waitingDelivery,
    inDelivery,
    delivered,
-   canceled;
+   cancelled;
 
 }

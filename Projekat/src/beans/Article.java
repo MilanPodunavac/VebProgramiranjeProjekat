@@ -16,6 +16,10 @@ public class Article {
 	private Restaurant restaurant;
 	private boolean deleted;
    
+	public Article() {
+		super();
+	}
+	
 	public Article(String name, double price, ArticleType articleType, int size, String description, Image picture,
 			Restaurant restaurant) {
 	super();

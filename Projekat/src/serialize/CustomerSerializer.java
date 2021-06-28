@@ -84,7 +84,8 @@ public class CustomerSerializer {
 		ArrayList<Customer> customers = Load();
 		for(Customer c : customers) {
 			if(c.getUsername().equals(customer.getUsername())) {
-				c = customer;
+				customers.remove(c);
+				customers.add(customer);
 				Save(customers);
 				return true;
 			}

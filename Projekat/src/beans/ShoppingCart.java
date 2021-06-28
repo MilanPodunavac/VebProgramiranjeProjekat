@@ -10,6 +10,10 @@ public class ShoppingCart {
    	private Customer customer;
    	private java.util.List<Article> articles;
 
+   	public ShoppingCart() {
+   		super();
+   	}
+   	
 	public ShoppingCart(double totalCost, Customer customer, List<Article> articles) {
 	super();
 	this.totalCost = totalCost;

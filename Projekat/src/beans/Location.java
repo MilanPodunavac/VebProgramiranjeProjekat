@@ -10,6 +10,10 @@ public class Location {
 	private String cityName;
 	private int cityNumber;
    
+	public Location() {
+		super();
+	}
+	
 	public Location(double latitude, double longitude, String streetName, int streetNumber, String cityName,
 			int cityNumber) {
 		super();

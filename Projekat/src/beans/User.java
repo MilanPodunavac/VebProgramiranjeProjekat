@@ -14,6 +14,7 @@ public class User {
 	public User() {
 		deleted = false;
 	}
+	
 	public User(String username, String password, String name, String surname, Gender gender, Date dateOfBirth) {
 		super();
 		this.username = username;

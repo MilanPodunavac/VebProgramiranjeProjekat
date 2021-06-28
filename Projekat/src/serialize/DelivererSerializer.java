@@ -84,7 +84,8 @@ public class DelivererSerializer {
 		ArrayList<Deliverer> deliverers = Load();
 		for(Deliverer d : deliverers) {
 			if(d.getUsername().equals(deliverer.getUsername())) {
-				d = deliverer;
+				deliverers.remove(d);
+				deliverers.add(deliverer);
 				Save(deliverers);
 				return true;
 			}

@@ -90,7 +90,8 @@ private final String imeFajla = "database" + File.separator + "restaurants.txt";
 		ArrayList<Restaurant> restaurants = Load();
 		for(Restaurant r : restaurants) {
 			if(r.getLocation().equals(restaurant.getLocation())) {
-				r = restaurant;
+				restaurants.remove(r);
+				restaurants.add(restaurant);
 				Save(restaurants);
 				return true;
 			}
