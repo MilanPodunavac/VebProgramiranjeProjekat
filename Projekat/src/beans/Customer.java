@@ -56,11 +56,11 @@ public class Customer extends User {
       return deliveries;
    }
    
-	public java.util.Iterator getIteratorDeliveries() {
+	/*public java.util.Iterator getIteratorDeliveries() {
 		if (deliveries == null)
 			deliveries = new java.util.Vector<Delivery>();
 		return deliveries.iterator();
-	}
+	}*/
    
 	public void setDeliveries(java.util.List<Delivery> newDeliveries) {
 		removeAllDeliveries();
@@ -95,7 +95,7 @@ public class Customer extends User {
 		if (deliveries != null)
 		{
 			Delivery oldDelivery;
-			for (java.util.Iterator iter = getIteratorDeliveries(); iter.hasNext();)
+			for (java.util.Iterator iter = deliveries.iterator(); iter.hasNext();)
 			{
 				oldDelivery = (Delivery)iter.next();
 				iter.remove();

@@ -113,11 +113,11 @@ public class Restaurant {
 	      return articles;
 	}
 	
-	public java.util.Iterator getIteratorArticles() {
+	/*public java.util.Iterator getIteratorArticles() {
       if (articles == null)
          articles = new java.util.Vector<Article>();
       return articles.iterator();
-	}
+	}*/
    
 	public void setArticles(java.util.List<Article> newArticles) {
       removeAllArticles();
@@ -152,7 +152,7 @@ public class Restaurant {
 		if (articles != null)
 		{
 			Article oldArticle;
-			for (java.util.Iterator iter = getIteratorArticles(); iter.hasNext();)
+			for (java.util.Iterator iter = articles.iterator(); iter.hasNext();)
 			{
 				oldArticle = (Article)iter.next();
 				iter.remove();

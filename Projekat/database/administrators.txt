@@ -1,1 +1,1 @@
-[{"username":"admin2","password":"password2","name":"Admina","surname":"Adminovski","gender":"female","dateOfBirth":1138748400000,"deleted":false},{"username":"admin3","password":"password3","name":"Admino","surname":"Adminovani","gender":"other","dateOfBirth":-312944400000,"deleted":true},{"username":"admin1","password":"password1","name":"Adminnnnnnn","surname":"Adminovic","gender":"male","dateOfBirth":2674800000,"deleted":false}]
+

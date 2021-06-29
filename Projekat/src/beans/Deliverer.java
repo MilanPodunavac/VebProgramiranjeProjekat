@@ -21,11 +21,11 @@ public class Deliverer extends User {
 		return deliveries;
    }
    
-	public java.util.Iterator getIteratorDeliveries() {
+	/*public java.util.Iterator getIteratorDeliveries() {
 		if (deliveries == null)
 			deliveries = new java.util.Vector<Delivery>();
 		return deliveries.iterator();
-   }
+   }*/
    
 	public void setDeliveries(java.util.List<Delivery> newDelivery) {
 		removeAllDeliveries();
