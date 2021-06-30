@@ -3,25 +3,31 @@ package beans;
 import java.awt.Image;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 public class Restaurant {
 	private String name;
 	private boolean working;
 	private Image logo;
 	private boolean deleted;
 	private RestaurantType restaurantType;
+	@JsonManagedReference
 	private java.util.List<Article> articles;
 	private Location location;
    
    
+	public Restaurant() {
+		super();
+	}
    
    
-	public Restaurant(String name, boolean working, Image logo, boolean deleted, RestaurantType restaurantType,
+	public Restaurant(String name, boolean working, Image logo, RestaurantType restaurantType,
 			List<Article> articles, Location location) {
 		super();
 		this.name = name;
 		this.working = working;
 		this.logo = logo;
-		this.deleted = deleted;
+		this.deleted = false;
 		this.restaurantType = restaurantType;
 		this.articles = articles;
 		this.location = location;
@@ -107,11 +113,11 @@ public class Restaurant {
 	      return articles;
 	}
 	
-	public java.util.Iterator getIteratorArticles() {
+	/*public java.util.Iterator getIteratorArticles() {
       if (articles == null)
          articles = new java.util.Vector<Article>();
       return articles.iterator();
-	}
+	}*/
    
 	public void setArticles(java.util.List<Article> newArticles) {
       removeAllArticles();
@@ -146,7 +152,7 @@ public class Restaurant {
 		if (articles != null)
 		{
 			Article oldArticle;
-			for (java.util.Iterator iter = getIteratorArticles(); iter.hasNext();)
+			for (java.util.Iterator iter = articles.iterator(); iter.hasNext();)
 			{
 				oldArticle = (Article)iter.next();
 				iter.remove();

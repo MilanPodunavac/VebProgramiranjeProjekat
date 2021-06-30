@@ -5,6 +5,10 @@ import java.util.*;
 public class Deliverer extends User {
 	private java.util.List<Delivery> deliveries;
    
+	public Deliverer() {
+		super();
+	}
+	
 	public Deliverer(String username, String password, String name, String surname, Gender gender, Date dateOfBirth,
 			ArrayList<Delivery> deliveries) {
 		super(username, password, name, surname, gender, dateOfBirth);
@@ -17,11 +21,11 @@ public class Deliverer extends User {
 		return deliveries;
    }
    
-	public java.util.Iterator getIteratorDeliveries() {
+	/*public java.util.Iterator getIteratorDeliveries() {
 		if (deliveries == null)
 			deliveries = new java.util.Vector<Delivery>();
 		return deliveries.iterator();
-   }
+   }*/
    
 	public void setDeliveries(java.util.List<Delivery> newDelivery) {
 		removeAllDeliveries();

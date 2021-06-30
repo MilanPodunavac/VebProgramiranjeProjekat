@@ -2,11 +2,18 @@ package beans;
 
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 public class ShoppingCart {
 	private double totalCost;
+	@JsonManagedReference
    	private Customer customer;
    	private java.util.List<Article> articles;
 
+   	public ShoppingCart() {
+   		super();
+   	}
+   	
 	public ShoppingCart(double totalCost, Customer customer, List<Article> articles) {
 	super();
 	this.totalCost = totalCost;

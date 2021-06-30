@@ -6,6 +6,11 @@ public class CustomerType {
 	private String name;
 	private double discount;
 	private int neededPoints;
+	
+	public CustomerType() {
+		super();
+	}
+	
 	public CustomerType(String name, double discount, int neededPoints) {
 		super();
 		this.name = name;

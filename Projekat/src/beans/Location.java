@@ -10,6 +10,10 @@ public class Location {
 	private String cityName;
 	private int cityNumber;
    
+	public Location() {
+		super();
+	}
+	
 	public Location(double latitude, double longitude, String streetName, int streetNumber, String cityName,
 			int cityNumber) {
 		super();
@@ -57,6 +61,13 @@ public class Location {
 		this.cityNumber = cityNumber;
 	}
 	
-	
+	public boolean equals(Location location) {
+		return location.getLatitude() == this.getLatitude()
+				&& location.getLongitude() == this.getLongitude()
+				&& location.getStreetName().equals(this.getStreetName())
+				&& location.getStreetNumber() == this.getStreetNumber()
+				&& location.getCityName().equals(this.getCityName())
+				&& location.getCityNumber() == this.getCityNumber();
+	}
    
 }
