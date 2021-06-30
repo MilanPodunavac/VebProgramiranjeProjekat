@@ -13,8 +13,13 @@ public class Customer extends User {
 	@JsonBackReference
 	private ShoppingCart shoppingCart;
 
-	public Customer(int points, List<Delivery> deliveries, CustomerType customerType, ShoppingCart shoppingCart) {
-	   	super();
+	public Customer() {
+		super();
+	}
+	
+	public Customer(String username, String password, String name, String surname, Gender gender, Date dateOfBirth,
+			int points, List<Delivery> deliveries, CustomerType customerType, ShoppingCart shoppingCart) {
+		super(username, password, name, surname, gender, dateOfBirth);
 		this.points = points;
 		this.deliveries = deliveries;
 		this.customerType = customerType;
@@ -51,11 +56,11 @@ public class Customer extends User {
       return deliveries;
    }
    
-	public java.util.Iterator getIteratorDeliveries() {
+	/*public java.util.Iterator getIteratorDeliveries() {
 		if (deliveries == null)
 			deliveries = new java.util.Vector<Delivery>();
 		return deliveries.iterator();
-	}
+	}*/
    
 	public void setDeliveries(java.util.List<Delivery> newDeliveries) {
 		removeAllDeliveries();
@@ -90,7 +95,7 @@ public class Customer extends User {
 		if (deliveries != null)
 		{
 			Delivery oldDelivery;
-			for (java.util.Iterator iter = getIteratorDeliveries(); iter.hasNext();)
+			for (java.util.Iterator iter = deliveries.iterator(); iter.hasNext();)
 			{
 				oldDelivery = (Delivery)iter.next();
 				iter.remove();

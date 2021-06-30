@@ -12,7 +12,10 @@ public class Delivery {
 	@JsonBackReference
 	private Customer customer;
    
-   
+    public Delivery() {
+	    super();
+    }
+	
 	public Delivery(String id, Date time, double totalCost, DeliveryStatus deliveryStatus, Customer customer) {
 		super();
 		this.id = id;

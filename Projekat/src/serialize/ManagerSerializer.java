@@ -84,7 +84,8 @@ public class ManagerSerializer {
 		ArrayList<Manager> managers = Load();
 		for(Manager m : managers) {
 			if(m.getUsername().equals(manager.getUsername())) {
-				m = manager;
+				managers.remove(m);
+				managers.add(manager);
 				Save(managers);
 				return true;
 			}

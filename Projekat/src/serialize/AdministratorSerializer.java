@@ -84,7 +84,8 @@ public class AdministratorSerializer {
 		ArrayList<Administrator> administrators = Load();
 		for(Administrator a : administrators) {
 			if(a.getUsername().equals(administrator.getUsername())) {
-				a = administrator;
+				administrators.remove(a);
+				administrators.add(administrator);
 				Save(administrators);
 				return true;
 			}

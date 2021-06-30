@@ -9,6 +9,10 @@ public class Comment {
    private Customer customer;
    private Restaurant restaurant;
    
+   public Comment() {
+		super();
+	}
+   
    public Comment(String text, int grade, boolean approved, Customer customer, Restaurant restaurant) {
 		super();
 		this.text = text;
