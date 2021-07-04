@@ -65,6 +65,7 @@ public class LoginService {
 		}
 		request.getSession().setAttribute("user", loggedUser);
 		return Response.status(200).build();*/
+		System.out.println(user.getUsername());
 		return Response.status(200).build();
 	}
 	
