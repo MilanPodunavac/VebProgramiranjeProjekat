@@ -17,7 +17,24 @@ import beans.Manager;
 
 public class ManagerSerializer {
 
-	private final String imeFajla = "database" + File.separator + "managers.txt";
+	private String imeFajla = "database" + File.separator + "managers.txt";
+	
+	public ManagerSerializer(String contextPath){
+		imeFajla = contextPath + File.separator + "database" + File.separator + "managers.txt";
+		File file = new File(imeFajla);
+		if(!file.exists()) {
+			try {
+				PrintWriter writer;
+				writer = new PrintWriter(imeFajla, "UTF-8");
+				writer.println("[]");
+				writer.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	public ManagerSerializer(){
 		File file = new File(imeFajla);

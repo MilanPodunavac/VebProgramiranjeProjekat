@@ -17,7 +17,24 @@ import beans.Customer;
 
 public class CustomerSerializer {
 
-	private final String imeFajla = "database" + File.separator + "customers.txt";
+	private String imeFajla = "database" + File.separator + "customers.txt";
+	
+	public CustomerSerializer(String contextPath) {
+		imeFajla = contextPath + File.separator + "database" + File.separator + "customers.txt";
+		File file = new File(imeFajla);
+		if(!file.exists()) {
+			try {
+				PrintWriter writer;
+				writer = new PrintWriter(imeFajla, "UTF-8");
+				writer.println("[]");
+				writer.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	public CustomerSerializer(){
 		File file = new File(imeFajla);

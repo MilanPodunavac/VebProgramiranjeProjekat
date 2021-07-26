@@ -3,17 +3,25 @@ $(document).ready(function() {
         e.preventDefault();
         let username = $("#username").val();
         let password = $("#password").val();
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:8080/Projekat/rest/login",
-            data: { username: username, password: password },
-            dataType: JSON,
-            success: function(response) {
-                if (response == null) {
-                    alert("Wrong username or password!");
+        $.post({
+            url: "rest/login",
+            data: JSON.stringify({ username: username, password: password }),
+            contentType: 'application/json',
+            complete: function(message) {
+                if (message.responseText == "customer") {
+                    window.location.replace("customer.html");
+                } else if (message.responseText == "deliverer") {
+                    window.location.replace("deliverer.html");
+                } else if (message.responseText == "manager") {
+                    window.location.replace("manager.html");
+                } else if (message.responseText == "administrator") {
+                    window.location.replace("administrator.html");
+                } else {
+                    $("#username").val("");
+                    $("#password").val("");
+                    alert(message.responseText);
                 }
             }
-
         })
 
     })

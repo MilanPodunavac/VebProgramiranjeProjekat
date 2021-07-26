@@ -17,7 +17,24 @@ import beans.Administrator;
 
 public class AdministratorSerializer {
 
-	private final String imeFajla = "database" + File.separator + "administrators.txt";
+	private String imeFajla = "database" + File.separator + "administrators.txt";
+	
+	public AdministratorSerializer(String contextPath){
+		imeFajla = contextPath + File.separator + "database" + File.separator + "administrators.txt";
+		File file = new File(imeFajla);
+		if(!file.exists()) {
+			try {
+				PrintWriter writer;
+				writer = new PrintWriter(imeFajla, "UTF-8");
+				writer.println("[]");
+				writer.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	public AdministratorSerializer(){
 		File file = new File(imeFajla);

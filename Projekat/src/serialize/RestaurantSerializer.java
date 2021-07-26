@@ -18,7 +18,24 @@ import beans.Restaurant;
 
 public class RestaurantSerializer {
 
-private final String imeFajla = "database" + File.separator + "restaurants.txt";
+private String imeFajla = "database" + File.separator + "restaurants.txt";
+
+	public RestaurantSerializer(String contextPath){
+		imeFajla = contextPath + File.separator + "database" + File.separator + "restaurants.txt";
+		File file = new File(imeFajla);
+		if(!file.exists()) {
+			try {
+				PrintWriter writer;
+				writer = new PrintWriter(imeFajla, "UTF-8");
+				writer.println("[]");
+				writer.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	public RestaurantSerializer(){
 		File file = new File(imeFajla);

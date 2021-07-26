@@ -17,7 +17,24 @@ import beans.Deliverer;
 
 public class DelivererSerializer {
 
-	private final String imeFajla = "database" + File.separator + "deliverers.txt";
+	private String imeFajla = "database" + File.separator + "deliverers.txt";
+	
+	public DelivererSerializer(String contextPath){
+		imeFajla = contextPath + File.separator + "database" + File.separator + "deliverers.txt";
+		File file = new File(imeFajla);
+		if(!file.exists()) {
+			try {
+				PrintWriter writer;
+				writer = new PrintWriter(imeFajla, "UTF-8");
+				writer.println("[]");
+				writer.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	public DelivererSerializer(){
 		File file = new File(imeFajla);

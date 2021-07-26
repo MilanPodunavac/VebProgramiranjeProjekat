@@ -17,7 +17,24 @@ import beans.Comment;
 
 public class CommentSerializer {
 
-private final String imeFajla = "database" + File.separator + "comments.txt";
+private String imeFajla = "database" + File.separator + "comments.txt";
+
+	public CommentSerializer(String contextPath){
+		imeFajla = contextPath + File.separator + "database" + File.separator + "comments.txt";
+		File file = new File(imeFajla);
+		if(!file.exists()) {
+			try {
+				PrintWriter writer;
+				writer = new PrintWriter(imeFajla, "UTF-8");
+				writer.println("[]");
+				writer.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	public CommentSerializer(){
 		File file = new File(imeFajla);
