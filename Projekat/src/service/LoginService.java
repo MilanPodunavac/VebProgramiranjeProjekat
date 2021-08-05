@@ -1,11 +1,14 @@
 package service;
 
+import java.util.ArrayList;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -17,8 +20,11 @@ import javax.ws.rs.core.Response;
 import beans.Administrator;
 import beans.Customer;
 import beans.Deliverer;
+import beans.Delivery;
 import beans.Manager;
+import beans.ShoppingCart;
 import beans.User;
+import beans.CustomerType;
 import dao.AdministratorDao;
 import dao.CommentDao;
 import dao.CustomerDao;
@@ -31,6 +37,7 @@ import serialize.CustomerSerializer;
 import serialize.DelivererSerializer;
 import serialize.ManagerSerializer;
 import serialize.RestaurantSerializer;
+import serialize.UsernameChecker;
 
 @Path("")
 public class LoginService {
@@ -68,13 +75,6 @@ public class LoginService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(User user, @Context HttpServletRequest request) {
-/*		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
-		User loggedUser = userDao.find(user.getUsername(), user.getPassword());
-		if (loggedUser != null) {
-			return Response.status(400).entity("Invalid username and/or password").build();
-		}
-		request.getSession().setAttribute("user", loggedUser);
-		return Response.status(200).build();*/
 		CustomerDao customers = (CustomerDao)context.getAttribute("customers");
 		AdministratorDao administrators = (AdministratorDao)context.getAttribute("administrators");
 		DelivererDao deliverers = (DelivererDao)context.getAttribute("deliverers");
@@ -85,7 +85,6 @@ public class LoginService {
 		Deliverer deliverer = deliverers.find(user.getUsername(), user.getPassword());
 		if(customer != null) {
 			request.getSession().setAttribute("customer", customer);
-		//	return Response.ok("customer").build();
 			return Response.status(200).entity("customer").build();
 		}
 		else if(manager != null) {
@@ -101,8 +100,6 @@ public class LoginService {
 			return Response.status(200).entity("administrator").build();
 		}
 		return Response.status(400).entity("Invalid username and/or password").build();
-//		request.getSession().setAttribute("customer", customer);
-//		return Response.status(200).build();
 	}
 	
 	
@@ -118,7 +115,30 @@ public class LoginService {
 	@Path("/currentUser")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public User login(@Context HttpServletRequest request) {
+	public User getCurrentUser(@Context HttpServletRequest request) {
 		return (User) request.getSession().getAttribute("user");
+		//doraditi?
 	}
+	
+	@POST
+	@Path("/register")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response register(User user, @Context HttpServletRequest request) {
+		UsernameChecker checker = new UsernameChecker();
+		if(checker.Check(user.getUsername(), context.getRealPath(""))){
+			Customer newCustomer = new Customer(user.getUsername(), user.getPassword(), user.getName(), user.getSurname(), user.getGender(), user.getDateOfBirth(),
+					0, new ArrayList<Delivery>(), null, new ShoppingCart());
+			newCustomer.setCustomerType(new CustomerType("Bronze", 0, 1000));
+			newCustomer.getShoppingCart().setCustomer(newCustomer);
+			new CustomerSerializer(context.getRealPath("")).Add(newCustomer, context.getRealPath(""));
+			CustomerDao customers = (CustomerDao)context.getAttribute("customers");
+			customers.getCustomers().add(newCustomer);
+			return Response.status(200).entity("You have been successfully registered").build();
+		}
+		else {
+			return Response.status(400).entity("Username already exists").build();
+		}
+	}
+	
 }

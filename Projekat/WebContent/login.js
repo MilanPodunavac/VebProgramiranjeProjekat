@@ -22,7 +22,6 @@ $(document).ready(function() {
                     alert(message.responseText);
                 }
             }
-        })
-
+        });
     })
 });

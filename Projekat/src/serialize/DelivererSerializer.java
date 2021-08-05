@@ -83,9 +83,9 @@ public class DelivererSerializer {
 		return deliverers;
 	}
 	
-	public boolean Add(Deliverer deliverers) {
+	public boolean Add(Deliverer deliverers, String contextPath) {
 		ArrayList<Deliverer> customers = Load();
-		boolean unique = CheckUnique(deliverers.getUsername());
+		boolean unique = CheckUnique(deliverers.getUsername(), contextPath);
 		if(unique) {
 			customers.add(deliverers);
 			Save(customers);
@@ -93,8 +93,8 @@ public class DelivererSerializer {
 		return unique;
 	}
 	
-	public boolean CheckUnique(String username) {
-		return new UsernameChecker().Check(username);
+	public boolean CheckUnique(String username, String contextPath) {
+		return new UsernameChecker().Check(username, contextPath);
 	}
 	
 	public boolean Update(Deliverer deliverer) {

@@ -83,9 +83,9 @@ public class AdministratorSerializer {
 		return managers;
 	}
 	
-	public boolean Add(Administrator administrators) {
+	public boolean Add(Administrator administrators, String contextPath) {
 		ArrayList<Administrator> customers = Load();
-		boolean unique = CheckUnique(administrators.getUsername());
+		boolean unique = CheckUnique(administrators.getUsername(), contextPath);
 		if(unique) {
 			customers.add(administrators);
 			Save(customers);
@@ -93,8 +93,8 @@ public class AdministratorSerializer {
 		return unique;
 	}
 	
-	public boolean CheckUnique(String username) {
-		return new UsernameChecker().Check(username);
+	public boolean CheckUnique(String username, String contextPath) {
+		return new UsernameChecker().Check(username, contextPath);
 	}
 	
 	public boolean Update(Administrator administrator) {

@@ -83,9 +83,9 @@ public class ManagerSerializer {
 		return managers;
 	}
 	
-	public boolean Add(Manager manager) {
+	public boolean Add(Manager manager, String contextPath) {
 		ArrayList<Manager> managers = Load();
-		boolean unique = CheckUnique(manager.getUsername());
+		boolean unique = CheckUnique(manager.getUsername(), contextPath);
 		if(unique) {
 			managers.add(manager);
 			Save(managers);
@@ -93,8 +93,8 @@ public class ManagerSerializer {
 		return unique;
 	}
 	
-	public boolean CheckUnique(String username) {
-		return new UsernameChecker().Check(username);
+	public boolean CheckUnique(String username, String contextPath) {
+		return new UsernameChecker().Check(username, contextPath);
 	}
 	
 	public boolean Update(Manager manager) {

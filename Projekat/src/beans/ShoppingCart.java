@@ -12,6 +12,7 @@ public class ShoppingCart {
 
    	public ShoppingCart() {
    		super();
+   		articles = new ArrayList<Article>();
    	}
    	
 	public ShoppingCart(double totalCost, Customer customer, List<Article> articles) {
