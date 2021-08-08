@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import beans.Administrator;
 import beans.Customer;
+import beans.Delivery;
 
 public class CustomerDao {
 	private ArrayList<Customer> customers;
@@ -29,5 +30,15 @@ public class CustomerDao {
 			}
 		}
 		return customer;
+	}
+	public Delivery findDelivery(String id) {
+		for(Customer customer : customers) {
+			for(Delivery delivery : customer.getDeliveries()) {
+				if(delivery.getId().equals(id)) {
+					return delivery;
+				}
+			}
+		}
+		return null;
 	}
 }

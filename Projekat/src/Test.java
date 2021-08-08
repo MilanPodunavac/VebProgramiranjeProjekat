@@ -85,8 +85,8 @@ public class Test {
 			System.out.println(c.getRestaurant().getName());
 		}
 		
-		System.out.println(resSer.Add(restaurant1));
-		System.out.println(cusSer.Add(customer1));
+//		System.out.println(resSer.Add(restaurant1));
+//		System.out.println(cusSer.Add(customer1));
 		
 		//Administrator admin11 = new Administrator("admin1", "password1", "Adminnnnnnn", "Adminovic", Gender.male, new Date(70,1,1));
 		//System.out.println(admSer.Update(admin11));

@@ -10,7 +10,7 @@ public class Customer extends User {
 	@JsonManagedReference
 	private java.util.List<Delivery> deliveries;
 	private CustomerType customerType;
-	@JsonBackReference
+	@JsonManagedReference
 	private ShoppingCart shoppingCart;
 
 	public Customer() {

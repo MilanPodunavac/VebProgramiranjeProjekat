@@ -21,4 +21,13 @@ public class RestaurantDao {
 		this.restaurants = restaurants;
 	}
 	
+	public Restaurant find(Restaurant restaurant) {//ZA IZMENU (KAKO IDENTIFIKOVATI BOLJE (JEDINSTVENO) RESTORAN?)
+		for(Restaurant iterRestaurant : restaurants) {
+			if(restaurant.getName().equals(iterRestaurant.getName())){
+				return iterRestaurant;
+			}
+		}
+		return null;
+	}
+	
 }
