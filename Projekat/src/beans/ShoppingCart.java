@@ -14,6 +14,7 @@ public class ShoppingCart {
    	public ShoppingCart() {
    		super();
    		articles = new ArrayList<Article>();
+   		totalCost = 0;
    	}
    	
 	public ShoppingCart(double totalCost, Customer customer, List<Article> articles) {

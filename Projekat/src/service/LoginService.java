@@ -1,6 +1,7 @@
 package service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -24,8 +25,12 @@ import beans.Comment;
 import beans.Customer;
 import beans.Deliverer;
 import beans.Delivery;
+import beans.DeliveryStatus;
+import beans.Gender;
+import beans.Location;
 import beans.Manager;
 import beans.Restaurant;
+import beans.RestaurantType;
 import beans.ShoppingCart;
 import beans.User;
 import beans.CustomerType;
@@ -54,6 +59,10 @@ public class LoginService {
 	
 	@PostConstruct
 	public void init() {
+		initializeData();
+	}
+
+	private void initializeData() {
 		if(context.getAttribute("customers") == null) {
 		//	context.setAttribute("customers", new CustomerDao(new CustomerSerializer(context.getRealPath("")).Load()));
 			List<Customer> customers = new CustomerSerializer(context.getRealPath("")).Load();
@@ -181,6 +190,86 @@ public class LoginService {
 		else {
 			return Response.status(400).entity("Username already exists").build();
 		}
+	}
+	
+	@POST
+	@Path("/initData")
+	public void initData() {
+		AdministratorSerializer admSer = new AdministratorSerializer(context.getRealPath(""));
+		CommentSerializer comSer = new CommentSerializer(context.getRealPath(""));
+		CustomerSerializer cusSer = new CustomerSerializer(context.getRealPath(""));
+		DelivererSerializer delSer = new DelivererSerializer(context.getRealPath(""));
+		ManagerSerializer manSer = new ManagerSerializer(context.getRealPath(""));
+		RestaurantSerializer resSer = new RestaurantSerializer(context.getRealPath(""));
+		
+		ArrayList<Administrator> admins = new ArrayList<Administrator>();
+		ArrayList<Comment> comments = new ArrayList<Comment>();
+		ArrayList<Customer> customers = new ArrayList<Customer>();
+		ArrayList<Deliverer> deliverers = new ArrayList<Deliverer>();
+		ArrayList<Manager> managers = new ArrayList<Manager>();
+		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
+		
+		Administrator admin1 = new Administrator("admin1", "password1", "Admin", "Adminovic", Gender.male, new Date(100,1,1));
+		Administrator admin2 = new Administrator("admin2", "password2", "Admina", "Adminovski", Gender.female, new Date(106,1,1));
+		Administrator admin3 = new Administrator("admin3", "password3", "Admino", "Adminovani", Gender.other, new Date(60,1,1));
+		
+		admins.add(admin1);
+		admins.add(admin2);
+		admins.add(admin3);
+		
+		admSer.Save(admins);
+		
+		Delivery delivery1 = new Delivery("0000000001", new Date(121,9,9), 100, DeliveryStatus.delivered, null);
+		Delivery delivery2 = new Delivery("0000000002", new Date(121,9,9), 10000, DeliveryStatus.cancelled, null);
+		Delivery delivery3 = new Delivery("0000000002", new Date(121,9,9), 2000, DeliveryStatus.inDelivery, null);
+		
+		Customer customer1 = new Customer("customer1", "password1", "Kustomer", "Kustomerovic", Gender.male, new Date(106,1,1), 1000, new ArrayList<Delivery>(), new CustomerType("Gold", 12, 700), new ShoppingCart());
+		customer1.getShoppingCart().setCustomer(customer1);
+		customer1.addDeliveries(delivery1);
+		customer1.addDeliveries(delivery2);
+		Customer customer2 = new Customer("Beli", "password1", "Mirko", "Beli", Gender.male, new Date(106,1,1), 1000, new ArrayList<Delivery>(), new CustomerType("Gold", 12, 700), new ShoppingCart());
+		customer2.addDeliveries(delivery3);
+		
+		customers.add(customer1);
+		customers.add(customer2);
+		
+		cusSer.Save(customers);
+		
+		Restaurant restaurant1 = new Restaurant("Chinese Restaurant", true, null, RestaurantType.chinese, new ArrayList<Article>(), new Location(100, 100.5, "Street1", 10, "City1", 1000));
+		Restaurant restaurant2 = new Restaurant("Krusty Krab", true, null, RestaurantType.barbecue, new ArrayList<Article>(), new Location(100, 100.5, "Street1", 10, "City1", 1000));
+		
+		restaurants.add(restaurant1);
+		restaurants.add(restaurant2);
+		
+		resSer.Save(restaurants);
+		
+		Comment comment1 = new Comment("text1", 5, true, customer1, restaurant1);
+		Comment comment2 = new Comment("text2", 3, true, customer1, restaurant1);
+		Comment comment3 = new Comment("text3", 1, false, customer1, restaurant1);
+		
+		comments.add(comment1);
+		comments.add(comment2);
+		comments.add(comment3);
+		
+		comSer.Save(comments);
+		
+		Manager manager1 = new Manager("ChineseManager", "passwordcajna", "cin", "cong", Gender.male, new Date(106,1,1), restaurant1);
+		Manager manager2 = new Manager("KrustyKrabManager", "spatula", "Spongebob", "Squarepants", Gender.male, new Date(99,5,1), restaurant2);
+		
+		managers.add(manager1);
+		managers.add(manager2);
+		
+		manSer.Save(managers);
+		
+		Deliverer deliverer1 = new Deliverer("LukaDostavljac", "lukaPassword", "Luka", "Novak", Gender.male, new Date(106,1,1), new ArrayList<Delivery>());
+		Deliverer deliverer2 = new Deliverer("MilojkaBajs", "MilojkaPassword", "Milojka", "Izbosnu", Gender.female, new Date(106,1,1), new ArrayList<Delivery>());
+		deliverer2.addDelivery(delivery3);
+		
+		deliverers.add(deliverer1);
+		deliverers.add(deliverer2);
+		
+		delSer.Save(deliverers);
+		
 	}
 	
 }
