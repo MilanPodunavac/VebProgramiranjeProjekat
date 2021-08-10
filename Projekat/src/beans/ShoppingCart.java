@@ -46,16 +46,19 @@ public class ShoppingCart {
 		return articles;
 	}
 	   
-	public java.util.Iterator getIteratorArticles() {
+/*	public java.util.Iterator getIteratorArticles() {
 		if (articles == null)
 			articles = new java.util.Vector<Article>();
 		return articles.iterator();
-	}
+	}*/
 	   
 	public void setArticles(java.util.List<Article> newArticles) {
 		removeAllArticles();
-			for (java.util.Iterator iter = newArticles.iterator(); iter.hasNext();)
-		addArticles((Article)iter.next());
+/*			for (java.util.Iterator iter = newArticles.iterator(); iter.hasNext();)
+		addArticles((Article)iter.next());*/
+		for(Article article : newArticles) {
+			addArticles(article);
+		}
 	}
 	   
 	public void addArticles(Article newArticle) {
