@@ -3,6 +3,7 @@ package dao;
 import java.util.ArrayList;
 
 import beans.Administrator;
+import serialize.AdministratorSerializer;
 
 public class AdministratorDao {
 	private ArrayList<Administrator> administrators;
@@ -28,6 +29,15 @@ public class AdministratorDao {
 			}
 		}
 		return administrator;
+	}
+	
+	public boolean IsUniqueUsername(String username) {
+		for(Administrator administrator : administrators) {
+			if(administrator.getUsername().equals(username)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 }

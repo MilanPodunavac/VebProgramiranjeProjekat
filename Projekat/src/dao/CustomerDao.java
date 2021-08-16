@@ -41,4 +41,13 @@ public class CustomerDao {
 		}
 		return null;
 	}
+	
+	public boolean IsUniqueUsername(String username) {
+		for(Customer customer : customers) {
+			if(customer.getUsername().equals(username)) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

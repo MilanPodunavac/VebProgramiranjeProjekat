@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import beans.Deliverer;
 import beans.Manager;
+import serialize.ManagerSerializer;
 
 public class ManagerDao {
 	private ArrayList<Manager> managers;
@@ -29,5 +30,14 @@ public class ManagerDao {
 			}
 		}
 		return deliverer;
+	}
+	
+	public boolean IsUniqueUsername(String username) {
+		for(Manager manager : managers) {
+			if(manager.getUsername().equals(username)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

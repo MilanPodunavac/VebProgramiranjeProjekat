@@ -2,6 +2,7 @@ package dao;
 
 import java.util.ArrayList;
 
+import beans.Customer;
 import beans.Deliverer;
 
 public class DelivererDao {
@@ -28,5 +29,14 @@ public class DelivererDao {
 			}
 		}
 		return deliverer;
+	}
+	
+	public boolean IsUniqueUsername(String username) {
+		for(Deliverer deliverer : deliverers) {
+			if(deliverer.getUsername().equals(username)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

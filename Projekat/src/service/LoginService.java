@@ -176,14 +176,20 @@ public class LoginService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response register(User user, @Context HttpServletRequest request) {
-		UsernameChecker checker = new UsernameChecker();
-		if(checker.Check(user.getUsername(), context.getRealPath(""))){
+		String username = user.getUsername();
+		CustomerDao customers = (CustomerDao)context.getAttribute("customers");
+		AdministratorDao administrators = (AdministratorDao)context.getAttribute("administrators");
+		DelivererDao deliverers = (DelivererDao)context.getAttribute("deliverers");
+		ManagerDao managers = (ManagerDao)context.getAttribute("managers");
+		boolean uniqueUsername = customers.IsUniqueUsername(username) && administrators.IsUniqueUsername(username) && deliverers.IsUniqueUsername(username) && managers.IsUniqueUsername(username);
+	//	UsernameChecker checker = new UsernameChecker();
+	//	if(checker.Check(user.getUsername(), context.getRealPath(""))
+		if(uniqueUsername){
 			Customer newCustomer = new Customer(user.getUsername(), user.getPassword(), user.getName(), user.getSurname(), user.getGender(), user.getDateOfBirth(),
 					0, new ArrayList<Delivery>(), null, new ShoppingCart());
 			newCustomer.setCustomerType(new CustomerType("Bronze", 0, 1000));
 			newCustomer.getShoppingCart().setCustomer(newCustomer);
 			new CustomerSerializer(context.getRealPath("")).Add(newCustomer, context.getRealPath(""));
-			CustomerDao customers = (CustomerDao)context.getAttribute("customers");
 			customers.getCustomers().add(newCustomer);
 			return Response.status(200).entity("You have been successfully registered").build();
 		}
