@@ -1,8 +1,10 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import beans.Comment;
+import beans.Restaurant;
 
 public class CommentDao {
 
@@ -19,5 +21,9 @@ public class CommentDao {
 
 	public void setComments(ArrayList<Comment> comments) {
 		this.comments = comments;
+	}
+	
+	public List<Comment> getRestaurantComments(Restaurant restaurant){
+		return null;
 	}
 }
