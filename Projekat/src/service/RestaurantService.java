@@ -5,12 +5,12 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -21,9 +21,7 @@ import beans.Deliverer;
 import beans.Delivery;
 import beans.Manager;
 import beans.Restaurant;
-import beans.ShoppingCart;
-import beans.ShoppingCartItem;
-import beans.User;
+import beans.RestaurantType;
 import dao.AdministratorDao;
 import dao.CommentDao;
 import dao.CustomerDao;
@@ -37,16 +35,15 @@ import serialize.DelivererSerializer;
 import serialize.ManagerSerializer;
 import serialize.RestaurantSerializer;
 
-@Path("CustomerService")
-public class CustomerService {
-
+@Path("RestaurantService")
+public class RestaurantService {
 	@Context
 	private ServletContext context;
 	
-	public CustomerService() {
+	public RestaurantService() {
 		
 	}
-
+	
 	@PostConstruct
 	public void init() {
 		initializeData();
@@ -112,50 +109,20 @@ public class CustomerService {
 	}
 	
 	@GET
-	@Path("/getCustomer")
+	@Path("WorkingRestaurants")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Customer getCustomer(@Context HttpServletRequest request) {
-		return (Customer) request.getSession().getAttribute("customer");
+	public ArrayList<Restaurant> getWorkingRestaurants(){
+		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
+		return restaurantDao.getWorkingRestaurants();
 	}
 	
-	@POST
-	@Path("/addItem")
+	@GET
+	@Path("WorkingRestaurantsByType")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public ShoppingCart addItem(ShoppingCartItem item, @Context HttpServletRequest request) {
-		Customer customer = (Customer) request.getSession().getAttribute("customer");
-		if(customer == null)return null;
-		customer.getShoppingCart().addItem(item);
-		updateCustomer(customer);
-		return customer.getShoppingCart();
-	}
-	
-	@POST
-	@Path("/removeItem")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public ShoppingCart removeItem(ShoppingCartItem item, @Context HttpServletRequest request) {
-		Customer customer = (Customer) request.getSession().getAttribute("customer");
-		if(customer == null)return null;
-		customer.getShoppingCart().removeItem(item);
-		updateCustomer(customer);
-		return customer.getShoppingCart();
-	}
-	
-	@POST
-	@Path("/postComment")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public void postComment(Comment comment) {
-		CommentDao commentDao = (CommentDao)context.getAttribute("comments");
-		comment.setApproved(false);
-		commentDao.addComment(comment);
-		CommentSerializer commentSerializer = new CommentSerializer(context.getRealPath(""));
-		commentSerializer.Add(comment);
-	}
-
-	private void updateCustomer(Customer customer) {
-		CustomerSerializer ser = new CustomerSerializer(context.getRealPath(""));
-		ser.Update(customer);
+	public ArrayList<Restaurant> getWorkingRestaurantsByType(@QueryParam("type") RestaurantType type){
+		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
+		return restaurantDao.getWorkingRestaurantsByType(type);
 	}
 }

@@ -26,4 +26,8 @@ public class CommentDao {
 	public List<Comment> getRestaurantComments(Restaurant restaurant){
 		return null;
 	}
+	
+	public void addComment(Comment comment) {
+		comments.add(comment);
+	}
 }

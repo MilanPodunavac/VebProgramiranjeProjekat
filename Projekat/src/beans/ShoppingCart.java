@@ -9,19 +9,19 @@ public class ShoppingCart {
 	private double totalCost;
 	@JsonBackReference
    	private Customer customer;
-   	private java.util.List<Article> articles;
+   	private java.util.List<ShoppingCartItem> items;
 
    	public ShoppingCart() {
    		super();
-   		articles = new ArrayList<Article>();
+   		items = new ArrayList<ShoppingCartItem>();
    		totalCost = 0;
    	}
    	
-	public ShoppingCart(double totalCost, Customer customer, List<Article> articles) {
+	public ShoppingCart(double totalCost, Customer customer, List<ShoppingCartItem> items) {
 	super();
 	this.totalCost = totalCost;
 	this.customer = customer;
-	this.articles = articles;
+	this.items = items;
 	}
 
 	public double getTotalCost() {
@@ -39,11 +39,11 @@ public class ShoppingCart {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-   
-	public java.util.List<Article> getArticles() {
-		if (articles == null)
-			articles = new java.util.Vector<Article>();
-		return articles;
+	
+	public java.util.List<ShoppingCartItem> getItems() {
+		if (items == null)
+			items = new java.util.Vector<ShoppingCartItem>();
+		return items;
 	}
 	   
 /*	public java.util.Iterator getIteratorArticles() {
@@ -52,35 +52,50 @@ public class ShoppingCart {
 		return articles.iterator();
 	}*/
 	   
-	public void setArticles(java.util.List<Article> newArticles) {
-		removeAllArticles();
+	public void setItems(java.util.List<ShoppingCartItem> newItems) {
+		removeAllItems();
 /*			for (java.util.Iterator iter = newArticles.iterator(); iter.hasNext();)
 		addArticles((Article)iter.next());*/
-		for(Article article : newArticles) {
-			addArticles(article);
+		for(ShoppingCartItem item : newItems) {
+			addItem(item);
 		}
 	}
 	   
-	public void addArticles(Article newArticle) {
-		if (newArticle == null)
+	public void addItem(ShoppingCartItem newItem) {
+		if (newItem == null)
 			return;
-		if (this.articles == null)
-			this.articles = new java.util.Vector<Article>();
-		if (!this.articles.contains(newArticle))
-			this.articles.add(newArticle);
+		if (this.items == null)
+			this.items = new java.util.Vector<ShoppingCartItem>();
+		for(ShoppingCartItem item : items) {
+			if(item.getArticle().equals(newItem.getArticle())) {
+				totalCost += newItem.getAmount() * newItem.getArticle().getPrice() - item.getAmount()*item.getArticle().getPrice();
+				item = newItem;
+				break;
+			}
+		}		
+		if (!this.items.contains(newItem)) {
+			this.items.add(newItem);
+			totalCost += newItem.getAmount() * newItem.getArticle().getPrice();
+		}
+			
 	}
 	   
-	public void removeArticles(Article oldArticle) {
-		if (oldArticle == null)
+	public void removeItem(ShoppingCartItem oldItem) {
+		if (oldItem == null)
 			return;
-		if (this.articles != null)
-			if (this.articles.contains(oldArticle))
-				this.articles.remove(oldArticle);
+		if (this.items != null)
+			if (this.items.contains(oldItem))
+			{
+				this.items.remove(oldItem);
+				totalCost -= oldItem.getAmount() * oldItem.getArticle().getPrice();
+			}
 	}
 	   
-	public void removeAllArticles() {
-		if (articles != null)
-			articles.clear();
+	public void removeAllItems() {
+		if (items != null) {
+			items.clear();
+			totalCost = 0;
+		}
 	}
 
 }
