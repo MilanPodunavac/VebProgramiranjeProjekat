@@ -167,8 +167,20 @@ public class LoginService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public User getCurrentUser(@Context HttpServletRequest request) {
-		return (User) request.getSession().getAttribute("user");
-		//doraditi?
+		User user = null;
+		if(request.getSession().getAttribute("customer") != null) {
+			user = (User)request.getSession().getAttribute("customer");
+		}
+		else if(request.getSession().getAttribute("deliverer") != null) {
+			user = (User)request.getSession().getAttribute("deliverer");
+		}
+		else if(request.getSession().getAttribute("manager") != null) {
+			user = (User)request.getSession().getAttribute("manager");
+		}
+		else if(request.getSession().getAttribute("administrator") != null) {
+			user = (User)request.getSession().getAttribute("administrator");
+		}
+		return user;
 	}
 	
 	@POST
@@ -225,9 +237,16 @@ public class LoginService {
 		
 		admSer.Save(admins);
 		
-		Delivery delivery1 = new Delivery("0000000001", new Date(121,9,9), 100, DeliveryStatus.delivered, null);
-		Delivery delivery2 = new Delivery("0000000002", new Date(121,9,9), 10000, DeliveryStatus.cancelled, null);
-		Delivery delivery3 = new Delivery("0000000002", new Date(121,9,9), 2000, DeliveryStatus.inDelivery, null);
+		Delivery delivery1 = new Delivery("0000000001", new Date(121,9,9), 100, DeliveryStatus.delivered, null, null);
+		Delivery delivery2 = new Delivery("0000000002", new Date(121,9,9), 10000, DeliveryStatus.cancelled, null, null);
+		Delivery delivery3 = new Delivery("0000000002", new Date(121,9,9), 2000, DeliveryStatus.inDelivery, null, null);
+		
+		Restaurant restaurant1 = new Restaurant("Chinese Restaurant", true, null, RestaurantType.chinese, new ArrayList<Article>(), new Location(100, 100.5, "Street1", 10, "City1", 1000));
+		Restaurant restaurant2 = new Restaurant("Krusty Krab", true, null, RestaurantType.barbecue, new ArrayList<Article>(), new Location(100, 100.5, "Street1", 10, "City1", 1000));
+		
+		delivery1.setRestaurant(restaurant2);
+		delivery2.setRestaurant(restaurant1);
+		delivery3.setRestaurant(restaurant2);
 		
 		Customer customer1 = new Customer("customer1", "password1", "Kustomer", "Kustomerovic", Gender.male, new Date(106,1,1), 1000, new ArrayList<Delivery>(), new CustomerType("Gold", 12, 700), new ShoppingCart());
 		customer1.getShoppingCart().setCustomer(customer1);
@@ -240,9 +259,6 @@ public class LoginService {
 		customers.add(customer2);
 		
 		cusSer.Save(customers);
-		
-		Restaurant restaurant1 = new Restaurant("Chinese Restaurant", true, null, RestaurantType.chinese, new ArrayList<Article>(), new Location(100, 100.5, "Street1", 10, "City1", 1000));
-		Restaurant restaurant2 = new Restaurant("Krusty Krab", true, null, RestaurantType.barbecue, new ArrayList<Article>(), new Location(100, 100.5, "Street1", 10, "City1", 1000));
 		
 		restaurants.add(restaurant1);
 		restaurants.add(restaurant2);

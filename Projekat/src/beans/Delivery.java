@@ -11,19 +11,20 @@ public class Delivery {
 	private DeliveryStatus deliveryStatus; 
 	@JsonBackReference
 	private Customer customer;
+	private Restaurant restaurant;
    
     public Delivery() {
 	    super();
     }
 	
-	public Delivery(String id, Date time, double totalCost, DeliveryStatus deliveryStatus, Customer customer) {
+	public Delivery(String id, Date time, double totalCost, DeliveryStatus deliveryStatus, Customer customer, Restaurant restaurant) {
 		super();
 		this.id = id;
 		this.time = time;
 		this.totalCost = totalCost;
 		this.deliveryStatus = deliveryStatus;
 		this.customer = customer;
-	}
+		this.restaurant = restaurant;	}
 
 	public String getId() {
 		return id;
@@ -76,6 +77,13 @@ public class Delivery {
 				this.customer.addDeliveries(this);
 			}
 		}
+	}
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+	
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
 	}
 
 }

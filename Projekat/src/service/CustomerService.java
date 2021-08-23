@@ -113,6 +113,6 @@ public class CustomerService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Customer getCustomer(@Context HttpServletRequest request) {
-		return (Customer) request.getSession().getAttribute("Customer");
+		return (Customer) request.getSession().getAttribute("customer");
 	}
 }
