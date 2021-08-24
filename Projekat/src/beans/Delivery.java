@@ -24,7 +24,8 @@ public class Delivery {
 		this.totalCost = totalCost;
 		this.deliveryStatus = deliveryStatus;
 		this.customer = customer;
-		this.restaurant = restaurant;	}
+		this.restaurant = restaurant;	
+	}
 
 	public String getId() {
 		return id;

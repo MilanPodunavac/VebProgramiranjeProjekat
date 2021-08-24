@@ -1,6 +1,7 @@
 package service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +20,7 @@ import beans.Comment;
 import beans.Customer;
 import beans.Deliverer;
 import beans.Delivery;
+import beans.DeliveryStatus;
 import beans.Manager;
 import beans.Restaurant;
 import beans.ShoppingCart;
@@ -28,6 +30,7 @@ import dao.AdministratorDao;
 import dao.CommentDao;
 import dao.CustomerDao;
 import dao.DelivererDao;
+import dao.DeliveryDao;
 import dao.ManagerDao;
 import dao.RestaurantDao;
 import serialize.AdministratorSerializer;
@@ -78,6 +81,16 @@ public class CustomerService {
 				}
 			}
 			context.setAttribute("deliverers", new DelivererDao((ArrayList<Deliverer>)deliverers));
+		}
+		if(context.getAttribute("deliveries") == null) {
+			CustomerDao customerDao = (CustomerDao)(context.getAttribute("customers"));
+			ArrayList<Delivery> deliveries = new ArrayList<Delivery>();
+			for(Customer customer : customerDao.getCustomers()) {
+				for(Delivery delivery : customer.getDeliveries()) {
+					deliveries.add(delivery);
+				}
+			}
+			context.setAttribute("deliveries", new DeliveryDao(deliveries));
 		}
 		if(context.getAttribute("restaurants") == null) {
 			List<Restaurant> restaurants = new RestaurantSerializer(context.getRealPath("")).Load();
@@ -158,4 +171,49 @@ public class CustomerService {
 		CustomerSerializer ser = new CustomerSerializer(context.getRealPath(""));
 		ser.Update(customer);
 	}
+	
+	@POST
+	@Path("/checkOut")
+	public void checkOut(@Context HttpServletRequest request) {
+		Customer customer = (Customer)request.getSession().getAttribute("customer");
+		Delivery newDelivery = new Delivery();
+		newDelivery.setId(((DeliveryDao)context.getAttribute("deliveries")).generateId());
+		newDelivery.setCustomer(customer);
+		newDelivery.setDeliveryStatus(DeliveryStatus.processing);
+		newDelivery.setRestaurant(customer.getShoppingCart().getItems().get(0).getArticle().getRestaurant());
+		newDelivery.setTime(new Date());
+		newDelivery.setTotalCost(customer.getShoppingCart().getTotalCost());
+		customer.addDeliveries(newDelivery);
+		customer.getShoppingCart().removeAllItems();
+		new CustomerSerializer(context.getRealPath("")).Update(customer);
+		((DeliveryDao)context.getAttribute("deliveries")).getDeliveries().add(newDelivery);
+		CustomerDao customerDao = (CustomerDao)context.getAttribute("customers");
+		//Nisam siguran da ce se azurirati u contextu automatski, tj jel u session referenca na customera u contextu,
+		//pa za svaki slucaj
+		for(Customer ctxCustomer : customerDao.getCustomers()) {
+			if(customer.getUsername().equals(ctxCustomer.getUsername())) {
+				ctxCustomer = customer;
+			}
+		}
+	}
+	
+	@POST
+	@Path("/cancelDelivery")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void CancelDelivery(Delivery delivery, @Context HttpServletRequest request) {
+		DeliveryDao deliveryDao = (DeliveryDao)context.getAttribute("deliveries");
+		for(Delivery ctxDelivery : deliveryDao.getDeliveries()) {
+			if(delivery.getId().equals(ctxDelivery.getId())) {
+				ctxDelivery.setDeliveryStatus(DeliveryStatus.cancelled);
+				new CustomerSerializer(context.getRealPath("")).Update(ctxDelivery.getCustomer());
+			}
+		}
+	}
+	
+/*	@GET
+	@Path("/idGenTest")
+	public String idGeneratorTest() {
+		DeliveryDao dao = (DeliveryDao)context.getAttribute("deliveries");
+		return dao.generateId();
+	}*/
 }

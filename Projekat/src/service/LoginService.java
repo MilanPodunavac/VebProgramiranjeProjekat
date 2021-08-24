@@ -38,6 +38,7 @@ import dao.AdministratorDao;
 import dao.CommentDao;
 import dao.CustomerDao;
 import dao.DelivererDao;
+import dao.DeliveryDao;
 import dao.ManagerDao;
 import dao.RestaurantDao;
 import serialize.AdministratorSerializer;
@@ -88,6 +89,16 @@ public class LoginService {
 				}
 			}
 			context.setAttribute("deliverers", new DelivererDao((ArrayList<Deliverer>)deliverers));
+		}
+		if(context.getAttribute("deliveries") == null) {
+			CustomerDao customerDao = (CustomerDao)(context.getAttribute("customers"));
+			ArrayList<Delivery> deliveries = new ArrayList<Delivery>();
+			for(Customer customer : customerDao.getCustomers()) {
+				for(Delivery delivery : customer.getDeliveries()) {
+					deliveries.add(delivery);
+				}
+			}
+			context.setAttribute("deliveries", new DeliveryDao(deliveries));
 		}
 		if(context.getAttribute("restaurants") == null) {
 			List<Restaurant> restaurants = new RestaurantSerializer(context.getRealPath("")).Load();
@@ -239,7 +250,7 @@ public class LoginService {
 		
 		Delivery delivery1 = new Delivery("0000000001", new Date(121,9,9), 100, DeliveryStatus.delivered, null, null);
 		Delivery delivery2 = new Delivery("0000000002", new Date(121,9,9), 10000, DeliveryStatus.cancelled, null, null);
-		Delivery delivery3 = new Delivery("0000000002", new Date(121,9,9), 2000, DeliveryStatus.inDelivery, null, null);
+		Delivery delivery3 = new Delivery("0000000003", new Date(121,9,9), 2000, DeliveryStatus.inDelivery, null, null);
 		
 		Restaurant restaurant1 = new Restaurant("Chinese Restaurant", true, null, RestaurantType.chinese, new ArrayList<Article>(), new Location(100, 100.5, "Street1", 10, "City1", 1000));
 		Restaurant restaurant2 = new Restaurant("Krusty Krab", true, null, RestaurantType.barbecue, new ArrayList<Article>(), new Location(100, 100.5, "Street1", 10, "City1", 1000));
@@ -291,6 +302,8 @@ public class LoginService {
 		deliverers.add(deliverer2);
 		
 		delSer.Save(deliverers);
+		
+		initializeData();
 		
 	}
 	
