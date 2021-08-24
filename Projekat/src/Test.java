@@ -57,11 +57,13 @@ public class Test {
 			System.out.println(a.getDateOfBirth());
 		}*/
 		
-		Delivery delivery1 = new Delivery("0000000001", new Date(121,9,9), 100, DeliveryStatus.delivered, null);
-		Delivery delivery2 = new Delivery("0000000002", new Date(121,9,9), 10000, DeliveryStatus.cancelled, null);
+		
 		
 		Customer customer1 = new Customer("customer1", "password1", "Kustomer", "Kustomerovic", Gender.male, new Date(106,1,1), 1000, new ArrayList<Delivery>(), new CustomerType("Gold", 12, 700), null);
 		Restaurant restaurant1 = new Restaurant("Restaurant1", true, null, RestaurantType.chinese, new ArrayList<Article>(), new Location(100, 100.5, "Street1", 10, "City1", 1000));
+		
+		Delivery delivery1 = new Delivery("0000000001", new Date(121,9,9), 100, DeliveryStatus.delivered, null, restaurant1);
+		Delivery delivery2 = new Delivery("0000000002", new Date(121,9,9), 10000, DeliveryStatus.cancelled, null, restaurant1);
 		
 		customer1.getDeliveries().add(delivery1);
 		delivery1.setCustomer(customer1);
