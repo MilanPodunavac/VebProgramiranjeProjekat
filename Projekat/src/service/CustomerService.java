@@ -206,7 +206,7 @@ public class CustomerService {
 		for(Delivery ctxDelivery : deliveryDao.getDeliveries()) {
 			if(delivery.getId().equals(ctxDelivery.getId())) {
 				ctxDelivery.setDeliveryStatus(DeliveryStatus.cancelled);
-				ctxDelivery.getCustomer().removePoints((int)ctxDelivery.getTotalCost());
+				ctxDelivery.getCustomer().removePoints((int)ctxDelivery.getTotalCost()/1000 * 133 * 4);
 				new CustomerSerializer(context.getRealPath("")).Update(ctxDelivery.getCustomer());
 			}
 		}
