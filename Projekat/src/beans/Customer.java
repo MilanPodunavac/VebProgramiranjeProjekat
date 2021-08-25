@@ -103,5 +103,27 @@ public class Customer extends User {
 			}
 		}
 	}
+	
+	public boolean addPoints(int points) {
+		this.points += points;
+		return customerType.changeCustomerType(this.points);
+	}
+	
+	public boolean removePoints(int points) {
+		this.points -= points;
+		return customerType.changeCustomerType(this.points);
+	}
+	
+	public double getDiscountedShoppingCartCost() {
+		return shoppingCart.getTotalCost() * (1.0 - customerType.getDiscount()/100);
+	}
+	
+	public double getDiscountedPrice(double price) {
+		return price * (1.0 - customerType.getDiscount()/100);
+	}
+	
+	public double getDiscount() {
+		return customerType.getDiscount();
+	}
 
 }

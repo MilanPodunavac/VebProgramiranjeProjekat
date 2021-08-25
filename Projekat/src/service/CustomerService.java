@@ -182,7 +182,8 @@ public class CustomerService {
 		newDelivery.setDeliveryStatus(DeliveryStatus.processing);
 		newDelivery.setRestaurant(customer.getShoppingCart().getItems().get(0).getArticle().getRestaurant());
 		newDelivery.setTime(new Date());
-		newDelivery.setTotalCost(customer.getShoppingCart().getTotalCost());
+		newDelivery.setTotalCost(customer.getDiscountedShoppingCartCost());
+		customer.addPoints((int)customer.getDiscountedShoppingCartCost()/1000 * 133);
 		customer.addDeliveries(newDelivery);
 		customer.getShoppingCart().removeAllItems();
 		new CustomerSerializer(context.getRealPath("")).Update(customer);
@@ -205,6 +206,7 @@ public class CustomerService {
 		for(Delivery ctxDelivery : deliveryDao.getDeliveries()) {
 			if(delivery.getId().equals(ctxDelivery.getId())) {
 				ctxDelivery.setDeliveryStatus(DeliveryStatus.cancelled);
+				ctxDelivery.getCustomer().removePoints((int)ctxDelivery.getTotalCost());
 				new CustomerSerializer(context.getRealPath("")).Update(ctxDelivery.getCustomer());
 			}
 		}

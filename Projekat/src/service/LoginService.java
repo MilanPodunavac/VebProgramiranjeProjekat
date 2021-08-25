@@ -259,11 +259,11 @@ public class LoginService {
 		delivery2.setRestaurant(restaurant1);
 		delivery3.setRestaurant(restaurant2);
 		
-		Customer customer1 = new Customer("customer1", "password1", "Kustomer", "Kustomerovic", Gender.male, new Date(106,1,1), 1000, new ArrayList<Delivery>(), new CustomerType("Gold", 12, 700), new ShoppingCart());
+		Customer customer1 = new Customer("customer1", "password1", "Kustomer", "Kustomerovic", Gender.male, new Date(106,1,1), 1000, new ArrayList<Delivery>(), new CustomerType("Gold", 12, 1500), new ShoppingCart());
 		customer1.getShoppingCart().setCustomer(customer1);
 		customer1.addDeliveries(delivery1);
 		customer1.addDeliveries(delivery2);
-		Customer customer2 = new Customer("Beli", "password1", "Mirko", "Beli", Gender.male, new Date(106,1,1), 1000, new ArrayList<Delivery>(), new CustomerType("Gold", 12, 700), new ShoppingCart());
+		Customer customer2 = new Customer("Beli", "password1", "Mirko", "Beli", Gender.male, new Date(106,1,1), 1000, new ArrayList<Delivery>(), new CustomerType("Gold", 12, 1500), new ShoppingCart());
 		customer2.addDeliveries(delivery3);
 		
 		customers.add(customer1);
