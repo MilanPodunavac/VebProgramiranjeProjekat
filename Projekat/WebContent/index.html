@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Index</title>
+<style>
+	.menu{
+		background-color: yellow;
+		float: left;
+		width: 15%;
+		height: 100%;
+  		position: fixed;
+  		z-index: 1;
+ 		top: 0;
+  		left: 0;
+ 		overflow-x: hidden;
+ 		padding-top: 10px;
+	}
+	
+	.menu h2{
+		text-align: center;
+	}
+	
+	.menu button{
+		height: 22px;
+		width: 40%;
+		margin: 4%;
+		font-size: 15px;
+		background-color: green;
+	}
+	
+	.menu button:hover{
+		background-color: gray;
+	}
+	
+	.menu ul{
+		list-style-type: none;
+	}
+	
+	.mainlist{
+		float: right;
+		width: 85%;
+	}
+	
+</style>
+</head>
+<body>
+
+<div class="menu">
+	<h2>Rade&Dunav</h2>
+	<button onclick="location.href='login.html'">Login</button>
+	<button onclick="location.href='register.html'">Register</button>
+	<ul>
+		<li>Restaurants</li>
+		<li>Login to unlock functionalities</li>
+	</ul>
+</div>
+
+<div class="mainlist">
+	<div style="height:100px">
+	<h2>Restaurants</h2>
+
+	<h3>Search</h3>
+	<table style="width:70%">
+	<tr style="height:25%">
+	<td>
+	<input name="search_name" placeholder="Name"><br>
+	</td>
+	
+	<td rowspan="3" style="vertical-align:top; width:25%">
+	<h4>Type</h4>
+	<input type="radio" id="filter_typeall" name="type_filter" value="filter_typeall" checked>
+	<label for="filter_typeall">All</label><br>
+	<input type="radio" id="filter_barbecue" name="type_filter" value="filter_barbecue">
+	<label for="filter_barbecue">Barbecue</label><br>
+	<input type="radio" id="filter_chinese" name="type_filter" value="filter_chinese">
+	<label for="filter_chinese">Chinese</label><br>
+	<input type="radio" id="filter_fastfood" name="type_filter" value="filter_fastfood">
+	<label for="filter_fastfood">Fastfood</label><br>
+	<input type="radio" id="filter_italian" name="type_filter" value="filter_italian">
+	<label for="filter_italian">Italian</label><br>
+	<input type="radio" id="filter_japanese" name="type_filter" value="filter_japanese">
+	<label for="filter_japanese">Japanese</label><br>
+	<input type="radio" id="filter_kfc" name="type_filter" value="filter_kfc">
+	<label for="filter_kfc">KFC</label><br>
+	<input type="radio" id="filter_mcDonalds" name="type_filter" value="filter_mcDonalds">
+	<label for="filter_mcDonalds">McDonalds</label><br>
+	<input type="radio" id="filter_seafood" name="type_filter" value="filter_seafood">
+	<label for="filter_seafood">Seafood</label><br>
+	<input type="radio" id="filter_thai" name="type_filter" value="filter_thai">
+	<label for="filter_thai">Thai</label><br>
+	</td>
+	
+	<td rowspan="3" style="vertical-align:top; width:25%">
+	<h4>Grade</h4>
+	<input type="radio" id="filter_gradeall" name="grade_filter" value="filter_gradeall" checked>
+	<label for="filter_gradeall">All</label><br>
+	<input type="radio" id="filter_grade2" name="grade_filter" value="filter_grade2">
+	<label for="filter_grade2">>2</label><br>
+	<input type="radio" id="filter_grade3" name="grade_filter" value="filter_grade3">
+	<label for="filter_grade3">>3</label><br>
+	<input type="radio" id="filter_grade4" name="grade_filter" value="filter_grade4">
+	<label for="filter_grade4">>4</label><br>
+	</td>
+	
+	<td rowspan="2" style="vertical-align:top; width:25%">
+	<h4>Sort</h4>
+	<input type="radio" id="name_ascending" name="restaurant_sort" value="name_ascending" checked>
+	<label for="name_ascending">Name ascending</label><br>
+	<input type="radio" id="name_descending" name="restaurant_sort" value="name_descending">
+	<label for="name_descending">Name descending</label><br>
+	<input type="radio" id="location_ascending" name="restaurant_sort" value="location_ascending">
+	<label for="location_ascending">Location ascending</label><br>
+	<input type="radio" id="location_descending" name="restaurant_sort" value="location_descending">
+	<label for="location_descending">Location descending</label><br>
+	<input type="radio" id="grade_ascending" name="restaurant_sort" value="grade_ascending">
+	<label for="grade_ascending">Grade ascending</label><br>
+	<input type="radio" id="grade_descending" name="restaurant_sort" value="grade_descending">
+	<label for="grade_descending">Grade descending</label>
+	</td>
+	</tr>
+	
+	<tr style="height:25%">
+	<td>
+	<input name="search_location" placeholder="Location"><br>
+	</td>
+	</tr>
+	<tr style="height:50%">
+	<td>
+	<input type="checkbox" id="filter_open" name="filter_open" value="filter_open">
+	<label for="filter_open">Show only open restaurants</label>
+	</td>
+	<td>
+	<button>Search</button>
+	</td>
+	</tr>
+	
+	</table>
+	</div>
+	
+	<ul id="restaurant_list">
+	</ul>
+	
+</div>
+
+</body>
+</html>
