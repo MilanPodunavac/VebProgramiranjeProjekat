@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import beans.Deliverer;
 import beans.Manager;
+import beans.Restaurant;
 import serialize.ManagerSerializer;
 
 public class ManagerDao {
@@ -39,5 +40,16 @@ public class ManagerDao {
 			}
 		}
 		return true;
+	}
+	public Manager getManagerByRestaurant(Restaurant restaurant) {
+		Manager retVal = null;
+		for(Manager manager : managers) {
+			if(manager.getRestaurant() == null)continue;
+			if(manager.getRestaurant().getName().equals(restaurant.getName()) 
+					&& manager.getRestaurant().getLocation().equals(restaurant.getLocation())) {
+				retVal = manager;
+			}
+		}
+		return retVal;
 	}
 }

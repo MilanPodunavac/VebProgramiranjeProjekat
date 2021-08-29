@@ -1,8 +1,10 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import beans.Delivery;
+import beans.DeliveryStatus;
 
 public class DeliveryDao {
 	private ArrayList<Delivery> deliveries;
@@ -33,6 +35,14 @@ public class DeliveryDao {
 		retVal = retVal.substring(0, retVal.length() - id.length());
 		retVal = retVal.concat(id);
 		return retVal;
+	}
+	
+	public List<Delivery> getWaitingDeliveries(){
+		List<Delivery> waitingDeliveries = new ArrayList<Delivery>();
+		for(Delivery delivery : deliveries) {
+			if(delivery.getDeliveryStatus() == DeliveryStatus.waitingDelivery)waitingDeliveries.add(delivery);
+		}
+		return waitingDeliveries;
 	}
 	
 }
