@@ -125,4 +125,13 @@ public class RestaurantService {
 		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
 		return restaurantDao.getWorkingRestaurantsByType(type);
 	}
+	
+	@GET
+	@Path("RestaurantsSortedByWorking")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Restaurant> getRestaurantsSortedByWorking(){
+		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
+		return restaurantDao.getRestaurantsSortedByWorking();
+	}
 }
