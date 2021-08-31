@@ -34,9 +34,6 @@ import serialize.RestaurantSerializer;
 
 @Path("ManagerService")
 public class ManagerService extends ServiceTemplate {
-
-	@Context
-	private ServletContext context;
 	
 	public ManagerService() {
 		

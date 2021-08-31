@@ -40,8 +40,6 @@ import serialize.RestaurantSerializer;
 
 @Path("RestaurantService")
 public class RestaurantService extends ServiceTemplate {
-	@Context
-	private ServletContext context;
 	
 	public RestaurantService() {
 		

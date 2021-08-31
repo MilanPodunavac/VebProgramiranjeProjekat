@@ -54,8 +54,6 @@ import serialize.UsernameChecker;
 
 @Path("")
 public class LoginService extends ServiceTemplate {
-	@Context
-	private ServletContext context;
 	
 	public LoginService() {
 		
