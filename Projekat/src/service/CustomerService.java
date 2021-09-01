@@ -105,6 +105,7 @@ public class CustomerService extends ServiceTemplate {
 	
 	@POST
 	@Path("/checkOut")
+	@Consumes(MediaType.APPLICATION_JSON)
 	public void checkOut(@Context HttpServletRequest request) {
 		Customer customer = (Customer)request.getSession().getAttribute("customer");
 		Delivery newDelivery = new Delivery();
@@ -141,6 +142,31 @@ public class CustomerService extends ServiceTemplate {
 				new CustomerSerializer(context.getRealPath("")).Update(ctxDelivery.getCustomer());
 			}
 		}
+	}
+	
+	@GET
+	@Path("/getReviewableRestaurants")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Restaurant> getReviewableRestaurants(@Context HttpServletRequest request){
+		List<Restaurant> reviewableRestaurants = new ArrayList<Restaurant>();
+		Customer customer = (Customer)request.getSession().getAttribute("customer");
+		for(Delivery delivery : customer.getDeliveries()) {
+			if(delivery.getDeliveryStatus() == DeliveryStatus.delivered) {
+				boolean exists = false;
+				for(Restaurant restaurant : reviewableRestaurants) {
+					if(restaurant.getName().equals(delivery.getRestaurant().getName())
+							&& restaurant.getLocation().equals(delivery.getRestaurant().getLocation())) {
+						exists = true;
+						break;
+					}
+				}
+				if(!exists) {
+					reviewableRestaurants.add(delivery.getRestaurant());
+				}
+			}
+		}
+		return reviewableRestaurants;
 	}
 	
 /*	@GET
