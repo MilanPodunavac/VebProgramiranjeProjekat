@@ -44,4 +44,21 @@ public class ManagerService extends ServiceTemplate {
 		initializeData();
 	}
 
+	//getManager
+	
+	//getRestaurantDeliveries
+	
+	//setPreparationDeliveryStatus
+	
+	//setWaitingDeliveryStatus
+	
+	//setInDelivery (accept Request)
+	
+	//getRestaurantComments
+	
+	//approveRestaurantComment
+	
+	//addArticle
+	
+	//updateArticle
 }

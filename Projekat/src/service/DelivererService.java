@@ -59,6 +59,9 @@ public class DelivererService extends ServiceTemplate {
 		return (Deliverer) request.getSession().getAttribute("deliverer");
 	}
 	
+	//getInDelivery
+	
+	
 	@POST
 	@Path("/requestDelivery")
 	@Consumes(MediaType.APPLICATION_JSON)

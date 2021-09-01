@@ -43,4 +43,18 @@ public class AdministratorService extends ServiceTemplate {
 	public void init() {
 		initializeData();
 	}
+	
+	//createNewRestaurant
+	
+	//pregledSvihKorisnika
+	
+	//createManager
+	
+	//createDeliverer
+	
+	//deleteEntities
+	
+	//za 9-10 -- blokiranje korisnika
+	
+	//za 9-10 -- prikaz sumnjivih korisnika
 }

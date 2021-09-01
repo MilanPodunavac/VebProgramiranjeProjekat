@@ -67,4 +67,22 @@ public class RestaurantService extends ServiceTemplate {
 		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
 		return restaurantDao.getWorkingRestaurantsByType(type);
 	}
+	
+	@GET
+	@Path("/getRestaurantComments")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Comment> getRestaurantComments(Restaurant restaurant){
+		return null;//URADI 
+	}
+	
+	@GET
+	@Path("/getApprovedRestaurantComments")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Comment> getApprovedRestaurantComments(Restaurant restaurant){
+		return null;//URADI 
+	}
+	
+	
 }
