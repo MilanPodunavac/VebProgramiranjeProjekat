@@ -24,13 +24,23 @@ public class ManagerDao {
 	}
 
 	public Manager find(String username, String password) {
-		Manager deliverer = null;
+		Manager manager = null;
 		for(Manager m : managers) {
 			if(m.getUsername().equals(username) && m.getPassword().equals(password)) {
-				deliverer = m;
+				manager = m;
 			}
 		}
-		return deliverer;
+		return manager;
+	}
+	
+	public Manager getManagerByUsername(String username) {
+		Manager manager = null;
+		for(Manager m : managers) {
+			if(m.getUsername().equals(username)) {
+				manager = m;
+			}
+		}
+		return manager;
 	}
 	
 	public boolean IsUniqueUsername(String username) {

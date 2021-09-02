@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import beans.Customer;
 import beans.Deliverer;
+import beans.Manager;
 
 public class DelivererDao {
 	private ArrayList<Deliverer> deliverers;
@@ -25,6 +26,16 @@ public class DelivererDao {
 		Deliverer deliverer = null;
 		for(Deliverer d : deliverers) {
 			if(d.getUsername().equals(username) && d.getPassword().equals(password)) {
+				deliverer = d;
+			}
+		}
+		return deliverer;
+	}
+	
+	public Deliverer getDelivererByUsername(String username) {
+		Deliverer deliverer = null;
+		for(Deliverer d : deliverers) {
+			if(d.getUsername().equals(username)) {
 				deliverer = d;
 			}
 		}

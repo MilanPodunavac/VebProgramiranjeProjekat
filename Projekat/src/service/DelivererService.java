@@ -59,8 +59,7 @@ public class DelivererService extends ServiceTemplate {
 		return (Deliverer) request.getSession().getAttribute("deliverer");
 	}
 	
-	//getInDelivery
-	
+	//getInDelivery ???
 	
 	@POST
 	@Path("/requestDelivery")

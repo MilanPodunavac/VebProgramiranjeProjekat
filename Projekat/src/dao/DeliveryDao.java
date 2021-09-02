@@ -5,6 +5,7 @@ import java.util.List;
 
 import beans.Delivery;
 import beans.DeliveryStatus;
+import beans.Restaurant;
 
 public class DeliveryDao {
 	private ArrayList<Delivery> deliveries;
@@ -43,6 +44,17 @@ public class DeliveryDao {
 			if(delivery.getDeliveryStatus() == DeliveryStatus.waitingDelivery)waitingDeliveries.add(delivery);
 		}
 		return waitingDeliveries;
+	}
+	
+	public List<Delivery> getRestaurantDeliveries(Restaurant restaurant){
+		List<Delivery> restaurantDeliveries = new ArrayList<Delivery>();
+		for(Delivery delivery : deliveries) {
+			if(delivery.getRestaurant().getName().equals(restaurant.getName())
+					&& delivery.getRestaurant().getLocation().equals(restaurant.getLocation())) {
+				restaurantDeliveries.add(delivery);
+			}
+		}
+		return restaurantDeliveries;
 	}
 	
 }

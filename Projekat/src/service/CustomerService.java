@@ -170,6 +170,17 @@ public class CustomerService extends ServiceTemplate {
 	}
 	
 	//getInProcessingDeliveries
+	@GET
+	@Path("/getInProcessingDeliveries")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Delivery> getInProcessingDeliveries(@Context HttpServletRequest request) {
+		List<Delivery> deliveries = new ArrayList<Delivery>();
+		for(Delivery delivery : getCustomer(request).getDeliveries()) {
+			if(delivery.getDeliveryStatus() == DeliveryStatus.processing)deliveries.add(delivery);
+		}
+		return deliveries;
+	}
 	
 /*	@GET
 	@Path("/idGenTest")

@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Comment;
+import beans.Manager;
 
 public class CommentSerializer {
 
@@ -88,6 +89,21 @@ private String imeFajla = "database" + File.separator + "comments.txt";
 		comments.add(comment);
 		Save(comments);
 		return true;
+	}
+	
+	public boolean Update(Comment comment) {
+		ArrayList<Comment> comments = Load();
+		for(Comment c : comments) {
+			if(c.getText().equals(comment.getText()) 
+					&& comment.getGrade() == c.getGrade() 
+					&& comment.getCustomer().getUsername().equals(c.getCustomer().getUsername())) {
+				comments.remove(c);
+				comments.add(comment);
+				Save(comments);
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

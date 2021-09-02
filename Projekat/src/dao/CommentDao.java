@@ -24,7 +24,36 @@ public class CommentDao {
 	}
 	
 	public List<Comment> getRestaurantComments(Restaurant restaurant){
-		return null;
+		List<Comment> restaurantComments = new ArrayList<Comment>();
+		for(Comment comment : comments) {
+			if(comment.getRestaurant().getName().equals(restaurant.getName())
+					&& comment.getRestaurant().getLocation().equals(restaurant.getLocation())) {
+				restaurantComments.add(comment);
+			}
+		}
+		return restaurantComments;
+	}
+	
+	public List<Comment> getApprovedRestaurantComments(Restaurant restaurant){
+		List<Comment> restaurantComments = getRestaurantComments(restaurant);
+		List<Comment> approvedRestaurantComments = new ArrayList<Comment>();
+		for(Comment comment : restaurantComments) {
+			if(comment.isApproved()) {
+				approvedRestaurantComments.add(comment);
+			}
+		}
+		return approvedRestaurantComments;
+	}
+	
+	public List<Comment> getNotApprovedRestaurantComments(Restaurant restaurant){
+		List<Comment> restaurantComments = getRestaurantComments(restaurant);
+		List<Comment> notApprovedRestaurantComments = new ArrayList<Comment>();
+		for(Comment comment : restaurantComments) {
+			if(!comment.isApproved()) {
+				notApprovedRestaurantComments.add(comment);
+			}
+		}
+		return notApprovedRestaurantComments;
 	}
 	
 	public void addComment(Comment comment) {

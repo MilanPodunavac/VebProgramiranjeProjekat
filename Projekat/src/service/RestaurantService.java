@@ -69,19 +69,30 @@ public class RestaurantService extends ServiceTemplate {
 	}
 	
 	@GET
-	@Path("/getRestaurantComments")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Comment> getRestaurantComments(Restaurant restaurant){
-		return null;//URADI 
-	}
-	
-	@GET
 	@Path("/getApprovedRestaurantComments")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Comment> getApprovedRestaurantComments(Restaurant restaurant){
 		return null;//URADI 
+	}
+	
+	//getRestaurantComments
+	@GET
+	@Path("/getRestaurantComments")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Comment> getRestaurantComments(Restaurant restaurant){
+		CommentDao commentDao = (CommentDao)context.getAttribute("comments");
+		return commentDao.getRestaurantComments(restaurant);
+	}
+	
+	@GET
+	@Path("/getNotApprovedRestaurantComments")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Comment> getNotApprovedRestaurantComments(Restaurant restaurant){
+		CommentDao commentDao = (CommentDao)context.getAttribute("comments");
+		return commentDao.getNotApprovedRestaurantComments(restaurant);
 	}
 	
 	
