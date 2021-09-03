@@ -97,6 +97,36 @@ public class ManagerService extends ServiceTemplate {
 	}
 	
 	//setInDelivery (accept Request)
+	@POST
+	@Path("/setDeliveryToInDelivery")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void setDeliveryToInDelivery(Delivery delivery, Deliverer deliverer) {
+		DeliveryDao deliveryDao = (DeliveryDao)context.getAttribute("deliveries");
+		DelivererDao delivererDao = (DelivererDao)context.getAttribute("deliverers");
+		for(Delivery ctxDelivery : deliveryDao.getWaitingDeliveries()) {
+			if(ctxDelivery.getId().equals(delivery.getId())) {
+				for(Deliverer ctxDeliverer : delivererDao.getDeliverers()) {
+					if(ctxDeliverer.getUsername().equals(deliverer.getUsername())) {
+						ctxDelivery.setDeliveryStatus(DeliveryStatus.inDelivery);
+						ctxDeliverer.addDelivery(ctxDelivery);
+					}
+				}
+			}
+		}
+		DeliveryRequestDao deliveryRequestDao = (DeliveryRequestDao)context.getAttribute("deliveryRequests");
+		deliveryRequestDao.declineAllDeliveryRequests(delivery);
+		
+		CustomerDao customerDao = (CustomerDao)context.getAttribute("customers");
+		
+		CustomerSerializer customerSerializer = new CustomerSerializer(context.getRealPath(""));
+		DelivererSerializer delivererSerializer = new DelivererSerializer(context.getRealPath(""));
+		DeliveryRequestSerializer deliveryRequestSerializer = new DeliveryRequestSerializer(context.getRealPath(""));
+		
+		customerSerializer.Save(customerDao.getCustomers());
+		delivererSerializer.Save(delivererDao.getDeliverers());
+		deliveryRequestSerializer.Save(deliveryRequestDao.getDeliveryRequests());
+	}
 	
 	//approveRestaurantComment
 	@POST
@@ -116,6 +146,64 @@ public class ManagerService extends ServiceTemplate {
 		}
 	}
 	//addArticle
+	@POST
+	@Path("/addArticle")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean addArticle(Article article, Restaurant restaurant) {
+		boolean success = false;
+		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
+		for(Restaurant ctxRestaurant : restaurantDao.getRestaurants()) {
+			if(restaurant.getName().equals(ctxRestaurant.getName()) && restaurant.getLocation().equals(ctxRestaurant.getLocation())) {
+				boolean nameAvailable = true;
+				for(Article existingArticle : ctxRestaurant.getArticles()) {
+					if(existingArticle.getName().equals(article.getName())) {
+						nameAvailable = false;
+					}
+				}
+				if(nameAvailable) {
+					ctxRestaurant.addArticles(article);
+					(new RestaurantSerializer(context.getRealPath(""))).Update(ctxRestaurant);
+					success = true;
+					break;
+				}
+			}
+		}
+		return success;
+	}
+	
 	
 	//updateArticle
+	@POST
+	@Path("/updateArticle")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean updateArticle(Article article, Restaurant restaurant) {
+		boolean success = false;
+		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
+		for(Restaurant ctxRestaurant : restaurantDao.getRestaurants()) {
+			if(restaurant.getName().equals(ctxRestaurant.getName()) && restaurant.getLocation().equals(ctxRestaurant.getLocation())) {
+				for(Article existingArticle : restaurant.getArticles()) {
+					if(article.getName().equals(existingArticle.getName())) {
+						article.setRestaurant(ctxRestaurant);
+						existingArticle = article;
+						(new RestaurantSerializer(context.getRealPath(""))).Update(ctxRestaurant);
+						success = true;
+						break;
+					}
+				}
+			}
+		}
+		return success;
+	}
+	
+	@GET
+	@Path("/getPendingDeliveryRequestsForManager")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<DeliveryRequest> getPendingDeliveryRequestsForManager(@Context HttpServletRequest request) {
+		Manager manager = (Manager) request.getSession().getAttribute("manager");
+		DeliveryRequestDao deliveryRequestDao = (DeliveryRequestDao)context.getAttribute("deliveryRequests");
+		return deliveryRequestDao.getPendingDeliveryRequestsForManager(manager);
+	}
 }
