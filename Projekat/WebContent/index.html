@@ -44,8 +44,21 @@
 		width: 85%;
 	}
 	
+	#restaurant_list{
+		margin-top: 300px; 
+		width: 100%; 
+		border:2px solid black;
+	}
+	
+	#restaurant_list th{
+		border: 1px solid black;
+		border-bottom: 2px double black;
+		padding: 5px;
+	}
+	
 	#restaurant_list td{
-		margin:20px;
+		border: 1px solid black;
+		padding: 10px;
 	}
 	
 </style>
@@ -70,65 +83,51 @@
 	<table style="width:70%">
 	<tr style="height:25%">
 	<td>
-	<input name="search_name" placeholder="Name"><br>
+	<input type="text" id="search_name" name="search_name" placeholder="Name"><br>
 	</td>
 	
 	<td rowspan="3" style="vertical-align:top; width:25%">
 	<h4>Type</h4>
-	<input type="radio" id="filter_typeall" name="type_filter" value="filter_typeall" checked>
-	<label for="filter_typeall">All</label><br>
-	<input type="radio" id="filter_barbecue" name="type_filter" value="filter_barbecue">
-	<label for="filter_barbecue">Barbecue</label><br>
-	<input type="radio" id="filter_chinese" name="type_filter" value="filter_chinese">
-	<label for="filter_chinese">Chinese</label><br>
-	<input type="radio" id="filter_fastfood" name="type_filter" value="filter_fastfood">
-	<label for="filter_fastfood">Fastfood</label><br>
-	<input type="radio" id="filter_italian" name="type_filter" value="filter_italian">
-	<label for="filter_italian">Italian</label><br>
-	<input type="radio" id="filter_japanese" name="type_filter" value="filter_japanese">
-	<label for="filter_japanese">Japanese</label><br>
-	<input type="radio" id="filter_kfc" name="type_filter" value="filter_kfc">
-	<label for="filter_kfc">KFC</label><br>
-	<input type="radio" id="filter_mcDonalds" name="type_filter" value="filter_mcDonalds">
-	<label for="filter_mcDonalds">McDonalds</label><br>
-	<input type="radio" id="filter_seafood" name="type_filter" value="filter_seafood">
-	<label for="filter_seafood">Seafood</label><br>
-	<input type="radio" id="filter_thai" name="type_filter" value="filter_thai">
-	<label for="filter_thai">Thai</label><br>
+	<form id="type_filter">
+		<input type="radio" name="type_filter" value="all" checked /> All <br>
+		<input type="radio" name="type_filter" value="barbecue" /> Barbecue <br>
+		<input type="radio" name="type_filter" value="chinese" /> Chinese <br>
+		<input type="radio" name="type_filter" value="fastfood" /> Fastfood <br>
+		<input type="radio" name="type_filter" value="italian" /> Italian <br>
+		<input type="radio" name="type_filter" value="japanese" /> Japanese <br>
+		<input type="radio" name="type_filter" value="kfc" /> KFC <br>
+		<input type="radio" name="type_filter" value="mcDonalds" /> McDonalds <br>
+		<input type="radio" name="type_filter" value="seafood" /> Seafood <br>
+		<input type="radio" name="type_filter" value="thai" /> Thai
+	</form>
 	</td>
 	
 	<td rowspan="3" style="vertical-align:top; width:25%">
 	<h4>Grade</h4>
-	<input type="radio" id="filter_gradeall" name="grade_filter" value="filter_gradeall" checked>
-	<label for="filter_gradeall">All</label><br>
-	<input type="radio" id="filter_grade2" name="grade_filter" value="filter_grade2">
-	<label for="filter_grade2">>2</label><br>
-	<input type="radio" id="filter_grade3" name="grade_filter" value="filter_grade3">
-	<label for="filter_grade3">>3</label><br>
-	<input type="radio" id="filter_grade4" name="grade_filter" value="filter_grade4">
-	<label for="filter_grade4">>4</label><br>
+	<form id="grade_filter">
+		<input type="radio" name="grade_filter" value="filter_gradeall" checked /> All <br>
+		<input type="radio" name="grade_filter" value="filter_grade2" /> >2 <br>
+		<input type="radio" name="grade_filter" value="filter_grade3" /> >3 <br>
+		<input type="radio" name="grade_filter" value="filter_grade4" /> >4 <br>
+	</form>
 	</td>
 	
 	<td rowspan="2" style="vertical-align:top; width:25%">
 	<h4>Sort</h4>
-	<input type="radio" id="name_ascending" name="restaurant_sort" value="name_ascending" checked>
-	<label for="name_ascending">Name ascending</label><br>
-	<input type="radio" id="name_descending" name="restaurant_sort" value="name_descending">
-	<label for="name_descending">Name descending</label><br>
-	<input type="radio" id="location_ascending" name="restaurant_sort" value="location_ascending">
-	<label for="location_ascending">Location ascending</label><br>
-	<input type="radio" id="location_descending" name="restaurant_sort" value="location_descending">
-	<label for="location_descending">Location descending</label><br>
-	<input type="radio" id="grade_ascending" name="restaurant_sort" value="grade_ascending">
-	<label for="grade_ascending">Grade ascending</label><br>
-	<input type="radio" id="grade_descending" name="restaurant_sort" value="grade_descending">
-	<label for="grade_descending">Grade descending</label>
+	<form id="restaurant_sort">
+		<input type="radio" name="restaurant_sort" value="name_ascending" checked /> Name ascending <br>
+		<input type="radio" name="restaurant_sort" value="name_descending" /> Name descending <br>
+		<input type="radio" name="restaurant_sort" value="location_ascending" /> Location ascending <br>
+		<input type="radio" name="restaurant_sort" value="location_descending" /> Location descending <br>
+		<input type="radio" name="restaurant_sort" value="grade_ascending" /> Grade ascending <br>
+		<input type="radio" name="restaurant_sort" value="grade_descending" /> Grade descending <br>
+	</form>
 	</td>
 	</tr>
 	
 	<tr style="height:25%">
 	<td>
-	<input name="search_location" placeholder="Location"><br>
+	<input id="search_location" name="search_location" placeholder="Location"><br>
 	</td>
 	</tr>
 	<tr style="height:50%">
@@ -137,20 +136,29 @@
 	<label for="filter_open">Show only open restaurants</label>
 	</td>
 	<td>
-	<button>Search</button>
+	<button id="search_button">Search</button>
 	</td>
 	</tr>
 	
 	</table>
 	</div>
 	
-	<table id="restaurant_list" style="margin-top: 300px">
+	<table id="restaurant_list">
+	<tr>
+	<th>Name</th>
+	<th>Type</th>
+	<th>Location</th>
+	<th>Logo</th>
+	<th>Average grade</th>
+	<th>Is open?</th>
+	</tr>
 	<tr>
 	<td>Chum Bucket</td>
 	<td>trash</td>
 	<td>Bikini Bottom</td>
 	<td>very null</td>
-	<td>0</td>
+	<td>4</td>
+	<td>Closed</td>
 	</tr>
 	</table>
 	
