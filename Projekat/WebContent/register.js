@@ -12,8 +12,9 @@ $(document).ready(function() {
         if (name != "" && surname != "" && username != "" && dateOfBirth != "") {
             if (password == confirm && password.length > 7) {
                 jsonData = JSON.stringify(data);
-                $.post({
+                $.ajax({
                     url: "rest/register",
+                    type: 'PUT',
                     data: jsonData,
                     contentType: 'application/json',
                     complete: (function(message) {

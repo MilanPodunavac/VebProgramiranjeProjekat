@@ -126,7 +126,7 @@ public class LoginService extends ServiceTemplate {
 		return user;
 	}
 	
-	@POST
+	@PUT
 	@Path("/register")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)

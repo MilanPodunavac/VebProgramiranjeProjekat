@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
@@ -60,7 +61,7 @@ public class AdministratorService extends ServiceTemplate {
 	}
 	
 	//createNewRestaurant
-	@POST
+	@PUT
 	@Path("/createNewRestaurant")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -80,7 +81,7 @@ public class AdministratorService extends ServiceTemplate {
 		return success;
 	}
 	
-	@POST
+	@PUT
 	@Path("/createNewManager")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -95,7 +96,7 @@ public class AdministratorService extends ServiceTemplate {
 		return success;
 	}
 	
-	@POST
+	@PUT
 	@Path("/createNewDeliverer")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
