@@ -22,7 +22,7 @@ $(document).ready(function(){
 					
 					nameTd.appendChild(document.createTextNode(restaurant.name));
 					typeTd.appendChild(document.createTextNode(restaurant.restaurantType));
-					locationTd.appendChild(document.createTextNode(restaurant.location.streetName + " " + restaurant.location.streetNumber + ", " + restaurant.location.cityName));
+					locationTd.appendChild(document.createTextNode(restaurant.location.cityName + ", " + restaurant.location.streetName + " " + restaurant.location.streetNumber));
 					logoTd.appendChild(document.createTextNode(restaurant.logo));
 					gradeTd.appendChild(document.createTextNode("1"));
 					if(restaurant.working){
@@ -51,7 +51,6 @@ $(document).ready(function(){
 		var only_open_filter = $("#filter_open").is(":checked");
 		var type_filter = $('input[name=type_filter]:checked', '#type_filter').val().toUpperCase();
 		var grade_filter = $('input[name=grade_filter]:checked', '#grade_filter').val();
-		var restaurant_sort = $('input[name=restaurant_sort]:checked', '#restaurant_sort').val();
 		
 		var table = document.getElementById("restaurant_list");
 		var tr = table.getElementsByTagName("tr");
@@ -99,8 +98,39 @@ $(document).ready(function(){
 					tr[i].style.display = "none";
 				}
 			}
-			//make sort work
 		}
 		
 	})
+	
+	$('.sortable').click(function(){
+	    var table = $(this).parents('table').eq(0)
+	    var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
+	    this.asc = !this.asc
+	    if (!this.asc)
+		{
+			rows = rows.reverse()
+		}
+	    for (var i = 0; i < rows.length; i++)
+		{
+			table.append(rows[i])
+		}
+	})
+	function comparer(index) {
+    	return function(a, b) {
+        	var valA = getCellValue(a, index), valB = getCellValue(b, index)
+        	return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB)
+    	}
+	}
+	function getCellValue(row, index)
+	{ 
+		return $(row).children('td').eq(index).text() 
+	}
+	
+	$("#restaurant_list").on("click", "tr", function(){
+    	let restaurant_name = $(this).children("td:first").text();
+		let restaurant_location = $(this).children("td:nth-child(3)").text();
+		
+		window.location.replace("restaurant.html?name=" + restaurant_name + "&location=" + restaurant_location);
+	});
 });
+

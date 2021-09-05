@@ -61,6 +61,10 @@
 		padding: 10px;
 	}
 	
+	.sortable {
+		cursor: pointer;
+	}
+	
 </style>
 </head>
 <body>
@@ -102,25 +106,13 @@
 	</form>
 	</td>
 	
-	<td rowspan="3" style="vertical-align:top; width:25%">
+	<td rowspan="2" style="vertical-align:top; width:25%">
 	<h4>Grade</h4>
 	<form id="grade_filter">
 		<input type="radio" name="grade_filter" value="filter_gradeall" checked /> All <br>
 		<input type="radio" name="grade_filter" value="filter_grade2" /> >2 <br>
 		<input type="radio" name="grade_filter" value="filter_grade3" /> >3 <br>
 		<input type="radio" name="grade_filter" value="filter_grade4" /> >4 <br>
-	</form>
-	</td>
-	
-	<td rowspan="2" style="vertical-align:top; width:25%">
-	<h4>Sort</h4>
-	<form id="restaurant_sort">
-		<input type="radio" name="restaurant_sort" value="name_ascending" checked /> Name ascending <br>
-		<input type="radio" name="restaurant_sort" value="name_descending" /> Name descending <br>
-		<input type="radio" name="restaurant_sort" value="location_ascending" /> Location ascending <br>
-		<input type="radio" name="restaurant_sort" value="location_descending" /> Location descending <br>
-		<input type="radio" name="restaurant_sort" value="grade_ascending" /> Grade ascending <br>
-		<input type="radio" name="restaurant_sort" value="grade_descending" /> Grade descending <br>
 	</form>
 	</td>
 	</tr>
@@ -145,11 +137,11 @@
 	
 	<table id="restaurant_list">
 	<tr>
-	<th>Name</th>
+	<th class="sortable">Name</th>
 	<th>Type</th>
-	<th>Location</th>
+	<th class="sortable">Location</th>
 	<th>Logo</th>
-	<th>Average grade</th>
+	<th class="sortable">Average grade</th>
 	<th>Is open?</th>
 	</tr>
 	<tr>
