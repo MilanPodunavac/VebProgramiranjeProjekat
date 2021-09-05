@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Index</title>
+<script src="jquery-3.3.1.min.js"></script>
+<script src="index.js"></script>
+<style>
+	.menu{
+		background-color: yellow;
+		float: left;
+		width: 15%;
+		height: 100%;
+  		position: fixed;
+  		z-index: 1;
+ 		top: 0;
+  		left: 0;
+ 		overflow-x: hidden;
+ 		padding-top: 10px;
+	}
+	
+	.menu h2{
+		text-align: center;
+	}
+	
+	.menu button{
+		height: 22px;
+		width: 40%;
+		margin: 4%;
+		font-size: 15px;
+		background-color: green;
+	}
+	
+	.menu button:hover{
+		background-color: gray;
+	}
+	
+	.menu ul{
+		list-style-type: none;
+	}
+	
+	.mainlist{
+		float: right;
+		width: 85%;
+	}
+	
+	#restaurant_list{
+		margin-top: 300px; 
+		width: 100%; 
+		border:2px solid black;
+	}
+	
+	#restaurant_list th{
+		border: 1px solid black;
+		border-bottom: 2px double black;
+		padding: 5px;
+	}
+	
+	#restaurant_list td{
+		border: 1px solid black;
+		padding: 10px;
+	}
+	
+	.sortable {
+		cursor: pointer;
+	}
+	
+</style>
+</head>
+<body>
+
+<div class="menu">
+	<h2>Rade&Dunav</h2>
+	<button onclick="location.href='login.html'">Login</button>
+	<button onclick="location.href='register.html'">Register</button>
+	<ul>
+		<li>Restaurants</li>
+		<li>Login to unlock functionalities</li>
+	</ul>
+</div>
+
+<div class="mainlist">
+	<div style="height:100px">
+	<h2>Restaurants</h2>
+
+	<h3>Search</h3>
+	<table style="width:70%">
+	<tr style="height:25%">
+	<td>
+	<input type="text" id="search_name" name="search_name" placeholder="Name"><br>
+	</td>
+	
+	<td rowspan="3" style="vertical-align:top; width:25%">
+	<h4>Type</h4>
+	<form id="type_filter">
+		<input type="radio" name="type_filter" value="all" checked /> All <br>
+		<input type="radio" name="type_filter" value="barbecue" /> Barbecue <br>
+		<input type="radio" name="type_filter" value="chinese" /> Chinese <br>
+		<input type="radio" name="type_filter" value="fastfood" /> Fastfood <br>
+		<input type="radio" name="type_filter" value="italian" /> Italian <br>
+		<input type="radio" name="type_filter" value="japanese" /> Japanese <br>
+		<input type="radio" name="type_filter" value="kfc" /> KFC <br>
+		<input type="radio" name="type_filter" value="mcDonalds" /> McDonalds <br>
+		<input type="radio" name="type_filter" value="seafood" /> Seafood <br>
+		<input type="radio" name="type_filter" value="thai" /> Thai
+	</form>
+	</td>
+	
+	<td rowspan="2" style="vertical-align:top; width:25%">
+	<h4>Grade</h4>
+	<form id="grade_filter">
+		<input type="radio" name="grade_filter" value="filter_gradeall" checked /> All <br>
+		<input type="radio" name="grade_filter" value="filter_grade2" /> >2 <br>
+		<input type="radio" name="grade_filter" value="filter_grade3" /> >3 <br>
+		<input type="radio" name="grade_filter" value="filter_grade4" /> >4 <br>
+	</form>
+	</td>
+	</tr>
+	
+	<tr style="height:25%">
+	<td>
+	<input id="search_location" name="search_location" placeholder="Location"><br>
+	</td>
+	</tr>
+	<tr style="height:50%">
+	<td>
+	<input type="checkbox" id="filter_open" name="filter_open" value="filter_open">
+	<label for="filter_open">Show only open restaurants</label>
+	</td>
+	<td>
+	<button id="search_button">Search</button>
+	</td>
+	</tr>
+	
+	</table>
+	</div>
+	
+	<table id="restaurant_list">
+	<tr>
+	<th class="sortable">Name</th>
+	<th>Type</th>
+	<th class="sortable">Location</th>
+	<th>Logo</th>
+	<th class="sortable">Average grade</th>
+	<th>Is open?</th>
+	</tr>
+	<tr>
+	<td>Chum Bucket</td>
+	<td>trash</td>
+	<td>Bikini Bottom</td>
+	<td>very null</td>
+	<td>4</td>
+	<td>Closed</td>
+	</tr>
+	</table>
+	
+</div>
+
+	
+
+</body>
+</html>

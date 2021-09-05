@@ -41,6 +41,15 @@ public class RestaurantDao {
 		return workingRestaurants;
 	}
 	
+	public ArrayList<Restaurant> getClosedRestaurants(){
+		ArrayList<Restaurant> closedRestaurants = new ArrayList<Restaurant>();
+		for(Restaurant restaurant : restaurants) {
+			if(!restaurant.isWorking() && !restaurant.isDeleted())
+				closedRestaurants.add(restaurant);
+		}
+		return closedRestaurants;
+	}
+	
 	public ArrayList<Restaurant> getWorkingRestaurantsByType(RestaurantType type){
 		ArrayList<Restaurant> workingRestaurants = new ArrayList<Restaurant>();
 		for(Restaurant restaurant : restaurants) {
@@ -48,6 +57,12 @@ public class RestaurantDao {
 				workingRestaurants.add(restaurant);
 		}
 		return workingRestaurants;
+	}
+	
+	public ArrayList<Restaurant> getRestaurantsSortedByWorking(){
+		ArrayList<Restaurant> restaurants = getWorkingRestaurants();
+		restaurants.addAll(getClosedRestaurants());
+		return restaurants;
 	}
 	
 }

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Restaurant</title>
+<script src="jquery-3.3.1.min.js"></script>
+<script src="restaurant.js"></script>
+<style>
+	.menu{
+		background-color: yellow;
+		float: left;
+		width: 15%;
+		height: 100%;
+  		position: fixed;
+  		z-index: 1;
+ 		top: 0;
+  		left: 0;
+ 		overflow-x: hidden;
+ 		padding-top: 10px;
+	}
+	
+	.menu h2{
+		text-align: center;
+	}
+	
+	.menu button{
+		height: 22px;
+		width: 40%;
+		margin: 4%;
+		font-size: 15px;
+		background-color: green;
+	}
+	
+	.menu button:hover{
+		background-color: gray;
+	}
+	
+	.menu ul{
+		list-style-type: none;
+	}
+	
+	
+</style>
+</head>
+<body>
+
+<div class="menu">
+	<h2>Rade&Dunav</h2>
+	<button onclick="location.href='login.html'">Login</button>
+	<button onclick="location.href='register.html'">Register</button>
+	<ul>
+		<li><a href="index.html">Restaurants</a></li>
+		<li>Login to unlock functionalities</li>
+	</ul>
+</div>
+
+<div class="main">
+
+</div>
+
+
+</body>
+</html>
