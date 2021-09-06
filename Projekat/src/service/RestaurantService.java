@@ -20,6 +20,7 @@ import beans.Customer;
 import beans.Deliverer;
 import beans.Delivery;
 import beans.DeliveryRequest;
+import beans.Location;
 import beans.Manager;
 import beans.Restaurant;
 import beans.RestaurantType;
@@ -68,14 +69,24 @@ public class RestaurantService extends ServiceTemplate {
 		return restaurantDao.getWorkingRestaurantsByType(type);
 	}
 	
-	/*@GET
+	@GET
 	@Path("/getApprovedRestaurantComments")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Comment> getApprovedRestaurantComments(Restaurant restaurant){
-		return null;//URADI 
-	}*/
+	public List<Comment> getApprovedRestaurantComments(@QueryParam("name") String name, @QueryParam("cityName") String cityName, @QueryParam("streetName") String streetName, @QueryParam("streetNumber") String streetNumber){
+		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
+		CommentDao commentDao = (CommentDao)context.getAttribute("comments");
+		Restaurant restaurant = new Restaurant();
+		restaurant.setName(name);
+		Location location = new Location();
+		location.setStreetName(streetName);
+		location.setCityName(cityName);
+		location.setStreetNumber(Integer.parseInt(streetNumber));
+		restaurant.setLocation(location);
+		return commentDao.getApprovedRestaurantComments(restaurant);
+	}
 	
+	//MANAGER SERVICE
 	//getRestaurantComments
 	/*@GET
 	@Path("/getRestaurantComments")

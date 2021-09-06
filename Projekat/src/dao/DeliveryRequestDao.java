@@ -23,10 +23,10 @@ public class DeliveryRequestDao {
 		this.deliveryRequests = deliveryRequests;
 	}
 	
-	public void declineAllDeliveryRequests(Delivery delivery) {
-		for(DeliveryRequest deliveryRequest : deliveryRequests) {
-			if(deliveryRequest.getDeliveryId().equals(deliveryRequest.getDeliveryId())) {
-				deliveryRequest.setPending(false);
+	public void declineAllDeliveryRequests(DeliveryRequest deliveryRequest) {
+		for(DeliveryRequest ctxDeliveryRequest : deliveryRequests) {
+			if(ctxDeliveryRequest.getDeliveryId().equals(deliveryRequest.getDeliveryId())) {
+				ctxDeliveryRequest.setPending(false);
 			}
 		}
 	}

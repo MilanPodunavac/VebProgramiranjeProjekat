@@ -32,6 +32,7 @@ import dao.DeliveryDao;
 import dao.DeliveryRequestDao;
 import dao.ManagerDao;
 import dao.RestaurantDao;
+import dto.RestaurantCreationDTO;
 import serialize.AdministratorSerializer;
 import serialize.CommentSerializer;
 import serialize.CustomerSerializer;
@@ -61,11 +62,13 @@ public class AdministratorService extends ServiceTemplate {
 	}
 	
 	//createNewRestaurant
-/*	@PUT
+	@PUT
 	@Path("/createNewRestaurant")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public boolean createNewRestaurant(Restaurant restaurant, Manager manager) {
+	public boolean createNewRestaurant(RestaurantCreationDTO dto) {
+		Restaurant restaurant = dto.getRestaurant();
+		Manager manager = dto.getManager();
 		boolean success = false;
 		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
 		ManagerDao managerDao = (ManagerDao)context.getAttribute("managers");
@@ -79,7 +82,7 @@ public class AdministratorService extends ServiceTemplate {
 			success = true;
 		}
 		return success;
-	}*/
+	}
 	
 	@PUT
 	@Path("/createNewManager")

@@ -50,7 +50,7 @@ public class DeliveryDao {
 		List<Delivery> restaurantDeliveries = new ArrayList<Delivery>();
 		for(Delivery delivery : deliveries) {
 			if(delivery.getRestaurant().getName().equals(restaurant.getName())
-					&& delivery.getRestaurant().getLocation().equals(restaurant.getLocation())) {
+					&& delivery.getRestaurant().checkLocation(restaurant)) {
 				restaurantDeliveries.add(delivery);
 			}
 		}

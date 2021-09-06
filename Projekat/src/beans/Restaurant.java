@@ -160,5 +160,11 @@ public class Restaurant {
 			}
 		}
 	}
+	
+	public boolean checkLocation(Restaurant restaurant) {
+		return restaurant.getLocation().getCityName().equals(location.getCityName())
+				&& restaurant.getLocation().getCityNumber() == location.getCityNumber()
+				&& restaurant.getLocation().getStreetName().equals(location.getStreetName());
+	}
 
 }

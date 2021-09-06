@@ -156,7 +156,7 @@ public class CustomerService extends ServiceTemplate {
 				boolean exists = false;
 				for(Restaurant restaurant : reviewableRestaurants) {
 					if(restaurant.getName().equals(delivery.getRestaurant().getName())
-							&& restaurant.getLocation().equals(delivery.getRestaurant().getLocation())) {
+							&& restaurant.checkLocation(delivery.getRestaurant()) && !restaurant.isDeleted()) {
 						exists = true;
 						break;
 					}

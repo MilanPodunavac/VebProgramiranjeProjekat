@@ -99,17 +99,17 @@ public class ManagerService extends ServiceTemplate {
 	}
 	
 	//setInDelivery (accept Request)
-/*	@POST
+	@POST
 	@Path("/setDeliveryToInDelivery")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void setDeliveryToInDelivery(Delivery delivery, Deliverer deliverer) {
+	public void setDeliveryToInDelivery(DeliveryRequest deliveryRequest) {
 		DeliveryDao deliveryDao = (DeliveryDao)context.getAttribute("deliveries");
 		DelivererDao delivererDao = (DelivererDao)context.getAttribute("deliverers");
 		for(Delivery ctxDelivery : deliveryDao.getWaitingDeliveries()) {
-			if(ctxDelivery.getId().equals(delivery.getId())) {
+			if(ctxDelivery.getId().equals(deliveryRequest.getDeliveryId())) {
 				for(Deliverer ctxDeliverer : delivererDao.getDeliverers()) {
-					if(ctxDeliverer.getUsername().equals(deliverer.getUsername())) {
+					if(ctxDeliverer.getUsername().equals(deliveryRequest.getDelivererUsername())) {
 						ctxDelivery.setDeliveryStatus(DeliveryStatus.inDelivery);
 						ctxDeliverer.addDelivery(ctxDelivery);
 					}
@@ -117,7 +117,7 @@ public class ManagerService extends ServiceTemplate {
 			}
 		}
 		DeliveryRequestDao deliveryRequestDao = (DeliveryRequestDao)context.getAttribute("deliveryRequests");
-		deliveryRequestDao.declineAllDeliveryRequests(delivery);
+		deliveryRequestDao.declineAllDeliveryRequests(deliveryRequest);
 		
 		CustomerDao customerDao = (CustomerDao)context.getAttribute("customers");
 		
@@ -128,7 +128,7 @@ public class ManagerService extends ServiceTemplate {
 		customerSerializer.Save(customerDao.getCustomers());
 		delivererSerializer.Save(delivererDao.getDeliverers());
 		deliveryRequestSerializer.Save(deliveryRequestDao.getDeliveryRequests());
-	}*/
+	}
 	
 	//approveRestaurantComment
 	@POST
@@ -148,11 +148,13 @@ public class ManagerService extends ServiceTemplate {
 		}
 	}
 	//addArticle
-/*	@PUT
+	@PUT
 	@Path("/addArticle")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean addArticle(Article article, Restaurant restaurant) {
+	public boolean addArticle(Article article, @Context HttpServletRequest request) {
+		Manager manager = (Manager) request.getSession().getAttribute("manager");
+		Restaurant restaurant = manager.getRestaurant();
 		boolean success = false;
 		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
 		for(Restaurant ctxRestaurant : restaurantDao.getRestaurants()) {
@@ -172,15 +174,17 @@ public class ManagerService extends ServiceTemplate {
 			}
 		}
 		return success;
-	}*/
+	}
 	
 	
 	//updateArticle
-/*Z	@POST
+	@POST
 	@Path("/updateArticle")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean updateArticle(Article article, Restaurant restaurant) {
+	public boolean updateArticle(Article article, @Context HttpServletRequest request) {
+		Manager manager = (Manager) request.getSession().getAttribute("manager");
+		Restaurant restaurant = manager.getRestaurant();
 		boolean success = false;
 		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
 		for(Restaurant ctxRestaurant : restaurantDao.getRestaurants()) {
@@ -197,7 +201,7 @@ public class ManagerService extends ServiceTemplate {
 			}
 		}
 		return success;
-	}*/
+	}
 	
 	@GET
 	@Path("/getPendingDeliveryRequestsForManager")

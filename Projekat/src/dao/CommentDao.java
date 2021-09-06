@@ -27,7 +27,7 @@ public class CommentDao {
 		List<Comment> restaurantComments = new ArrayList<Comment>();
 		for(Comment comment : comments) {
 			if(comment.getRestaurant().getName().equals(restaurant.getName())
-					&& comment.getRestaurant().getLocation().equals(restaurant.getLocation())) {
+					&& comment.getRestaurant().checkLocation(restaurant)) {
 				restaurantComments.add(comment);
 			}
 		}
