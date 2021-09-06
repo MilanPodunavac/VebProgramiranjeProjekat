@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -144,8 +145,55 @@ public class AdministratorService extends ServiceTemplate {
 		return ((AdministratorDao)context.getAttribute("customers")).getAdministrators();
 	}
 	
+	@GET
+	@Path("/getManagersWithoutRestaurant")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Manager> getManagersWithoutRestaurant(){
+		return ((ManagerDao)context.getAttribute("managers")).getManagersWithoutRestaurant();
+	}
 	
 	//deleteEntities
+	@DELETE
+	@Path("/deleteCustomer")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void deleteCustomer(Customer customer) {
+		CustomerDao customerDao = (CustomerDao)context.getAttribute("customers");
+		customerDao.deleteCustomer(customer);
+		(new CustomerSerializer(context.getRealPath(""))).Save(customerDao.getCustomers());
+	}
+	
+	@DELETE
+	@Path("/deleteDeliverer")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void deleteDeliverer(Deliverer deliverer) {
+		DelivererDao delivererDao = (DelivererDao)context.getAttribute("deliverers");
+		delivererDao.deleteDeliverer(deliverer);
+		(new DelivererSerializer(context.getRealPath(""))).Save(delivererDao.getDeliverers());
+	}
+	
+	@DELETE
+	@Path("/deleteManager")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void deleteManager(Manager manager) {
+		ManagerDao managerDao = (ManagerDao)context.getAttribute("managers");
+		managerDao.deleteManager(manager);
+		(new ManagerSerializer(context.getRealPath(""))).Save(managerDao.getManagers());
+	}
+	
+	@DELETE
+	@Path("deleteRestaurant")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void deleteRestaurant(Restaurant restaurant) {
+		ManagerDao managerDao = (ManagerDao)context.getAttribute("managers");
+		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
+		managerDao.removeRestaurantFromManager(restaurant);
+		restaurantDao.deleteRestaurant(restaurant);
+		(new ManagerSerializer(context.getRealPath(""))).Save(managerDao.getManagers());
+		(new RestaurantSerializer(context.getRealPath(""))).Save(restaurantDao.getRestaurants());
+		
+	}
 	
 	//za 9-10 -- blokiranje korisnika
 	

@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import beans.Deliverer;
 import beans.Manager;
@@ -61,5 +62,36 @@ public class ManagerDao {
 			}
 		}
 		return retVal;
+	}
+	
+	public List<Manager> getManagersWithoutRestaurant(){
+		List<Manager> retVal = new ArrayList<Manager>();
+		for(Manager manager : managers) {
+			if(!manager.isDeleted() && manager.getRestaurant() == null) {
+				retVal.add(manager);
+			}
+		}
+		return retVal;
+	}
+
+	public void deleteManager(Manager manager) {
+		for(Manager ctxManager : managers) {
+			if(ctxManager.getUsername().equals(manager.getUsername())) {
+				ctxManager.setDeleted(true);
+			}
+		}
+		
+	}
+
+	public void removeRestaurantFromManager(Restaurant restaurant) {
+		for(Manager manager : managers) {
+			if(manager.getRestaurant() == null) {
+				continue;
+			}
+			if(manager.getRestaurant().getName().equals(restaurant.getName()) && manager.getRestaurant().checkLocation(restaurant)) {
+				manager.setRestaurant(null);
+			}
+		}
+		
 	}
 }

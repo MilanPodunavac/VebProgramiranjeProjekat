@@ -76,5 +76,14 @@ public class RestaurantDao {
 		}
 		return null;
 	}
+
+	public void deleteRestaurant(Restaurant restaurant) {
+		for(Restaurant ctxRestaurant : restaurants) {
+			if(restaurant.getName().equals(ctxRestaurant.getName()) && ctxRestaurant.checkLocation(restaurant)) {
+				ctxRestaurant.setDeleted(true);
+			}
+		}
+		
+	}
 	
 }

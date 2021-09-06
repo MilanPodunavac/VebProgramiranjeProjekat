@@ -51,4 +51,13 @@ public class CustomerDao {
 		}
 		return true;
 	}
+
+	public void deleteCustomer(Customer customer) {
+		for(Customer ctxCustomer : customers) {
+			if(ctxCustomer.getUsername().equals(customer.getUsername())){
+				ctxCustomer.setDeleted(true);
+			}
+		}
+		
+	}
 }

@@ -50,4 +50,13 @@ public class DelivererDao {
 		}
 		return true;
 	}
+
+	public void deleteDeliverer(Deliverer deliverer) {
+		for(Deliverer ctxDeliverer : deliverers) {
+			if(ctxDeliverer.getUsername().equals(deliverer.getUsername())){
+				ctxDeliverer.setDeleted(true);
+			}
+		}
+		
+	}
 }
