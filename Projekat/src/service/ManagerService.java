@@ -66,7 +66,8 @@ public class ManagerService extends ServiceTemplate {
 	@Path("/getRestaurantDeliveries")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Delivery> getRestaurantDeliveries(Restaurant restaurant){
+	public List<Delivery> getRestaurantDeliveries(@Context HttpServletRequest request){
+		Restaurant restaurant = ((Manager)request.getSession().getAttribute("manager")).getRestaurant();
 		DeliveryDao deliveryDao = (DeliveryDao)context.getAttribute("deliveries");
 		return deliveryDao.getRestaurantDeliveries(restaurant);
 	}
@@ -98,7 +99,7 @@ public class ManagerService extends ServiceTemplate {
 	}
 	
 	//setInDelivery (accept Request)
-	@POST
+/*	@POST
 	@Path("/setDeliveryToInDelivery")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -127,7 +128,7 @@ public class ManagerService extends ServiceTemplate {
 		customerSerializer.Save(customerDao.getCustomers());
 		delivererSerializer.Save(delivererDao.getDeliverers());
 		deliveryRequestSerializer.Save(deliveryRequestDao.getDeliveryRequests());
-	}
+	}*/
 	
 	//approveRestaurantComment
 	@POST
@@ -147,7 +148,7 @@ public class ManagerService extends ServiceTemplate {
 		}
 	}
 	//addArticle
-	@PUT
+/*	@PUT
 	@Path("/addArticle")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -171,11 +172,11 @@ public class ManagerService extends ServiceTemplate {
 			}
 		}
 		return success;
-	}
+	}*/
 	
 	
 	//updateArticle
-	@POST
+/*Z	@POST
 	@Path("/updateArticle")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -196,7 +197,7 @@ public class ManagerService extends ServiceTemplate {
 			}
 		}
 		return success;
-	}
+	}*/
 	
 	@GET
 	@Path("/getPendingDeliveryRequestsForManager")
@@ -206,5 +207,25 @@ public class ManagerService extends ServiceTemplate {
 		Manager manager = (Manager) request.getSession().getAttribute("manager");
 		DeliveryRequestDao deliveryRequestDao = (DeliveryRequestDao)context.getAttribute("deliveryRequests");
 		return deliveryRequestDao.getPendingDeliveryRequestsForManager(manager);
+	}
+	
+	@GET
+	@Path("/getNotApprovedRestaurantComments")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Comment> getNotApprovedRestaurantComments(@Context HttpServletRequest request){
+		Manager manager = (Manager) request.getSession().getAttribute("manager");
+		CommentDao commentDao = (CommentDao)context.getAttribute("comments");
+		return commentDao.getNotApprovedRestaurantComments(manager.getRestaurant());
+	}
+	
+	@GET
+	@Path("/getRestaurantComments")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Comment> getRestaurantComments(@Context HttpServletRequest request){
+		Manager manager = (Manager) request.getSession().getAttribute("manager");
+		CommentDao commentDao = (CommentDao)context.getAttribute("comments");
+		return commentDao.getRestaurantComments(manager.getRestaurant());
 	}
 }

@@ -61,7 +61,7 @@ public class AdministratorService extends ServiceTemplate {
 	}
 	
 	//createNewRestaurant
-	@PUT
+/*	@PUT
 	@Path("/createNewRestaurant")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -79,7 +79,7 @@ public class AdministratorService extends ServiceTemplate {
 			success = true;
 		}
 		return success;
-	}
+	}*/
 	
 	@PUT
 	@Path("/createNewManager")
