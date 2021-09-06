@@ -65,4 +65,16 @@ public class RestaurantDao {
 		return restaurants;
 	}
 	
+	public Restaurant getRestaurantByNameAndLocation(String name, String cityName, String streetName, String streetNumber) {
+		for(Restaurant restaurant : restaurants) {
+			if(restaurant.getName().equals(name) && 
+					restaurant.getLocation().getCityName().equals(cityName) &&
+					restaurant.getLocation().getStreetName().equals(streetName) &&
+					String.valueOf(restaurant.getLocation().getStreetNumber()).equals(streetNumber)) {
+				return restaurant;
+			}
+		}
+		return null;
+	}
+	
 }

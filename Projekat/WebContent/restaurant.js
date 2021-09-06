@@ -14,9 +14,8 @@ $(document).ready(function(){
 	let restaurant_streetname = restaurant_citystreet.substring(0, restaurant_citystreet.length - restaurant_streetnumber.length - 1);
 	
 	$.get({
-            url: "rest/RestaurantService/RestaurantsSortedByWorking",
+            url: "rest/RestaurantService/getRestaurantByNameAndLocation?name=" + restaurant_cityname + "&cityName=" + restaurant_cityname + "&streetName=" + restaurant_streetname + "&streetNumber=" + restaurant_streetnumber,
             contentType: 'application/json',
-			data: JSON.stringify({ cityName: restaurant_cityname, streetName: restaurant_streetname, streetNumber: restaurant_streetnumber }),
             complete: function(message) {
 				alert(message.responseText);
 			}
