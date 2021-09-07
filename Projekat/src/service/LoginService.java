@@ -63,7 +63,7 @@ public class LoginService extends ServiceTemplate {
 	
 	@PostConstruct
 	public void init() {
-		//initializeData();
+		initializeData();
 	}
 	
 	@POST
@@ -196,6 +196,19 @@ public class LoginService extends ServiceTemplate {
 		Article article22 = new Article("Krabby patty deluxe", 1400.0, ArticleType.food, 380, "Krabby patty is the best patty", null, restaurant2);
 		Article article23 = new Article("Krabby patty kids", 700.0, ArticleType.food, 200, "Krabby patty is the best patty", null, restaurant2);
 		Article article24 = new Article("Kelp shake", 200.0, ArticleType.drink, 500, "Drink that makes grass grow on you", null, restaurant2);
+		
+		restaurant1.addArticles(article11);
+		restaurant1.addArticles(article12);
+		restaurant1.addArticles(article13);
+		restaurant1.addArticles(article14);
+		restaurant1.addArticles(article15);
+		restaurant1.addArticles(article16);
+		
+		restaurant2.addArticles(article21);
+		restaurant2.addArticles(article22);
+		restaurant2.addArticles(article23);
+		restaurant2.addArticles(article24);
+		
 		
 		ArrayList<ShoppingCartItem> items1 = new ArrayList<>();
 		items1.add(new ShoppingCartItem(article21, 1));
