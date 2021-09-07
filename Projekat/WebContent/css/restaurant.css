@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+#info_table {
+	border: 2px solid black;
+	width: 100%;
+}
+
+#info_table td {
+	border: 1px solid black;
+}
+
+#info_table .info {
+	height: 50px;
+	padding: 10px;
+	font-size: large;
+}
+
+#article_table {
+	width: 100%;
+	border: 1px solid black;
+}
+
+#article_table tr, #article_table th, #article_table td{
+	border: 1px solid black;
+}

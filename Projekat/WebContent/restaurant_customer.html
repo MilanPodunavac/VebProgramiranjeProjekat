@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Restaurant</title>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/show_username.js"></script>
+<script src="js/signout.js"></script>
+<script src="js/restaurant.js"></script>
+
+<link rel="stylesheet" href="css/menu.css">
+<link rel="stylesheet" href="css/restaurant.css">
+
+</head>
+<body>
+
+<div class="menu">
+	<h2>Rade&Dunav</h2>
+	<h4 style="text-align:center;" id="username_label"></h4>
+	<input type="submit" id="profile" name="profile" value="Profile" />
+    <input type="submit" id="signout" name="signout" value="Signout" />
+	<ul>
+		<li><a href="index.html">Restaurants</a></li>
+	</ul>
+</div>
+
+<div class="main">
+<table id="info_table">
+<tr>
+<td id="name_td" style="width:50%" class="info"></td>
+<td id="logo_td" rowspan="4" style="width:50%"></td>
+</tr>
+<tr>
+<td id="working_td" class="info"></td>
+</tr>
+<tr>
+<td id="type_td" class="info"></td>
+</tr>
+<tr>
+<td id="location_td" class="info"></td>
+</tr>
+<tr>
+<td colspan="2">
+<table id="article_table" >
+<tr>
+<th style="width:20%;">Name</th>
+<th style="width:10%;">Type</th>
+<th style="width:8%;">Size</th>
+<th style="width:8%;">Price</th>
+<th style="width:15%;">Picture</th>
+<th>Description</th>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

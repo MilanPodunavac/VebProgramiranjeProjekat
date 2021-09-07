@@ -3,69 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Index</title>
-<script src="jquery-3.3.1.min.js"></script>
-<script src="index.js"></script>
-<style>
-	.menu{
-		background-color: yellow;
-		float: left;
-		width: 15%;
-		height: 100%;
-  		position: fixed;
-  		z-index: 1;
- 		top: 0;
-  		left: 0;
- 		overflow-x: hidden;
- 		padding-top: 10px;
-	}
-	
-	.menu h2{
-		text-align: center;
-	}
-	
-	.menu button{
-		height: 22px;
-		width: 40%;
-		margin: 4%;
-		font-size: 15px;
-		background-color: green;
-	}
-	
-	.menu button:hover{
-		background-color: gray;
-	}
-	
-	.menu ul{
-		list-style-type: none;
-	}
-	
-	.mainlist{
-		float: right;
-		width: 85%;
-	}
-	
-	#restaurant_list{
-		margin-top: 300px; 
-		width: 100%; 
-		border:2px solid black;
-	}
-	
-	#restaurant_list th{
-		border: 1px solid black;
-		border-bottom: 2px double black;
-		padding: 5px;
-	}
-	
-	#restaurant_list td{
-		border: 1px solid black;
-		padding: 10px;
-	}
-	
-	.sortable {
-		cursor: pointer;
-	}
-	
-</style>
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/get_restaurants.js"></script>
+<script src="js/search_restaurants.js"></script>
+<script src="js/sortable.js"></script>
+<script src="js/restaurant_index.js"></script>
+
+<link rel="stylesheet" href="css/restaurant_list.css">
+<link rel="stylesheet" href="css/menu.css">
+
 </head>
 <body>
 
@@ -74,14 +21,14 @@
 	<button onclick="location.href='login.html'">Login</button>
 	<button onclick="location.href='register.html'">Register</button>
 	<ul>
-		<li>Restaurants</li>
+		<li class="selected">Restaurants</li>
 		<li>Login to unlock functionalities</li>
 	</ul>
 </div>
 
-<div class="mainlist">
+<div class="main">
 	<div style="height:100px">
-	<h2>Restaurants</h2>
+	<h2 class="selected">Restaurants</h2>
 
 	<h3>Search</h3>
 	<table style="width:70%">
@@ -143,14 +90,6 @@
 	<th>Logo</th>
 	<th class="sortable">Average grade</th>
 	<th>Is open?</th>
-	</tr>
-	<tr>
-	<td>Chum Bucket</td>
-	<td>trash</td>
-	<td>Bikini Bottom</td>
-	<td>very null</td>
-	<td>4</td>
-	<td>Closed</td>
 	</tr>
 	</table>
 	

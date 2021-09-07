@@ -17,9 +17,11 @@ $(document).ready(function(){
             url: "rest/RestaurantService/getRestaurantByNameAndLocation?name=" + restaurant_name + "&cityName=" + restaurant_cityname + "&streetName=" + restaurant_streetname + "&streetNumber=" + restaurant_streetnumber,
             contentType: 'application/json',
             complete: function(message) {
-				console.log(message.responseText);
 				let restaurant = JSON.parse(message.responseText);
-	
+				
+				let titleTag = document.getElementsByTagName("title")[0];
+				titleTag.innerText = restaurant.name;
+				
 				let restaurantNameTd = document.getElementById("name_td");
 				restaurantNameTd.appendChild(document.createTextNode("Name: " + restaurant.name));
 				
@@ -65,8 +67,6 @@ $(document).ready(function(){
 					
 					articleTable.appendChild(articleTr);
 				}
-				
-				
 			}
 	})
 })

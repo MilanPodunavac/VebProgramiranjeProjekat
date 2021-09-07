@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+.menu{
+	background-color: yellow;
+	float: left;
+	width: 15%;
+	height: 100%;
+ 		position: fixed;
+ 		z-index: 1;
+		top: 0;
+ 		left: 0;
+		overflow-x: hidden;
+		padding-top: 10px;
+}
+
+.menu h2{
+	text-align: center;
+}
+
+.menu button{
+	height: 22px;
+	width: 40%;
+	margin: 4%;
+	font-size: 15px;
+	background-color: green;
+}
+
+.menu button:hover{
+	background-color: gray;
+}
+
+.menu input{
+	height: 22px;
+	width: 40%;
+	margin: 4%;
+	font-size: 15px;
+	background-color: green;
+}
+
+.menu input:hover{
+	background-color: gray;
+}
+
+.menu ul{
+	list-style-type: none;
+}
+
+.main{
+	float: right;
+	width: 85%;
+}
+
+.selected {
+	font-weight: bold;
+}

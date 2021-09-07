@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+#restaurant_list{
+	margin-top: 300px; 
+	width: 100%; 
+	border:2px solid black;
+}
+
+#restaurant_list th{
+	border: 1px solid black;
+	border-bottom: 2px double black;
+	padding: 5px;
+}
+
+#restaurant_list td{
+	border: 1px solid black;
+	padding: 10px;
+}
+
+.sortable {
+	cursor: pointer;
+}
