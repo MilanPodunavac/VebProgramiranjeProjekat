@@ -80,7 +80,7 @@ $(document).ready(function(){
 						let deliveryTd = document.createElement('td');
 						deliveryTd.style.textAlign = "center";
 						
-						var minusButton = document.createElement('button');
+						minusButton = document.createElement('button');
 						minusButton.innerText = "-";
 						minusButton.style.marginRight = "7px";
 						minusButton.disabled = true;
@@ -88,23 +88,29 @@ $(document).ready(function(){
 						
 						let numberText = document.createTextNode("0");
 						
-						var plusButton = document.createElement('button');
+						plusButton = document.createElement('button');
 						plusButton.innerText = "+";
 						plusButton.style.marginLeft = "7px";
 						plusButton.classList.add("plusButton");
 						
 						
 						
-						minusButton.click(function(e){
+						$(minusButton).click(function(e){
 							alert("minus");
 							minusButton.disabled = true;
 							plusButton.disabled = false;
+							deliveryTd.appendChild(minusButton);
+							deliveryTd.appendChild(numberText);
+							deliveryTd.appendChild(plusButton);
 						})
-						plusButton.click(function(e){
+						$(plusButton).click(function(e){
 							e.preventDefault();
-							alert("plus");
+							alert(descriptionTd.innerText);
 							minusButton.disabled = false;
 							plusButton.disabled = true;
+							deliveryTd.appendChild(minusButton);
+							deliveryTd.appendChild(numberText);
+							deliveryTd.appendChild(plusButton);
 						})
 						
 						deliveryTd.appendChild(minusButton);
