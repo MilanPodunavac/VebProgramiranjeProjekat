@@ -2,24 +2,16 @@ package beans;
 
 import java.util.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 public class Customer extends User {
 	private int points;
-	@JsonManagedReference
 	private java.util.List<Delivery> deliveries;
 	private CustomerType customerType;
-	@JsonManagedReference
 	private ShoppingCart shoppingCart;
-
-	public Customer() {
-		super();
-	}
-	
-	public Customer(String username, String password, String name, String surname, Gender gender, Date dateOfBirth,
-			int points, List<Delivery> deliveries, CustomerType customerType, ShoppingCart shoppingCart) {
-		super(username, password, name, surname, gender, dateOfBirth);
+   
+   
+ 
+	public Customer(int points, List<Delivery> deliveries, CustomerType customerType, ShoppingCart shoppingCart) {
+	   	super();
 		this.points = points;
 		this.deliveries = deliveries;
 		this.customerType = customerType;
@@ -56,11 +48,11 @@ public class Customer extends User {
       return deliveries;
    }
    
-	/*public java.util.Iterator getIteratorDeliveries() {
+	public java.util.Iterator getIteratorDeliveries() {
 		if (deliveries == null)
 			deliveries = new java.util.Vector<Delivery>();
 		return deliveries.iterator();
-	}*/
+	}
    
 	public void setDeliveries(java.util.List<Delivery> newDeliveries) {
 		removeAllDeliveries();
@@ -95,35 +87,13 @@ public class Customer extends User {
 		if (deliveries != null)
 		{
 			Delivery oldDelivery;
-			for (java.util.Iterator iter = deliveries.iterator(); iter.hasNext();)
+			for (java.util.Iterator iter = getIteratorDeliveries(); iter.hasNext();)
 			{
 				oldDelivery = (Delivery)iter.next();
 				iter.remove();
 				oldDelivery.setCustomer((Customer)null);
 			}
 		}
-	}
-	
-	public boolean addPoints(int points) {
-		this.points += points;
-		return customerType.changeCustomerType(this.points);
-	}
-	
-	public boolean removePoints(int points) {
-		this.points -= points;
-		return customerType.changeCustomerType(this.points);
-	}
-	
-	public double calculateDiscountedShoppingCartCost() {
-		return shoppingCart.getTotalCost() * (1.0 - customerType.getDiscount()/100);
-	}
-	
-	public double calculateDiscountedPrice(double price) {
-		return price * (1.0 - customerType.getDiscount()/100);
-	}
-	
-	public double calculateDiscount() {
-		return customerType.getDiscount();
 	}
 
 }

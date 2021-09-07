@@ -114,8 +114,8 @@ public class CustomerService extends ServiceTemplate {
 		newDelivery.setDeliveryStatus(DeliveryStatus.processing);
 		newDelivery.setRestaurant(customer.getShoppingCart().getItems().get(0).getArticle().getRestaurant());
 		newDelivery.setTime(new Date());
-		newDelivery.setTotalCost(customer.getDiscountedShoppingCartCost());
-		customer.addPoints((int)customer.getDiscountedShoppingCartCost()/1000 * 133);
+		newDelivery.setTotalCost(customer.calculateDiscountedShoppingCartCost());
+		customer.addPoints((int)customer.calculateDiscountedShoppingCartCost()/1000 * 133);
 		customer.addDeliveries(newDelivery);
 		customer.getShoppingCart().removeAllItems();
 		new CustomerSerializer(context.getRealPath("")).Update(customer);
