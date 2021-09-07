@@ -48,6 +48,7 @@ $(document).ready(function(){
 					let articleTr = document.createElement('tr');
 					let nameTd = document.createElement('td');
 					let typeTd = document.createElement('td');
+					let sizeTd = document.createElement('td');
 					let priceTd = document.createElement('td');
 					let pictureTd = document.createElement('td');
 					let descriptionTd = document.createElement('td');
@@ -55,6 +56,12 @@ $(document).ready(function(){
 					
 					nameTd.appendChild(document.createTextNode(article.name));
 					typeTd.appendChild(document.createTextNode(article.articleType));
+					if(article.articleType === "food"){
+						sizeTd.appendChild(document.createTextNode(article.size + "g"));
+					}
+					else{
+						sizeTd.appendChild(document.createTextNode(article.size + "ml"));
+					}
 					priceTd.appendChild(document.createTextNode(article.price));
 					pictureTd.appendChild(document.createTextNode(article.picture));
 					descriptionTd.appendChild(document.createTextNode(article.description));
@@ -62,6 +69,7 @@ $(document).ready(function(){
 					
 					articleTr.appendChild(nameTd);
 					articleTr.appendChild(typeTd);
+					articleTr.appendChild(sizeTd);
 					articleTr.appendChild(priceTd);
 					articleTr.appendChild(pictureTd);
 					articleTr.appendChild(descriptionTd);
@@ -69,15 +77,35 @@ $(document).ready(function(){
 					let urlParts = window.location.href.split("/");
 					let lastUrlPart = urlParts[urlParts.length - 1];
 					if(lastUrlPart.startsWith("restaurant_customer")){
-						let deliveryTd = document.createElement('td')
+						let deliveryTd = document.createElement('td');
+						deliveryTd.style.textAlign = "center";
 						
-						let minusButton = document.createElement('button');
+						var minusButton = document.createElement('button');
 						minusButton.innerText = "-";
+						minusButton.style.marginRight = "7px";
+						minusButton.disabled = true;
+						minusButton.classList.add("minusButton");
 						
 						let numberText = document.createTextNode("0");
 						
-						let plusButton = document.createElement('button');
+						var plusButton = document.createElement('button');
 						plusButton.innerText = "+";
+						plusButton.style.marginLeft = "7px";
+						plusButton.classList.add("plusButton");
+						
+						
+						
+						minusButton.click(function(e){
+							alert("minus");
+							minusButton.disabled = true;
+							plusButton.disabled = false;
+						})
+						plusButton.click(function(e){
+							e.preventDefault();
+							alert("plus");
+							minusButton.disabled = false;
+							plusButton.disabled = true;
+						})
 						
 						deliveryTd.appendChild(minusButton);
 						deliveryTd.appendChild(numberText);
