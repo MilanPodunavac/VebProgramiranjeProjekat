@@ -14,6 +14,7 @@ import beans.Delivery;
 import beans.DeliveryRequest;
 import beans.Manager;
 import beans.Restaurant;
+import beans.ShoppingCartItem;
 import dao.AdministratorDao;
 import dao.CommentDao;
 import dao.CustomerDao;
@@ -35,12 +36,23 @@ public class ServiceTemplate {
 	protected ServletContext context;
 	
 	protected void initializeData() {
+		if(context.getAttribute("restaurants") == null) {
+			List<Restaurant> restaurants = new RestaurantSerializer(context.getRealPath("")).Load();
+			for(Restaurant restaurant : restaurants) {
+				for(Article article : restaurant.getArticles()) {
+					article.setRestaurant(restaurant);
+				}
+			}
+			context.setAttribute("restaurants", new RestaurantDao((ArrayList<Restaurant>)restaurants));
+		}
 		if(context.getAttribute("customers") == null) {
 		//	context.setAttribute("customers", new CustomerDao(new CustomerSerializer(context.getRealPath("")).Load()));
 			List<Customer> customers = new CustomerSerializer(context.getRealPath("")).Load();
+			RestaurantDao restaurantDao = (RestaurantDao)(context.getAttribute("restaurants"));
 			for(Customer customer : customers) {
 				for(Delivery delivery : customer.getDeliveries()) {
 					delivery.setCustomer(customer);
+					delivery.setRestaurant(restaurantDao.find(delivery.getRestaurant()));
 				}
 				customer.getShoppingCart().setCustomer(customer);
 			}
@@ -63,22 +75,17 @@ public class ServiceTemplate {
 		}
 		if(context.getAttribute("deliveries") == null) {
 			CustomerDao customerDao = (CustomerDao)(context.getAttribute("customers"));
+			RestaurantDao restaurantDao = (RestaurantDao)(context.getAttribute("restaurants"));
 			ArrayList<Delivery> deliveries = new ArrayList<Delivery>();
 			for(Customer customer : customerDao.getCustomers()) {
 				for(Delivery delivery : customer.getDeliveries()) {
 					deliveries.add(delivery);
+					for(ShoppingCartItem shoppingCartItem : delivery.getItems()) {
+						shoppingCartItem.setArticle(restaurantDao.find(delivery.getRestaurant()).findArticle(shoppingCartItem.getArticle()));
+					}
 				}
 			}
 			context.setAttribute("deliveries", new DeliveryDao(deliveries));
-		}
-		if(context.getAttribute("restaurants") == null) {
-			List<Restaurant> restaurants = new RestaurantSerializer(context.getRealPath("")).Load();
-			for(Restaurant restaurant : restaurants) {
-				for(Article article : restaurant.getArticles()) {
-					article.setRestaurant(restaurant);
-				}
-			}
-			context.setAttribute("restaurants", new RestaurantDao((ArrayList<Restaurant>)restaurants));
 		}
 		if(context.getAttribute("managers") == null) {
 			List<Manager> managers = new ManagerSerializer(context.getRealPath("")).Load();
@@ -99,7 +106,7 @@ public class ServiceTemplate {
 				comment.setCustomer(((CustomerDao)context.getAttribute("customers")).find(comment.getCustomer().getUsername(), comment.getCustomer().getPassword()));
 				comment.setRestaurant(((RestaurantDao)context.getAttribute("restaurants")).find(comment.getRestaurant()));
 			}
-			context.setAttribute("comments", new CommentDao(new CommentSerializer(context.getRealPath("")).Load()));
+			context.setAttribute("comments", new CommentDao((ArrayList<Comment>)comments));
 		}
 		if(context.getAttribute("deliveryRequests") == null) {
 			List<DeliveryRequest> deliveryRequests = new DeliveryRequestSerializer(context.getRealPath("")).Load();

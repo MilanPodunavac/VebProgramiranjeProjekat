@@ -166,5 +166,14 @@ public class Restaurant {
 				&& restaurant.getLocation().getStreetNumber() == location.getStreetNumber()
 				&& restaurant.getLocation().getStreetName().equals(location.getStreetName());
 	}
+	
+	public Article findArticle(Article testArticle) {
+		for(Article article : articles) {
+			if(article.getName().equals(testArticle.getName())) {
+				return article;
+			}
+		}
+		return testArticle;
+	}
 
 }

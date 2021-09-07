@@ -12,19 +12,22 @@ public class Delivery {
 	@JsonBackReference
 	private Customer customer;
 	private Restaurant restaurant;
+	private ArrayList<ShoppingCartItem> items;
    
-    public Delivery() {
+    
+	public Delivery() {
 	    super();
     }
 	
-	public Delivery(String id, Date time, double totalCost, DeliveryStatus deliveryStatus, Customer customer, Restaurant restaurant) {
+	public Delivery(String id, Date time, double totalCost, DeliveryStatus deliveryStatus, Customer customer, Restaurant restaurant, ArrayList<ShoppingCartItem> items) {
 		super();
 		this.id = id;
 		this.time = time;
 		this.totalCost = totalCost;
 		this.deliveryStatus = deliveryStatus;
 		this.customer = customer;
-		this.restaurant = restaurant;	
+		this.restaurant = restaurant;
+		this.items = items;
 	}
 
 	public String getId() {
@@ -87,4 +90,13 @@ public class Delivery {
 		this.restaurant = restaurant;
 	}
 
+	public ArrayList<ShoppingCartItem> getItems() {
+		return items;
+	}
+
+	public void setItems(ArrayList<ShoppingCartItem> items) {
+		this.items = items;
+	}
+
+	
 }

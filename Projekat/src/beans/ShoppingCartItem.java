@@ -3,6 +3,11 @@ package beans;
 public class ShoppingCartItem {
 	private Article article;
 	private int amount;
+	
+	public ShoppingCartItem() {
+		super();
+	}
+	
 	public ShoppingCartItem(Article article, int amount) {
 		super();
 		this.article = article;

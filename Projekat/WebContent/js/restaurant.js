@@ -52,6 +52,7 @@ $(document).ready(function(){
 					let pictureTd = document.createElement('td');
 					let descriptionTd = document.createElement('td');
 					
+					
 					nameTd.appendChild(document.createTextNode(article.name));
 					typeTd.appendChild(document.createTextNode(article.articleType));
 					priceTd.appendChild(document.createTextNode(article.price));
@@ -64,6 +65,26 @@ $(document).ready(function(){
 					articleTr.appendChild(priceTd);
 					articleTr.appendChild(pictureTd);
 					articleTr.appendChild(descriptionTd);
+					
+					let urlParts = window.location.href.split("/");
+					let lastUrlPart = urlParts[urlParts.length - 1];
+					if(lastUrlPart.startsWith("restaurant_customer")){
+						let deliveryTd = document.createElement('td')
+						
+						let minusButton = document.createElement('button');
+						minusButton.innerText = "-";
+						
+						let numberText = document.createTextNode("0");
+						
+						let plusButton = document.createElement('button');
+						plusButton.innerText = "+";
+						
+						deliveryTd.appendChild(minusButton);
+						deliveryTd.appendChild(numberText);
+						deliveryTd.appendChild(plusButton);
+						
+						articleTr.appendChild(deliveryTd);
+					}
 					
 					articleTable.appendChild(articleTr);
 				}

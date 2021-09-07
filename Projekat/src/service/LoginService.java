@@ -21,6 +21,7 @@ import javax.ws.rs.core.Response;
 
 import beans.Administrator;
 import beans.Article;
+import beans.ArticleType;
 import beans.Comment;
 import beans.Customer;
 import beans.Deliverer;
@@ -33,6 +34,7 @@ import beans.Manager;
 import beans.Restaurant;
 import beans.RestaurantType;
 import beans.ShoppingCart;
+import beans.ShoppingCartItem;
 import beans.User;
 import beans.CustomerType;
 import dao.AdministratorDao;
@@ -61,7 +63,7 @@ public class LoginService extends ServiceTemplate {
 	
 	@PostConstruct
 	public void init() {
-		initializeData();
+		//initializeData();
 	}
 	
 	@POST
@@ -180,22 +182,45 @@ public class LoginService extends ServiceTemplate {
 		
 		admSer.Save(admins);
 		
-		Delivery delivery1 = new Delivery("0000000001", new Date(121,9,9), 100, DeliveryStatus.delivered, null, null);
-		Delivery delivery2 = new Delivery("0000000002", new Date(121,9,9), 10000, DeliveryStatus.cancelled, null, null);
-		Delivery delivery3 = new Delivery("0000000003", new Date(121,9,9), 2000, DeliveryStatus.inDelivery, null, null);
-		
 		Restaurant restaurant1 = new Restaurant("Chinese Restaurant", true, null, RestaurantType.chinese, new ArrayList<Article>(), new Location(100, 100.5, "Street1", 10, "City1", 1000));
 		Restaurant restaurant2 = new Restaurant("Krusty Krab", true, null, RestaurantType.barbecue, new ArrayList<Article>(), new Location(100, 100.5, "Street1", 10, "City1", 1000));
+		
+		Article article11 = new Article("Fried Rice (Chaofan)", 1000.0, ArticleType.food, 200, "Fried rice from China", null, restaurant1);
+		Article article12 = new Article("Peking Duck (Beijing Kaoya)", 1300.0, ArticleType.food, 340, "What does a duck say", null, restaurant1);
+		Article article13 = new Article("Stinky Tofu (Choudoufu)", 600.0, ArticleType.food, 220, "Why is it stinky, why cant it just smell nice", null, restaurant1);
+		Article article14 = new Article("Chow Mein", 800.0, ArticleType.food, 200, "Something something something something something something something something something something something something something something something something something", null, restaurant1);
+		Article article15 = new Article("Congee (Baizhou)", 400.0, ArticleType.food, 120, "Small portion", null, restaurant1);
+		Article article16 = new Article("Fresh chinese water", 50.0, ArticleType.drink, 200, "Very fresh much wow", null, restaurant1);
+		
+		Article article21 = new Article("Krabby patty", 1100.0, ArticleType.food, 350, "Krabby patty is the best patty", null, restaurant2);
+		Article article22 = new Article("Krabby patty deluxe", 1400.0, ArticleType.food, 380, "Krabby patty is the best patty", null, restaurant2);
+		Article article23 = new Article("Krabby patty kids", 700.0, ArticleType.food, 200, "Krabby patty is the best patty", null, restaurant2);
+		Article article24 = new Article("Kelp shake", 200.0, ArticleType.drink, 500, "Drink that makes grass grow on you", null, restaurant2);
+		
+		ArrayList<ShoppingCartItem> items1 = new ArrayList<>();
+		items1.add(new ShoppingCartItem(article21, 1));
+		items1.add(new ShoppingCartItem(article24, 1));
+		ArrayList<ShoppingCartItem> items2 = new ArrayList<>();
+		items2.add(new ShoppingCartItem(article12, 2));
+		items2.add(new ShoppingCartItem(article14, 1));
+		ArrayList<ShoppingCartItem> items3 = new ArrayList<>();
+		items3.add(new ShoppingCartItem(article22, 1));
+		items3.add(new ShoppingCartItem(article23, 3));
+		items3.add(new ShoppingCartItem(article24, 4));
+		
+		Delivery delivery1 = new Delivery("0000000001", new Date(121,9,9), 1170, DeliveryStatus.delivered, null, null, items1);
+		Delivery delivery2 = new Delivery("0000000002", new Date(121,9,9), 3060, DeliveryStatus.cancelled, null, null, items2);
+		Delivery delivery3 = new Delivery("0000000003", new Date(121,9,9), 3690, DeliveryStatus.inDelivery, null, null, items3);
 		
 		delivery1.setRestaurant(restaurant2);
 		delivery2.setRestaurant(restaurant1);
 		delivery3.setRestaurant(restaurant2);
 		
-		Customer customer1 = new Customer("customer1", "password1", "Kustomer", "Kustomerovic", Gender.male, new Date(106,1,1), 1000, new ArrayList<Delivery>(), new CustomerType("Gold", 12, 1500), new ShoppingCart());
+		Customer customer1 = new Customer("customer1", "password1", "Kustomer", "Kustomerovic", Gender.male, new Date(106,1,1), 1000, new ArrayList<Delivery>(), new CustomerType("Gold", 10, 1500), new ShoppingCart());
 		customer1.getShoppingCart().setCustomer(customer1);
 		customer1.addDeliveries(delivery1);
 		customer1.addDeliveries(delivery2);
-		Customer customer2 = new Customer("Beli", "password1", "Mirko", "Beli", Gender.male, new Date(106,1,1), 1000, new ArrayList<Delivery>(), new CustomerType("Gold", 12, 1500), new ShoppingCart());
+		Customer customer2 = new Customer("Beli", "password1", "Mirko", "Beli", Gender.male, new Date(106,1,1), 1000, new ArrayList<Delivery>(), new CustomerType("Gold", 10, 1500), new ShoppingCart());
 		customer2.addDeliveries(delivery3);
 		
 		customers.add(customer1);
