@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Customer</title>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/customerView_administrator.js"></script>
+
+<link rel="stylesheet" href="css/menu.css">
+
+</head>
+<body>
+<div class="menu">
+	<h2>Rade&Dunav</h2>
+	<h4 style="text-align:center;" id="username_label"></h4>
+	<input type="submit" id="profile" name="profile" value="Profile" />
+    <input type="submit" id="signout" name="signout" value="Signout" />
+	<ul>
+		<li><a href="administrator.html">Restaurants</a></li>
+		<li><a href="users_administrator.html">Users</a></li>
+	</ul>
+</div>
+<div class="main">
+	<table id="customer_info">
+	<tr><td id="username_td"></td></tr>
+	<tr><td id="name_td"></td></tr>
+	<tr><td id="surname_td"></td></tr>
+	<tr><td id="customerType_td"></td></tr>
+	</table>
+	<h2>Deliveries</h2>
+	<table id="delivery_list">
+	<tr>
+	<td>Restaurant name</td>
+	<td>Cost</td>
+	<td>Status</td>
+	</tr>
+	</table>
+	<button id="delete">Delete</button>
+</div>
+</body>
+</html>

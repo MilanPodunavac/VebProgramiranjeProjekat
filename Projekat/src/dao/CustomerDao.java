@@ -60,4 +60,13 @@ public class CustomerDao {
 		}
 		
 	}
+
+	public Customer findCustomerByUsername(String username) {
+		for(Customer customer : customers) {
+			if(customer.getUsername().equals(username)) {
+				return customer;
+			}
+		}
+		return null;
+	}
 }

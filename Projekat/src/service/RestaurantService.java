@@ -123,4 +123,14 @@ public class RestaurantService extends ServiceTemplate {
 		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
 		return restaurantDao.getRestaurantByNameAndLocation(name, cityName, streetName, streetNumber);
 	}
+	
+	@GET
+	@Path("getAllrestaurantComments")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Comment> getAllrestaurantComments(@QueryParam("name") String name, @QueryParam("cityName") String cityName, @QueryParam("streetName") String streetName, @QueryParam("streetNumber") String streetNumber){
+		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
+		CommentDao commentDao = (CommentDao)context.getAttribute("comments");
+		return commentDao.getRestaurantComments(restaurantDao.getRestaurantByNameAndLocation(name, cityName, streetName, streetNumber));
+	}
 }

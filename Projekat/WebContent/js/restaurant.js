@@ -13,6 +13,9 @@ $(document).ready(function(){
 	let restaurant_streetnumber = restaurant_streetparams[restaurant_streetparams.length - 1];
 	let restaurant_streetname = restaurant_citystreet.substring(0, restaurant_citystreet.length - restaurant_streetnumber.length - 1);
 	
+	let urlParts = window.location.href.split("/");
+	let lastUrlPart = urlParts[urlParts.length - 1];
+	
 	$.get({
             url: "rest/RestaurantService/getRestaurantByNameAndLocation?name=" + restaurant_name + "&cityName=" + restaurant_cityname + "&streetName=" + restaurant_streetname + "&streetNumber=" + restaurant_streetnumber,
             contentType: 'application/json',
@@ -26,12 +29,14 @@ $(document).ready(function(){
 				restaurantNameTd.appendChild(document.createTextNode("Name: " + restaurant.name));
 				
 				let restaurantWorkingTd = document.getElementById("working_td");
-				if(restaurant.working){
-						restaurantWorkingTd.appendChild(document.createTextNode("Open"));
-					}
-					else{
-						restaurantWorkingTd.appendChild(document.createTextNode("Closed"));
-					}
+				if(restaurant.working)
+				{
+					restaurantWorkingTd.appendChild(document.createTextNode("Open"));
+				}
+				else
+				{
+					restaurantWorkingTd.appendChild(document.createTextNode("Closed"));
+				}
 				
 				let restaurantTypeTd = document.getElementById("type_td");
 				restaurantTypeTd.appendChild(document.createTextNode("Type: " + restaurant.restaurantType));
@@ -56,10 +61,12 @@ $(document).ready(function(){
 					
 					nameTd.appendChild(document.createTextNode(article.name));
 					typeTd.appendChild(document.createTextNode(article.articleType));
-					if(article.articleType === "food"){
+					if(article.articleType === "food")
+					{
 						sizeTd.appendChild(document.createTextNode(article.size + "g"));
 					}
-					else{
+					else
+					{
 						sizeTd.appendChild(document.createTextNode(article.size + "ml"));
 					}
 					priceTd.appendChild(document.createTextNode(article.price));
@@ -74,8 +81,7 @@ $(document).ready(function(){
 					articleTr.appendChild(pictureTd);
 					articleTr.appendChild(descriptionTd);
 					
-					let urlParts = window.location.href.split("/");
-					let lastUrlPart = urlParts[urlParts.length - 1];
+					
 					if(lastUrlPart.startsWith("restaurant_customer")){
 						let deliveryTd = document.createElement('td');
 						deliveryTd.style.textAlign = "center";
@@ -122,6 +128,54 @@ $(document).ready(function(){
 					
 					articleTable.appendChild(articleTr);
 				}
+				
+				if(lastUrlPart.startsWith("restaurant_administrator")){
+					$.get({
+						url: "rest/RestaurantService/getAllrestaurantComments?name=" + restaurant_name + "&cityName=" + restaurant_cityname + "&streetName=" + restaurant_streetname + "&streetNumber=" + restaurant_streetnumber,
+						contentType: 'application/json',
+						complete: function(message){
+							let comments = JSON.parse(message.responseText);
+							let commentTable = document.getElementById("comment_table");
+							for(let comment of comments){
+								let commentTr = document.createElement('tr');
+								let userNameTd = document.createElement('td');
+								let gradeTd = document.createElement('td');
+								let textTd = document.createElement('td');
+								let approvedTd = document.createElement('td');
+								
+								userNameTd.appendChild(document.createTextNode(comment.customer.username));
+								gradeTd.appendChild(document.createTextNode(comment.grade));
+								textTd.appendChild(document.createTextNode(comment.text));
+								if(comment.approved === true){
+									approvedTd.appendChild(document.createTextNode("Yes"));
+								}
+								else{
+									approvedTd.appendChild(document.createTextNode("No"));
+								}
+								commentTr.appendChild(userNameTd);
+								commentTr.appendChild(gradeTd);
+								commentTr.appendChild(textTd);
+								commentTr.appendChild(approvedTd);
+								
+								commentTable.appendChild(commentTr);
+							}
+						}
+					})
+					$("#delete").click(function(e){
+						alert(JSON.stringify(restaurant));
+						$.ajax({
+							url: "rest/AdministratorService/deleteRestaurant",
+							type: 'DELETE',
+							data: JSON.stringify(restaurant),
+							contentType: 'application/json',
+							complete: function(message){
+								alert("Restaurant has been deleted");
+								window.location.replace("administrator.html");
+							}
+						})
+					})
+				}
 			}
+			
 	})
 })

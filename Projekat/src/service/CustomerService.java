@@ -12,6 +12,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -53,6 +54,15 @@ public class CustomerService extends ServiceTemplate {
 	@PostConstruct
 	public void init() {
 		initializeData();
+	}
+	
+	@GET
+	@Path("/getCustomerByUsername")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Customer getCustomerByUsername(@QueryParam("username") String username) {
+		CustomerDao customerDao = (CustomerDao)context.getAttribute("customers");
+		return customerDao.findCustomerByUsername(username);
 	}
 	
 	@GET
