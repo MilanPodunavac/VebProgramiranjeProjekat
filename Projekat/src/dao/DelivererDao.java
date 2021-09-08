@@ -35,7 +35,7 @@ public class DelivererDao {
 	public Deliverer getDelivererByUsername(String username) {
 		Deliverer deliverer = null;
 		for(Deliverer d : deliverers) {
-			if(d.getUsername().equals(username)) {
+			if(d.getUsername().equals(username) && !d.isDeleted()) {
 				deliverer = d;
 			}
 		}

@@ -94,4 +94,10 @@ $(document).ready(function(){
 		if(deliverer_username == "")return;
 		window.location = "delivererView_administrator.html?username=" + deliverer_username;
 	})
+	$("#createDeliverer").click(function(){
+		window.location = "createDeliverer_administrator.html";
+	})
+	$("#createManager").click(function(){
+		window.location = "createManager_administrator.html";
+	})
 })

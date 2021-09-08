@@ -91,8 +91,12 @@ public class AdministratorService extends ServiceTemplate {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public boolean createNewManager(Manager manager) {
 		boolean success = false;
+		DelivererDao delivererDao = (DelivererDao)context.getAttribute("deliverers");
 		ManagerDao managerDao = (ManagerDao)context.getAttribute("managers");
-		if(managerDao.getManagerByUsername(manager.getUsername()) == null) {
+		CustomerDao customerDao = (CustomerDao)context.getAttribute("customers");
+		if(delivererDao.getDelivererByUsername(manager.getUsername()) == null &&
+				managerDao.getManagerByUsername(manager.getUsername()) == null
+				&& customerDao.getCustomerByUsername(manager.getUsername()) == null) {
 			managerDao.getManagers().add(manager);
 			ManagerSerializer managerSerializer = new ManagerSerializer(context.getRealPath(""));
 			success = managerSerializer.Add(manager, context.getRealPath(""));//Vraca false ako username vec postoji, zato salje getRealPath, promeniti?
@@ -107,7 +111,11 @@ public class AdministratorService extends ServiceTemplate {
 	public boolean createNewDeliverer(Deliverer deliverer) {
 		boolean success = false;
 		DelivererDao delivererDao = (DelivererDao)context.getAttribute("deliverers");
-		if(delivererDao.getDelivererByUsername(deliverer.getUsername()) == null) {
+		ManagerDao managerDao = (ManagerDao)context.getAttribute("managers");
+		CustomerDao customerDao = (CustomerDao)context.getAttribute("customers");
+		if(delivererDao.getDelivererByUsername(deliverer.getUsername()) == null &&
+				managerDao.getManagerByUsername(deliverer.getUsername()) == null
+				&& customerDao.getCustomerByUsername(deliverer.getUsername()) == null) {
 			delivererDao.getDeliverers().add(deliverer);
 			DelivererSerializer delivererSerializer = new DelivererSerializer(context.getRealPath(""));
 			success = delivererSerializer.Add(deliverer, context.getRealPath(""));//Vraca false ako username vec postoji, zato salje getRealPath, promeniti?

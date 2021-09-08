@@ -62,7 +62,7 @@ public class CustomerService extends ServiceTemplate {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Customer getCustomerByUsername(@QueryParam("username") String username) {
 		CustomerDao customerDao = (CustomerDao)context.getAttribute("customers");
-		return customerDao.findCustomerByUsername(username);
+		return customerDao.getCustomerByUsername(username);
 	}
 	
 	@GET

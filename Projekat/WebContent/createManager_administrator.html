@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+		<title>Create new manager</title>
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/show_username.js"></script>
+	    <script src="js/signout.js"></script>
+	    <script src="js/createManager_administrator.js"></script>
+	    
+	    <link rel="stylesheet" href="css/menu.css">
+</head>
+<body>
+<div class="menu">
+	<h2>Rade&Dunav</h2>
+	<h4 style="text-align:center;" id="username_label"></h4>
+	<input type="submit" id="profile" name="profile" value="Profile" />
+    <input type="submit" id="signout" name="signout" value="Signout" />
+	<ul>
+		<li><a href="administrator.html">Restaurants</a></li>
+		<li><a href="users_administrator.html">Users</a></li>
+	</ul>
+</div>
+<div class="main">
+	<table>
+        <tr>
+            <td>
+                Name:
+            </td>
+            <td>
+                <input type="text" name="name" id="name" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Surname:
+            </td>
+            <td>
+                <input type="text" name="surname" id="surname" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Username:
+            </td>
+            <td>
+                <input type="text" name="username" id="username" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Password:
+            </td>
+            <td>
+                <input type="password" name="password" id="password" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Gender:
+            </td>
+            <td>
+                <select id="gender" name="gender">
+						  <option value="male">male</option>
+						  <option value="female">female</option>
+						  <option value="other">other</option>
+					</select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Date of birth:
+            </td>
+            <td>
+                <input type="date" name="date" id="date" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+            </td>
+            <td>
+                <input type="submit" name="confirm" id="confirm" value="Confirm" />
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
