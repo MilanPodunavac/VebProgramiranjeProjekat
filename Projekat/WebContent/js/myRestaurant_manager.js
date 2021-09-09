@@ -71,7 +71,9 @@ $(document).ready(function(){
 						descriptionTd.appendChild(document.createTextNode(article.description));
 						
 						articleEditTd = document.createElement("td");
+						articleEditTd.style.textAlign = "center";
 						articleEditButton = document.createElement("button");
+						articleEditButton.style.width = "70%";
 						articleEditButton.appendChild(document.createTextNode("Edit"));
 						$(articleEditButton).click(function(){
 							
