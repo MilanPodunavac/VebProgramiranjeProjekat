@@ -18,6 +18,7 @@ $(document).ready(function(){
 					let priceTd = document.createElement('td');
 					let customerTd = document.createElement('td');
 					let statusTd = document.createElement('td');
+					let cancelTd = document.createElement('td');
 					
 					idTd.appendChild(document.createTextNode(delivery.id));
 					restaurantTd.appendChild(document.createTextNode(delivery.restaurant.name));
@@ -37,6 +38,23 @@ $(document).ready(function(){
 					priceTd.appendChild(document.createTextNode(delivery.totalCost));
 					customerTd.appendChild(document.createTextNode(customer.name + " " + customer.surname));
 					statusTd.appendChild(document.createTextNode(delivery.deliveryStatus));
+					if(!(delivery.deliveryStatus == "delivered" || delivery.deliveryStatus == "cancelled")){
+						let cancelButton = document.createElement('button');
+						cancelButton.innerText = "Cancel";
+						cancelTd.appendChild(cancelButton);
+						$(cancelButton).click(function(){
+							alert("alert");
+							$.post({
+								url: "rest/CustomerService/cancelDelivery",
+								data: JSON.stringify(delivery),
+								contentType: 'application/json',
+								complete: function(message){
+									alert("Delivery " + delivery.id + " cancelled");
+									location.reload();
+								}
+							})
+						})
+					}
 					
 					deliveryTr.appendChild(idTd);
 					deliveryTr.appendChild(restaurantTd);
@@ -45,6 +63,7 @@ $(document).ready(function(){
 					deliveryTr.appendChild(priceTd);
 					deliveryTr.appendChild(customerTd);
 					deliveryTr.appendChild(statusTd);
+					deliveryTr.appendChild(cancelTd);
 					
 					tabela.appendChild(deliveryTr);
 				}
