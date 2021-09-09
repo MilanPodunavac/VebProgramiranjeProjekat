@@ -25,7 +25,7 @@ public class CustomerDao {
 	public Customer find(String username, String password) {
 		Customer customer = null;
 		for(Customer c : customers) {
-			if(c.getUsername().equals(username) && c.getPassword().equals(password)) {
+			if(c.getUsername().equals(username) && c.getPassword().equals(password) && !c.isDeleted()) {
 				customer = c;
 			}
 		}

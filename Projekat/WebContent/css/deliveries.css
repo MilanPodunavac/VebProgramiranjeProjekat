@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+#delivery_table {
+	border: 2px solid black;
+	width: 100%;
+}
+
+#delivery_table td {
+	border: 1px solid black;
+}
+
+#delivery_table .info {
+	height: 50px;
+	padding: 10px;
+	font-size: large;
+}

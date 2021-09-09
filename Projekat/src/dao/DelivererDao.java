@@ -25,7 +25,7 @@ public class DelivererDao {
 	public Deliverer find(String username, String password) {
 		Deliverer deliverer = null;
 		for(Deliverer d : deliverers) {
-			if(d.getUsername().equals(username) && d.getPassword().equals(password)) {
+			if(d.getUsername().equals(username) && d.getPassword().equals(password) && !d.isDeleted()) {
 				deliverer = d;
 			}
 		}

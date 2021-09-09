@@ -27,7 +27,7 @@ public class ManagerDao {
 	public Manager find(String username, String password) {
 		Manager manager = null;
 		for(Manager m : managers) {
-			if(m.getUsername().equals(username) && m.getPassword().equals(password)) {
+			if(m.getUsername().equals(username) && m.getPassword().equals(password) && !m.isDeleted()) {
 				manager = m;
 			}
 		}

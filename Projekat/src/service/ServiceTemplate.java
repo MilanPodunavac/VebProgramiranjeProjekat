@@ -68,7 +68,9 @@ public class ServiceTemplate {
 			CustomerDao customerDao = (CustomerDao)(context.getAttribute("customers"));
 			for(Deliverer deliverer : deliverers) {
 				for(Delivery delivery : deliverer.getDeliveries()) {
-					delivery = customerDao.findDelivery(delivery.getId());
+					Delivery ctxDelivery = customerDao.findDelivery(delivery.getId());
+					deliverer.getDeliveries().remove(delivery);
+					deliverer.getDeliveries().add(ctxDelivery);
 				}
 			}
 			context.setAttribute("deliverers", new DelivererDao((ArrayList<Deliverer>)deliverers));
