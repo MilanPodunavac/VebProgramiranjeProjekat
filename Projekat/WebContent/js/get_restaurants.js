@@ -24,7 +24,21 @@ $(document).ready(function(){
 					typeTd.appendChild(document.createTextNode(restaurant.restaurantType));
 					locationTd.appendChild(document.createTextNode(restaurant.location.cityName + ", " + restaurant.location.streetName + " " + restaurant.location.streetNumber));
 					logoTd.appendChild(document.createTextNode(restaurant.logo));
-					gradeTd.appendChild(document.createTextNode("1"));
+					$.post({
+						url: "rest/RestaurantService/getAverageGrade",
+						data: JSON.stringify(restaurant),
+						contentType: 'application/json',
+						complete: function(m){
+							let grade = JSON.parse(m.responseText);
+							if(grade == 0){
+								gradeTd.appendChild(document.createTextNode("No grades"));
+							}
+							else {
+								gradeTd.appendChild(document.createTextNode(grade));
+							}
+						}
+					})
+
 					if(restaurant.working){
 						openTd.appendChild(document.createTextNode("Open"));
 					}

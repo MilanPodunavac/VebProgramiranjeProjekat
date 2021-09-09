@@ -44,6 +44,22 @@ $(document).ready(function(){
 				let restaurantLocationTd = document.getElementById("location_td");
 				restaurantLocationTd.appendChild(document.createTextNode("Location: " + restaurant.location.cityName + " " + restaurant.location.cityNumber + ", " + restaurant.location.streetName + " " + restaurant.location.streetNumber));
 	
+				let restaurantGradeTd = document.getElementById("grade_td");
+				$.post({
+					url: "rest/RestaurantService/getAverageGrade",
+					data: JSON.stringify(restaurant),
+					contentType: 'application/json',
+					complete: function(m){
+						let grade = JSON.parse(m.responseText);
+						if(grade == 0){
+							restaurantGradeTd.appendChild(document.createTextNode("No grades"));
+						}
+						else {
+							restaurantGradeTd.appendChild(document.createTextNode("Grade: " + grade));
+						}
+					}
+				})
+	
 				let restaurantLogoTd = document.getElementById("logo_td");
 				restaurantLogoTd.appendChild(document.createTextNode("Your logo goes here"));
 				
