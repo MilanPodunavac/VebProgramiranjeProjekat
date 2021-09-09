@@ -10,6 +10,7 @@
 
 <link rel="stylesheet" href="css/menu.css">
 <link rel="stylesheet" href="css/restaurant.css">
+<link rel="stylesheet" href="css/receipt.css">
 
 </head>
 <body>
@@ -20,7 +21,7 @@
 	<input type="submit" id="profile" name="profile" value="Profile" />
     <input type="submit" id="signout" name="signout" value="Signout" />
 	<ul>
-		<li><a href="index.html">Restaurants</a></li>
+		<li><a href="customer.html">Restaurants</a></li>
 	</ul>
 </div>
 
@@ -55,6 +56,50 @@
 </td>
 </tr>
 </table>
+
+<table id="shoppingCart_table">
+
+<tr>
+<td>Shopping cart</td>
+</tr>
+
+<tr>
+<td>
+<table id="shoppingCartItems_table">
+<thead>
+<tr>
+<th>Name</th>
+<th>Cost</th>
+<th>Amount</th>
+<th>Total cost of item</th>
+</tr>
+</thead>
+
+<tbody id="shoppingCartItems_table_tbody">
+</tbody>
+
+</table>
+</td>
+</tr>
+
+<tr>
+<td id="price_td">Add items to shopping cart to show price</td>
+</tr>
+
+<tr>
+<td id="discount_td"></td>
+</tr>
+
+<tr>
+<td id="cost_td"></td>
+</tr>
+
+<tr>
+<td id="points_td"></td>
+</tr>
+
+</table>
+
 </div>
 </body>
 </html>

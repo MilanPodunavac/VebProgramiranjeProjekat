@@ -67,28 +67,35 @@ public class ShoppingCart {
 		if (this.items == null)
 			this.items = new java.util.Vector<ShoppingCartItem>();
 		for(ShoppingCartItem item : items) {
-			if(item.getArticle().equals(newItem.getArticle())) {
-				totalCost += newItem.getAmount() * newItem.getArticle().getPrice() - item.getAmount()*item.getArticle().getPrice();
-				item = newItem;
-				break;
+			if(item.getArticle().getName().equals(newItem.getArticle().getName())) {
+				totalCost += item.getArticle().getPrice();
+				item.setAmount(newItem.getAmount());
+				return;
 			}
 		}		
-		if (!this.items.contains(newItem)) {
+		{
 			this.items.add(newItem);
 			totalCost += newItem.getAmount() * newItem.getArticle().getPrice();
 		}
 			
 	}
 	   
-	public void removeItem(ShoppingCartItem oldItem) {
-		if (oldItem == null)
+	public void removeItem(ShoppingCartItem newItem) {
+		if (newItem == null)
 			return;
 		if (this.items != null)
-			if (this.items.contains(oldItem))
-			{
-				this.items.remove(oldItem);
-				totalCost -= oldItem.getAmount() * oldItem.getArticle().getPrice();
-			}
+			for(ShoppingCartItem item : items) {
+				if(item.getArticle().getName().equals(newItem.getArticle().getName())) {
+					totalCost -= item.getArticle().getPrice();
+					if(newItem.getAmount() == 0) {
+						items.remove(item);
+					}
+					else {
+						item.setAmount(newItem.getAmount());
+					}
+					return;
+				}
+			}	
 	}
 	   
 	public void removeAllItems() {

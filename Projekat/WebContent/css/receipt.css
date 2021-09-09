@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+#shoppingCart_table tr {
+	border: 1px solid black;
+}
+
+#shoppingCartItems_table_tbody tr {
+	border-bottom: 1px dotted black;
+}
+

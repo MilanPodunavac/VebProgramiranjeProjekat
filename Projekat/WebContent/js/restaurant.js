@@ -41,7 +41,28 @@ $(document).ready(function(){
 	
 				let restaurantLogoTd = document.getElementById("logo_td");
 				restaurantLogoTd.appendChild(document.createTextNode("Your logo goes here"));
-	
+				
+				var discount;
+				var urlParts = window.location.href.split("/");
+				var lastUrlPart = urlParts[urlParts.length - 1];
+				if(lastUrlPart.startsWith("restaurant_customer")){	
+					$.get({
+						url: "rest/currentUser",
+						contentType: 'application/json',
+						complete: function(message) {
+							let customer = JSON.parse(message.responseText);
+							discount = customer.customerType.discount;
+						}
+					});
+					
+					$.post({
+						url: "rest/CustomerService/clearShoppingCart",
+						complete: function(message) {
+							
+						}
+					})
+				}
+
 				var articleTable = document.getElementById("article_table");
 				for(let article of restaurant.articles){
 					
@@ -52,7 +73,6 @@ $(document).ready(function(){
 					let priceTd = document.createElement('td');
 					let pictureTd = document.createElement('td');
 					let descriptionTd = document.createElement('td');
-					
 					
 					nameTd.appendChild(document.createTextNode(article.name));
 					typeTd.appendChild(document.createTextNode(article.articleType));
@@ -74,13 +94,15 @@ $(document).ready(function(){
 					articleTr.appendChild(pictureTd);
 					articleTr.appendChild(descriptionTd);
 					
-					let urlParts = window.location.href.split("/");
-					let lastUrlPart = urlParts[urlParts.length - 1];
+					
 					if(lastUrlPart.startsWith("restaurant_customer")){
+						
+						
+						
 						let deliveryTd = document.createElement('td');
 						deliveryTd.style.textAlign = "center";
 						
-						minusButton = document.createElement('button');
+						let minusButton = document.createElement('button');
 						minusButton.innerText = "-";
 						minusButton.style.marginRight = "7px";
 						minusButton.disabled = true;
@@ -88,29 +110,124 @@ $(document).ready(function(){
 						
 						let numberText = document.createTextNode("0");
 						
-						plusButton = document.createElement('button');
+						let plusButton = document.createElement('button');
 						plusButton.innerText = "+";
 						plusButton.style.marginLeft = "7px";
 						plusButton.classList.add("plusButton");
 						
-						
-						
-						$(minusButton).click(function(e){
-							alert("minus");
-							minusButton.disabled = true;
-							plusButton.disabled = false;
-							deliveryTd.appendChild(minusButton);
-							deliveryTd.appendChild(numberText);
-							deliveryTd.appendChild(plusButton);
+						$(minusButton).click(function(){
+							let number = parseInt(numberText.textContent);
+							number -= 1;
+							$.post({
+								url: "rest/CustomerService/removeItem",
+					            data: JSON.stringify({ article: article, amount: number }),
+					            contentType: 'application/json',
+					            success: function(mes) {
+					                if(number == 0){
+										minusButton.disabled = true;
+									}
+									numberText.textContent = number;
+									
+									let totalCostTd = document.getElementById("price_td");
+									totalCostTd.innerHTML = "";
+									totalCostTd.appendChild(document.createTextNode("Total cost: " + mes.totalCost));
+									
+									let discountTd = document.getElementById("discount_td");
+									discountTd.innerHTML = "";
+									discountTd.appendChild(document.createTextNode("Discount: " + discount + "%"));
+									
+									let costTd = document.getElementById("cost_td");
+									costTd.innerHTML = "";
+									costTd.appendChild(document.createTextNode("Cost after discount: " + (mes.totalCost * (1 - discount / 100))));
+									
+									let pointsTd = document.getElementById("points_td");
+									pointsTd.innerHTML = "";
+									pointsTd.appendChild(document.createTextNode("Points gained: " + (mes.totalCost * 133 / 1000)));
+									
+									let shoppingCartItemsTable = document.getElementById("shoppingCartItems_table_tbody");
+									shoppingCartItemsTable.innerHTML = "";
+									for(let item of mes.items){
+										
+										let cartItemTr = document.createElement('tr');
+										let nameTd = document.createElement('td');
+										let priceTd = document.createElement('td');
+										let amountTd = document.createElement('td');
+										let itemCostTd = document.createElement('td');
+										
+										nameTd.appendChild(document.createTextNode(item.article.name));
+										priceTd.appendChild(document.createTextNode(item.article.price));
+										amountTd.appendChild(document.createTextNode(item.amount));
+										itemCostTd.appendChild(document.createTextNode(item.amount * item.article.price));
+										
+										cartItemTr.appendChild(nameTd);
+										cartItemTr.appendChild(priceTd);
+										cartItemTr.appendChild(amountTd);
+										cartItemTr.appendChild(itemCostTd);
+										
+										shoppingCartItemsTable.appendChild(cartItemTr);
+									}
+						        },
+								fail: function(mes) {
+									alert("failure");
+								}
+							})
 						})
-						$(plusButton).click(function(e){
-							e.preventDefault();
-							alert(descriptionTd.innerText);
-							minusButton.disabled = false;
-							plusButton.disabled = true;
-							deliveryTd.appendChild(minusButton);
-							deliveryTd.appendChild(numberText);
-							deliveryTd.appendChild(plusButton);
+						$(plusButton).click(function(){
+							let number = parseInt(numberText.textContent);
+							number += 1;
+							$.post({
+								url: "rest/CustomerService/addItem",
+					            data: JSON.stringify({ article: article, amount: number }),
+					            contentType: 'application/json',
+					            success: function(mes) {
+					                if(number == 1){
+										minusButton.disabled = false;
+									}
+									numberText.textContent = number;
+									
+									let totalCostTd = document.getElementById("price_td");
+									totalCostTd.innerHTML = "";
+									totalCostTd.appendChild(document.createTextNode("Total cost: " + mes.totalCost));
+									
+									let discountTd = document.getElementById("discount_td");
+									discountTd.innerHTML = "";
+									discountTd.appendChild(document.createTextNode("Discount: " + discount + "%"));
+									
+									let costTd = document.getElementById("cost_td");
+									costTd.innerHTML = "";
+									costTd.appendChild(document.createTextNode("Cost after discount: " + (mes.totalCost * (1 - discount / 100))));
+									
+									let pointsTd = document.getElementById("points_td");
+									pointsTd.innerHTML = "";
+									pointsTd.appendChild(document.createTextNode("Points gained: " + (mes.totalCost * 133 / 1000)));
+									
+									let shoppingCartItemsTable = document.getElementById("shoppingCartItems_table_tbody");
+									shoppingCartItemsTable.innerHTML = "";
+									for(let item of mes.items){
+										
+										let cartItemTr = document.createElement('tr');
+										let nameTd = document.createElement('td');
+										let priceTd = document.createElement('td');
+										let amountTd = document.createElement('td');
+										let itemCostTd = document.createElement('td');
+										
+										nameTd.appendChild(document.createTextNode(item.article.name));
+										priceTd.appendChild(document.createTextNode(item.article.price));
+										amountTd.appendChild(document.createTextNode(item.amount));
+										itemCostTd.appendChild(document.createTextNode(item.amount * item.article.price));
+										
+										cartItemTr.appendChild(nameTd);
+										cartItemTr.appendChild(priceTd);
+										cartItemTr.appendChild(amountTd);
+										cartItemTr.appendChild(itemCostTd);
+										
+										shoppingCartItemsTable.appendChild(cartItemTr);
+									}
+						        },
+								fail: function(message) {
+									alert("failure");
+								}
+							})
 						})
 						
 						deliveryTd.appendChild(minusButton);

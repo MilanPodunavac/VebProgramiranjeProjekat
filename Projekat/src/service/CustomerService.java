@@ -182,6 +182,15 @@ public class CustomerService extends ServiceTemplate {
 		return deliveries;
 	}
 	
+	@POST
+	@Path("/clearShoppingCart")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void clearShoppingCart(@Context HttpServletRequest request) {
+		Customer customer = (Customer)request.getSession().getAttribute("customer");
+		customer.getShoppingCart().removeAllItems();
+		new CustomerSerializer(context.getRealPath("")).Update(customer);
+	}
+	
 /*	@GET
 	@Path("/idGenTest")
 	public String idGeneratorTest() {
