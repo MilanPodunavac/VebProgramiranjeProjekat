@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -132,6 +133,15 @@ public class RestaurantService extends ServiceTemplate {
 		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
 		CommentDao commentDao = (CommentDao)context.getAttribute("comments");
 		return commentDao.getRestaurantComments(restaurantDao.getRestaurantByNameAndLocation(name, cityName, streetName, streetNumber));
+	}
+	
+	@POST
+	@Path("getAverageGrade")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public double getAverageGrade(Restaurant restaurant) {
+		CommentDao commentDao = (CommentDao)context.getAttribute("comments");
+		return commentDao.getAverageGrade(restaurant);
 	}
 	
 }

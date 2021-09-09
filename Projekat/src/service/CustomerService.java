@@ -100,9 +100,12 @@ public class CustomerService extends ServiceTemplate {
 	@POST
 	@Path("/postComment")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void postComment(Comment comment) {
+	public void postComment(@QueryParam("name") String name, @QueryParam("cityName") String cityName, @QueryParam("streetName") String streetName, @QueryParam("streetNumber") String streetNumber, Comment comment, @Context HttpServletRequest request) {
 		CommentDao commentDao = (CommentDao)context.getAttribute("comments");
-		comment.setApproved(false);
+		Customer customer = (Customer)request.getSession().getAttribute("customer");
+		comment.setCustomer(customer);
+		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
+		comment.setRestaurant(restaurantDao.getRestaurantByNameAndLocation(name, cityName, streetName, streetNumber));
 		commentDao.addComment(comment);
 		CommentSerializer commentSerializer = new CommentSerializer(context.getRealPath(""));
 		commentSerializer.Add(comment);
@@ -201,6 +204,7 @@ public class CustomerService extends ServiceTemplate {
 		customer.getShoppingCart().removeAllItems();
 		new CustomerSerializer(context.getRealPath("")).Update(customer);
 	}
+	
 	
 /*	@GET
 	@Path("/idGenTest")

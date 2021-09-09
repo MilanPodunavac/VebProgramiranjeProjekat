@@ -59,4 +59,13 @@ public class CommentDao {
 	public void addComment(Comment comment) {
 		comments.add(comment);
 	}
+	
+	public double getAverageGrade(Restaurant restaurant) {
+		double gradeSum = 0;
+		List<Comment> commentList = getApprovedRestaurantComments(restaurant);
+		for(Comment comment : commentList) {
+			gradeSum += comment.getGrade();
+		}
+		return (gradeSum == 0) ? gradeSum : gradeSum / commentList.size();
+	}
 }
