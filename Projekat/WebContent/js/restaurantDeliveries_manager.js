@@ -75,30 +75,37 @@ $(document).ready(function(){
 									
 									inDeliveryBtn.appendChild(document.createTextNode("Wait delivery"));
 									$(inDeliveryBtn).click(function(){
-										rows = preparation_table.rows;
-										for(var i = 1 ; i <  rows.length ; i++){
-						            		if(rows[i].getElementsByTagName('td')[0].innerText == delivery.id){
-						            			preparation_table.deleteRow(i);
-												break;
-						            		}
-						            	}
-										let waitingDeliveryDeliveryTr = document.createElement("tr");
-						
-										let waitingDeliveryDeliveryIdTd = document.createElement("td");
-										let waitingDeliveryCustomerNameTd = document.createElement("td");
-										let waitingDeliveryTotalCostTd = document.createElement("td");
-										
-										waitingDeliveryDeliveryIdTd.hidden = true;
-										waitingDeliveryDeliveryIdTd.appendChild(document.createTextNode(delivery.id));
-										
-										waitingDeliveryCustomerNameTd.appendChild(document.createTextNode(delivery.customer.name + " " + delivery.customer.surname));
-										waitingDeliveryTotalCostTd.appendChild(document.createTextNode(delivery.totalCost));
-										
-										waitingDeliveryDeliveryTr.appendChild(waitingDeliveryDeliveryIdTd);
-										waitingDeliveryDeliveryTr.appendChild(waitingDeliveryCustomerNameTd);
-										waitingDeliveryDeliveryTr.appendChild(waitingDeliveryTotalCostTd);
-										
-										waitingDelivery_table.appendChild(waitingDeliveryDeliveryTr);
+										$.post({
+											url: "rest/ManagerService/setDeliveryToWaitingDelivery",
+											contentType: 'application/json',
+											data: JSON.stringify(delivery),
+											complete: function(message){
+												rows = preparation_table.rows;
+												for(var i = 1 ; i <  rows.length ; i++){
+								            		if(rows[i].getElementsByTagName('td')[0].innerText == delivery.id){
+								            			preparation_table.deleteRow(i);
+														break;
+								            		}
+								            	}
+												let waitingDeliveryDeliveryTr = document.createElement("tr");
+								
+												let waitingDeliveryDeliveryIdTd = document.createElement("td");
+												let waitingDeliveryCustomerNameTd = document.createElement("td");
+												let waitingDeliveryTotalCostTd = document.createElement("td");
+												
+												waitingDeliveryDeliveryIdTd.hidden = true;
+												waitingDeliveryDeliveryIdTd.appendChild(document.createTextNode(delivery.id));
+												
+												waitingDeliveryCustomerNameTd.appendChild(document.createTextNode(delivery.customer.name + " " + delivery.customer.surname));
+												waitingDeliveryTotalCostTd.appendChild(document.createTextNode(delivery.totalCost));
+												
+												waitingDeliveryDeliveryTr.appendChild(waitingDeliveryDeliveryIdTd);
+												waitingDeliveryDeliveryTr.appendChild(waitingDeliveryCustomerNameTd);
+												waitingDeliveryDeliveryTr.appendChild(waitingDeliveryTotalCostTd);
+												
+												waitingDelivery_table.appendChild(waitingDeliveryDeliveryTr);
+											}
+										})
 									});
 									inDeliveryTd.appendChild(inDeliveryBtn);
 									
