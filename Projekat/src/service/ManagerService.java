@@ -33,6 +33,8 @@ import dao.DeliveryDao;
 import dao.DeliveryRequestDao;
 import dao.ManagerDao;
 import dao.RestaurantDao;
+import dto.DeliveryDTO;
+import dto.DeliveryRequestDTO;
 import serialize.AdministratorSerializer;
 import serialize.CommentSerializer;
 import serialize.CustomerSerializer;
@@ -76,10 +78,15 @@ public class ManagerService extends ServiceTemplate {
 	@Path("/getRestaurantDeliveries")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Delivery> getRestaurantDeliveries(@Context HttpServletRequest request){
+	public List<DeliveryDTO> getRestaurantDeliveries(@Context HttpServletRequest request){
 		Restaurant restaurant = ((Manager)request.getSession().getAttribute("manager")).getRestaurant();
 		DeliveryDao deliveryDao = (DeliveryDao)context.getAttribute("deliveries");
-		return deliveryDao.getRestaurantDeliveries(restaurant);
+		List<Delivery> deliveries = deliveryDao.getRestaurantDeliveries(restaurant);
+		List<DeliveryDTO> dto = new ArrayList<>();
+		for(Delivery delivery : deliveries) {
+			dto.add(new DeliveryDTO(delivery));
+		}
+		return dto;
 	}
 	
 	//setPreparationDeliveryStatus
@@ -217,10 +224,18 @@ public class ManagerService extends ServiceTemplate {
 	@Path("/getPendingDeliveryRequestsForManager")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<DeliveryRequest> getPendingDeliveryRequestsForManager(@Context HttpServletRequest request) {
+	public List<DeliveryRequestDTO> getPendingDeliveryRequestsForManager(@Context HttpServletRequest request) {
 		Manager manager = (Manager) request.getSession().getAttribute("manager");
 		DeliveryRequestDao deliveryRequestDao = (DeliveryRequestDao)context.getAttribute("deliveryRequests");
-		return deliveryRequestDao.getPendingDeliveryRequestsForManager(manager);
+		DelivererDao delivererDao = (DelivererDao)context.getAttribute("deliverers");
+		DeliveryDao deliveryDao = (DeliveryDao)context.getAttribute("deliveries");
+		List<DeliveryRequest> requests = deliveryRequestDao.getPendingDeliveryRequestsForManager(manager);
+		List<DeliveryRequestDTO> dto = new ArrayList<>();
+		for(DeliveryRequest deliveryRequest : requests) {
+			dto.add(new DeliveryRequestDTO(delivererDao.getDelivererByUsername(deliveryRequest.getDelivererUsername()),
+					deliveryDao.findDeliveryById(deliveryRequest.getDeliveryId()), deliveryDao.findDeliveryById(deliveryRequest.getDeliveryId()).getCustomer()));
+		}
+		return dto;
 	}
 	
 	@GET
@@ -242,4 +257,5 @@ public class ManagerService extends ServiceTemplate {
 		CommentDao commentDao = (CommentDao)context.getAttribute("comments");
 		return commentDao.getRestaurantComments(manager.getRestaurant());
 	}
+	
 }

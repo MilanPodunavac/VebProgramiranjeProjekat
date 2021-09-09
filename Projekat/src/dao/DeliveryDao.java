@@ -57,4 +57,13 @@ public class DeliveryDao {
 		return restaurantDeliveries;
 	}
 	
+	public Delivery findDeliveryById(String id) {
+		for(Delivery delivery : deliveries) {
+			if(delivery.getId().equals(id)) {
+				return delivery;
+			}
+		}
+		return null;
+	}
+	
 }

@@ -14,3 +14,108 @@
 	padding: 10px;
 	font-size: large;
 }
+
+#deliveryRequest_table {
+	border: 2px solid black;
+	width: 60%;
+}
+
+#deliveryRequest_table td {
+	border: 1px solid black;
+}
+
+#deliveryRequest_table .info {
+	height: 50px;
+	padding: 10px;
+	font-size: large;
+}
+
+#processing_table {
+	border: 2px solid black;
+	width: 60%;
+}
+
+#processing_table td {
+	border: 1px solid black;
+}
+
+#processing_table .info {
+	height: 50px;
+	padding: 10px;
+	font-size: large;
+}
+
+#preparation_table {
+	border: 2px solid black;
+	width: 60%;
+}
+
+#preparation_table td {
+	border: 1px solid black;
+}
+
+#preparation_table .info {
+	height: 50px;
+	padding: 10px;
+	font-size: large;
+}
+
+#waitingDelivery_table {
+	border: 2px solid black;
+	width: 60%;
+}
+
+#waitingDelivery_table td {
+	border: 1px solid black;
+}
+
+#waitingDelivery_table .info {
+	height: 50px;
+	padding: 10px;
+	font-size: large;
+}
+
+#inDelivery_table {
+	border: 2px solid black;
+	width: 60%;
+}
+
+#inDelivery_table td {
+	border: 1px solid black;
+}
+
+#inDelivery_table .info {
+	height: 50px;
+	padding: 10px;
+	font-size: large;
+}
+
+#delivered_table {
+	border: 2px solid black;
+	width: 60%;
+}
+
+#delivered_table td {
+	border: 1px solid black;
+}
+
+#delivered_table .info {
+	height: 50px;
+	padding: 10px;
+	font-size: large;
+}
+
+#cancelled_table {
+	border: 2px solid black;
+	width: 60%;
+}
+
+#cancelled_table td {
+	border: 1px solid black;
+}
+
+#cancelled_table .info {
+	height: 50px;
+	padding: 10px;
+	font-size: large;
+}

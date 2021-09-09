@@ -34,7 +34,7 @@ public class DeliveryRequestDao {
 	public List<DeliveryRequest> getPendingDeliveryRequestsForManager(Manager manager){
 		List<DeliveryRequest> pendingRequests = new ArrayList<DeliveryRequest>();
 		for(DeliveryRequest deliveryRequest : deliveryRequests) {
-			if(deliveryRequest.getManagerUsername().equals(manager.getUsername())) {
+			if(deliveryRequest.getManagerUsername().equals(manager.getUsername()) && deliveryRequest.isPending()) {
 				pendingRequests.add(deliveryRequest);
 			}
 		}

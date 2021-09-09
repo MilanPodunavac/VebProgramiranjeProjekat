@@ -67,11 +67,12 @@ public class ServiceTemplate {
 			List<Deliverer> deliverers = new DelivererSerializer(context.getRealPath("")).Load();
 			CustomerDao customerDao = (CustomerDao)(context.getAttribute("customers"));
 			for(Deliverer deliverer : deliverers) {
+				List<Delivery> newDeliveryReferences = new ArrayList<>();
 				for(Delivery delivery : deliverer.getDeliveries()) {
 					Delivery ctxDelivery = customerDao.findDelivery(delivery.getId());
-					deliverer.getDeliveries().remove(delivery);
-					deliverer.getDeliveries().add(ctxDelivery);
+					newDeliveryReferences.add(ctxDelivery);
 				}
+				deliverer.setDeliveries(newDeliveryReferences);
 			}
 			context.setAttribute("deliverers", new DelivererDao((ArrayList<Deliverer>)deliverers));
 		}

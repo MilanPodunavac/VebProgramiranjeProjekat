@@ -22,7 +22,7 @@ function getDeliveries(){
 				totalCostTd.appendChild(document.createTextNode(delivery.totalCost));
 				restaurantTd.appendChild(document.createTextNode(delivery.restaurant.name));
 				
-				button.appendChild(document.createTextNode("request delivery"));
+				button.appendChild(document.createTextNode("deliver"));
 				$(button).click(function(){
 					$.post({
 			            url: "rest/DelivererService/deliverDelivery",
@@ -32,7 +32,7 @@ function getDeliveries(){
 			            	let rows = delivery_table.rows;
 			            	for(var i = 1 ; i <  rows.length ; i++){
 			            		if(rows[i].getElementsByTagName('td')[0].innerText == delivery.id){
-			            			delivery_table.deleteRow(i);
+			            			delivery_table.rows[i].deleteCell(4);
 			            			break;
 			            		}
 			            	}
@@ -45,7 +45,9 @@ function getDeliveries(){
 				deliveryTr.appendChild(customerTd);
 				deliveryTr.appendChild(totalCostTd);
 				deliveryTr.appendChild(restaurantTd);
-				deliveryTr.appendChild(requestTd);
+				if(delivery.deliveryStatus == "inDelivery"){
+					deliveryTr.appendChild(requestTd);
+				}
 				
 				delivery_table.appendChild(deliveryTr);
 			}

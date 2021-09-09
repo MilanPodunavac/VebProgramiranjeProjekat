@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Delivery Requests</title>
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/show_username.js"></script>
+	    <script src="js/signout.js"></script>
+	    
+	    <script src="js/deliveryRequests_manager.js"></script>
+		
+		<link rel="stylesheet" href="css/menu.css">
+    	<link rel="stylesheet" href="css/deliveries.css">
+	</head>
+<body>
+<div class="menu">
+	<h2>Rade&Dunav</h2>
+	<h4 style="text-align:center;" id="username_label"></h4>
+	<input type="submit" id="profile" name="profile" value="Profile" />
+    <input type="submit" id="signout" name="signout" value="Signout" />
+	<ul>
+		<li><a href="manager.html">Restaurants</a></li>
+		<li class="selected">Delivery requests</li>
+		<li><a href="restaurantDeliveries_manager.html">Restaurant deliveries</a></li>
+		<li><a href="restaurantComments_manager.html">Restaurant comments</a>
+		<li><a href="myRestaurant_manager.html">My restaurant</a></li>
+	</ul>
+</div>
+<div class="main">
+	<table id="deliveryRequest_table">
+		<tr>
+			<td>Deliverer</td>
+			<td>Customer</td>
+			<td>Total Cost</td>
+		</tr>
+	</table>
+</div>
+</body>
+</html>
