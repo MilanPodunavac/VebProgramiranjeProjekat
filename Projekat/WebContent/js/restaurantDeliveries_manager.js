@@ -6,7 +6,7 @@ $(document).ready(function(){
 			manager = JSON.parse(message.responseText);
 			if(manager.restaurant == null){
 				alert("Sorry, you have no restaurant");
-				window.location = manager.html;
+				window.location = "manager.html";
 			}
 			$.get({
 				url: "rest/ManagerService/getRestaurantDeliveries",

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
-	<head>
+<head>
 		<meta charset="UTF-8">
-		<title>Delivery Requests</title>
+		<title>Restaurant Deliveries</title>
 		<script src="js/jquery-3.3.1.min.js"></script>
 		<script src="js/show_username.js"></script>
 	    <script src="js/signout.js"></script>
 	    
-	    <script src="js/deliveryRequests_manager.js"></script>
+	    <script src="js/unapprovedRestaurantComments_manager.js"></script>
 		
 		<link rel="stylesheet" href="css/menu.css">
-    	<link rel="stylesheet" href="css/deliveries.css">
+    	<link rel="stylesheet" href="css/restaurant.css">
 	</head>
 <body>
 <div class="menu">
@@ -20,18 +20,18 @@
     <input type="submit" id="signout" name="signout" value="Signout" />
 	<ul>
 		<li><a href="manager.html">Restaurants</a></li>
-		<li class="selected">Delivery requests</li>
+		<li><a href="deliveryRequests_manager.html">Delivery requests</a></li>
 		<li><a href="restaurantDeliveries_manager.html">Restaurant deliveries</a></li>
-		<li><a href="unapprovedRestaurantComments_manager.html">Unapproved comments</a>
+		<li class="selected">Unapproved comments</li>
 		<li><a href="myRestaurant_manager.html">My restaurant</a></li>
 	</ul>
 </div>
 <div class="main">
-	<table id="deliveryRequest_table">
-		<tr>
-			<td>Deliverer</td>
+	<table id="comment_table">
+		<tr style="font-weight:bold">
 			<td>Customer</td>
-			<td>Total Cost</td>
+			<td>Grade</td>
+			<td>Text</td>
 		</tr>
 	</table>
 </div>
