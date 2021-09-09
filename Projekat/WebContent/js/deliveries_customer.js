@@ -38,12 +38,11 @@ $(document).ready(function(){
 					priceTd.appendChild(document.createTextNode(delivery.totalCost));
 					customerTd.appendChild(document.createTextNode(customer.name + " " + customer.surname));
 					statusTd.appendChild(document.createTextNode(delivery.deliveryStatus));
-					if(!(delivery.deliveryStatus == "delivered" || delivery.deliveryStatus == "cancelled")){
+					if(delivery.deliveryStatus == "processing"){
 						let cancelButton = document.createElement('button');
 						cancelButton.innerText = "Cancel";
 						cancelTd.appendChild(cancelButton);
 						$(cancelButton).click(function(){
-							alert("alert");
 							$.post({
 								url: "rest/CustomerService/cancelDelivery",
 								data: JSON.stringify(delivery),
@@ -53,6 +52,14 @@ $(document).ready(function(){
 									location.reload();
 								}
 							})
+						})
+					}
+					else if(delivery.deliveryStatus == "delivered"){
+						let commentButton = document.createElement('button');
+						commentButton.innerText = "Comment";
+						cancelTd.appendChild(commentButton);
+						$(commentButton).click(function(){
+							window.location = "addComment.html?name=" + delivery.restaurant.name + "&cityName=" + delivery.restaurant.location.cityName + "&streetName=" + delivery.restaurant.location.streetName + "&streetNumber=" + delivery.restaurant.location.streetNumber;
 						})
 					}
 					

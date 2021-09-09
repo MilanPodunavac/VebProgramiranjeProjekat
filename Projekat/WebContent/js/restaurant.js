@@ -125,9 +125,6 @@ $(document).ready(function(){
 							}
 						}
 					})
-					$("#addCommentButton").click(function(){
-						window.location = "addComment.html?" + parameters;
-					})
 				}
 
 				var articleTable = document.getElementById("article_table");

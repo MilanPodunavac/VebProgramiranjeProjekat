@@ -26,7 +26,6 @@
 }
 
 #comment_table tr, #comment_table th, #comment_table td{
-	width: 100%;
 	border: 1px solid black;
 }
 
