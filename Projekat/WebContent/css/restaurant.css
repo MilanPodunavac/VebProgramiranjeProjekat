@@ -33,3 +33,7 @@
 #article_table tr, #article_table th, #article_table td{
 	border: 1px solid black;
 }
+
+.sortable {
+	cursor: pointer;
+}
