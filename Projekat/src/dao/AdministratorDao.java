@@ -24,7 +24,7 @@ public class AdministratorDao {
 	public Administrator find(String username, String password) {
 		Administrator administrator = null;
 		for(Administrator a : administrators) {
-			if(a.getUsername().equals(username) && a.getPassword().equals(password)) {
+			if(a.getUsername().equals(username) && a.getPassword().equals(password) && !a.isDeleted()) {
 				administrator = a;
 			}
 		}

@@ -32,6 +32,7 @@ import dao.DeliveryDao;
 import dao.DeliveryRequestDao;
 import dao.ManagerDao;
 import dao.RestaurantDao;
+import dto.DeliveryDTO;
 import serialize.AdministratorSerializer;
 import serialize.CommentSerializer;
 import serialize.CustomerSerializer;
@@ -88,24 +89,54 @@ public class DelivererService extends ServiceTemplate {
 	public void deliverDelivery(Delivery delivery, @Context HttpServletRequest request) {
 		delivery.setDeliveryStatus(DeliveryStatus.delivered);
 		DeliveryDao deliveryDao = (DeliveryDao)context.getAttribute("deliveries");
+		CustomerDao customerDao = (CustomerDao)context.getAttribute("customers");
 		for(Delivery ctxDelivery : deliveryDao.getDeliveries()) {
 			if(ctxDelivery.getId().equals(delivery.getId())) {
-				ctxDelivery = delivery;
+				ctxDelivery.setDeliveryStatus(DeliveryStatus.delivered);
 			}
 		}
 		//referencama se azuriraju, nadam se
 		DelivererSerializer delSer = new DelivererSerializer(context.getRealPath(""));
 		CustomerSerializer cusSer = new CustomerSerializer(context.getRealPath(""));
-		cusSer.Update(delivery.getCustomer());
+		cusSer.Update(customerDao.getCustomerByUsername(delivery.getCustomer().getUsername()));
 		Deliverer deliverer = (Deliverer)request.getSession().getAttribute("deliverer");
 		delSer.Update(deliverer);
 	}
 	
 	@GET
-	@Path("/getWaitingDeliveries")
+	@Path("/getDelivererDeliveries")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public List<Delivery> getWaitingDeliveries(){
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<DeliveryDTO> getDelivererDeliveries(@Context HttpServletRequest request){
+		Deliverer deliverer = (Deliverer) request.getSession().getAttribute("deliverer");
+		List<DeliveryDTO> deliveriesDTO = new ArrayList<>();
+		for(Delivery delivery : deliverer.getDeliveries()) {
+			deliveriesDTO.add(new DeliveryDTO(delivery));
+		}
+		return deliveriesDTO;
+	}
+	
+	@GET
+	@Path("/getWaitingDeliveries")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<DeliveryDTO> getWaitingDeliveries(@Context HttpServletRequest request){
 		DeliveryDao dao = (DeliveryDao)context.getAttribute("deliveries");
-		return dao.getWaitingDeliveries();
+		DeliveryRequestDao deliveryRequestDao = (DeliveryRequestDao)context.getAttribute("deliveryRequests");
+		List<Delivery> allWaitingDeliveries = dao.getWaitingDeliveries();
+		Deliverer deliverer = (Deliverer)request.getSession().getAttribute("deliverer");
+		List<DeliveryDTO> notAlreadyRequestedWaitingDeliveries = new ArrayList<>();
+		for(Delivery delivery : allWaitingDeliveries) {
+			boolean alreadyRequested = false;
+			for(DeliveryRequest deliveryRequest : deliveryRequestDao.getDeliveryRequests()) {
+				if(delivery.getId().equals(deliveryRequest.getDeliveryId()) 
+						&& deliveryRequest.getDelivererUsername().equals(deliverer.getUsername())) {
+					alreadyRequested = true;
+				}
+			}
+			if(!alreadyRequested) {
+				notAlreadyRequestedWaitingDeliveries.add(new DeliveryDTO(delivery));
+			}
+		}
+		return notAlreadyRequestedWaitingDeliveries;
 	}
 }
