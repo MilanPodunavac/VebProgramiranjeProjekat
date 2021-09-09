@@ -21,7 +21,7 @@ public class UsernameChecker {
 	public boolean CheckCustomers(String username, String contextPath) {
 		ArrayList<Customer> customers = new CustomerSerializer(contextPath).Load();
 		for(Customer customer : customers) {
-			if(customer.getUsername().equals(username)) {
+			if(customer.getUsername().equals(username) && !customer.isDeleted()) {
 				return false;
 			}
 		}
@@ -31,7 +31,7 @@ public class UsernameChecker {
 	public boolean CheckDeliverers(String username, String contextPath) {
 		ArrayList<Deliverer> deliverers = new DelivererSerializer(contextPath).Load();
 		for(Deliverer deliverer : deliverers) {
-			if(deliverer.getUsername().equals(username)) {
+			if(deliverer.getUsername().equals(username) && !deliverer.isDeleted()) {
 				return false;
 			}
 		}
@@ -41,7 +41,7 @@ public class UsernameChecker {
 	public boolean CheckManagers(String username, String contextPath) {
 		ArrayList<Manager> managers = new ManagerSerializer(contextPath).Load();
 		for(Manager manager : managers) {
-			if(manager.getUsername().equals(username)) {
+			if(manager.getUsername().equals(username) && !manager.isDeleted()) {
 				return false;
 			}
 		}
@@ -51,7 +51,7 @@ public class UsernameChecker {
 	public boolean CheckAdministrators(String username, String contextPath) {
 		ArrayList<Administrator> administrators = new AdministratorSerializer(contextPath).Load();
 		for(Administrator administrator : administrators) {
-			if(administrator.getUsername().equals(username)) {
+			if(administrator.getUsername().equals(username) && !administrator.isDeleted()) {
 				return false;
 			}
 		}

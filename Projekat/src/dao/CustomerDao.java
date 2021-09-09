@@ -60,4 +60,13 @@ public class CustomerDao {
 		}
 		
 	}
+
+	public Customer getCustomerByUsername(String username) {
+		for(Customer customer : customers) {
+			if(customer.getUsername().equals(username) && !customer.isDeleted()) {
+				return customer;
+			}
+		}
+		return null;
+	}
 }

@@ -20,6 +20,16 @@
 	border: 1px solid black;
 }
 
+#comment_table {
+	border: 2px solid black;
+	width: 100%;
+}
+
+#comment_table tr, #comment_table th, #comment_table td{
+	width: 100%;
+	border: 1px solid black;
+}
+
 #article_table tr, #article_table th, #article_table td{
 	border: 1px solid black;
 }

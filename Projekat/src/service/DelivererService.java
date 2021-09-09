@@ -11,6 +11,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -49,6 +50,15 @@ public class DelivererService extends ServiceTemplate {
 	@PostConstruct
 	public void init() {
 		initializeData();
+	}
+	
+	@GET
+	@Path("/getDelivererByUsername")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Deliverer getDelivererByUsername(@QueryParam("username") String username) {
+		DelivererDao delivererDao = (DelivererDao)context.getAttribute("deliverers");
+		return delivererDao.getDelivererByUsername(username);
 	}
 	
 	@GET

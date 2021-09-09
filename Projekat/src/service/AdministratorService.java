@@ -55,7 +55,7 @@ public class AdministratorService extends ServiceTemplate {
 	}
 	
 	@GET
-	@Path("/getAdming")
+	@Path("/getAdmin")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Administrator getAdministrator(@Context HttpServletRequest request) {
@@ -91,8 +91,12 @@ public class AdministratorService extends ServiceTemplate {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public boolean createNewManager(Manager manager) {
 		boolean success = false;
+		DelivererDao delivererDao = (DelivererDao)context.getAttribute("deliverers");
 		ManagerDao managerDao = (ManagerDao)context.getAttribute("managers");
-		if(managerDao.getManagerByUsername(manager.getUsername()) == null) {
+		CustomerDao customerDao = (CustomerDao)context.getAttribute("customers");
+		if(delivererDao.getDelivererByUsername(manager.getUsername()) == null &&
+				managerDao.getManagerByUsername(manager.getUsername()) == null
+				&& customerDao.getCustomerByUsername(manager.getUsername()) == null) {
 			managerDao.getManagers().add(manager);
 			ManagerSerializer managerSerializer = new ManagerSerializer(context.getRealPath(""));
 			success = managerSerializer.Add(manager, context.getRealPath(""));//Vraca false ako username vec postoji, zato salje getRealPath, promeniti?
@@ -107,7 +111,11 @@ public class AdministratorService extends ServiceTemplate {
 	public boolean createNewDeliverer(Deliverer deliverer) {
 		boolean success = false;
 		DelivererDao delivererDao = (DelivererDao)context.getAttribute("deliverers");
-		if(delivererDao.getDelivererByUsername(deliverer.getUsername()) == null) {
+		ManagerDao managerDao = (ManagerDao)context.getAttribute("managers");
+		CustomerDao customerDao = (CustomerDao)context.getAttribute("customers");
+		if(delivererDao.getDelivererByUsername(deliverer.getUsername()) == null &&
+				managerDao.getManagerByUsername(deliverer.getUsername()) == null
+				&& customerDao.getCustomerByUsername(deliverer.getUsername()) == null) {
 			delivererDao.getDeliverers().add(deliverer);
 			DelivererSerializer delivererSerializer = new DelivererSerializer(context.getRealPath(""));
 			success = delivererSerializer.Add(deliverer, context.getRealPath(""));//Vraca false ako username vec postoji, zato salje getRealPath, promeniti?
@@ -121,29 +129,50 @@ public class AdministratorService extends ServiceTemplate {
 	@Path("/getAllCustomers")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Customer> getAllCustomers(){
-		return ((CustomerDao)context.getAttribute("customers")).getCustomers();
+		List<Customer> allCustomers = ((CustomerDao)context.getAttribute("customers")).getCustomers();
+		List<Customer> customers = new ArrayList<>();
+		for(Customer customer : allCustomers) {
+			if(!customer.isDeleted()) {
+				customers.add(customer);
+			}
+		}
+		return customers;
 	}
 	
 	@GET
 	@Path("/getAllManagers")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Manager> getAllManagers(){
-		return ((ManagerDao)context.getAttribute("managers")).getManagers();
+		List<Manager> allManagers = ((ManagerDao)context.getAttribute("managers")).getManagers();
+		List<Manager> managers = new ArrayList<>();
+		for(Manager manager : allManagers) {
+			if(!manager.isDeleted()) {
+				managers.add(manager);
+			}
+		}
+		return managers;
 	}
 	
 	@GET
 	@Path("/getAllDeliverers")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Deliverer> getAllDeliverers(){
-		return ((DelivererDao)context.getAttribute("deliverers")).getDeliverers();
+		List<Deliverer> allDeliverers = ((DelivererDao)context.getAttribute("deliverers")).getDeliverers();
+		List<Deliverer> deliverers = new ArrayList<>();
+		for(Deliverer deliverer : allDeliverers) {
+			if(!deliverer.isDeleted()) {
+				deliverers.add(deliverer);
+			}
+		}
+		return deliverers;
 	}
 	
-	@GET
+/*	@GET
 	@Path("/getAllAdmins")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Administrator> getAllAdmins(){
 		return ((AdministratorDao)context.getAttribute("customers")).getAdministrators();
-	}
+	}*/
 	
 	@GET
 	@Path("/getManagersWithoutRestaurant")

@@ -37,7 +37,7 @@ public class ManagerDao {
 	public Manager getManagerByUsername(String username) {
 		Manager manager = null;
 		for(Manager m : managers) {
-			if(m.getUsername().equals(username)) {
+			if(m.getUsername().equals(username) && !m.isDeleted()) {
 				manager = m;
 			}
 		}
