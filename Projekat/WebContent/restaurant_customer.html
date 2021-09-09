@@ -7,10 +7,11 @@
 <script src="js/show_username.js"></script>
 <script src="js/signout.js"></script>
 <script src="js/restaurant.js"></script>
+<script src="js/sortable.js"></script>
 
 <link rel="stylesheet" href="css/menu.css">
 <link rel="stylesheet" href="css/restaurant.css">
-<link rel="stylesheet" href="css/receipt.css">
+<link rel="stylesheet" href="css/shoppingCart.css">
 
 </head>
 <body>
@@ -22,6 +23,7 @@
     <input type="submit" id="signout" name="signout" value="Signout" />
 	<ul>
 		<li><a href="customer.html">Restaurants</a></li>
+		<li><a href="deliveries_customer.html">Deliveries</a></li>
 	</ul>
 </div>
 
@@ -68,10 +70,10 @@
 <table id="shoppingCartItems_table">
 <thead>
 <tr>
-<th>Name</th>
-<th>Cost</th>
-<th>Amount</th>
-<th>Total cost of item</th>
+<th style="width: 55%">Name</th>
+<th style="width: 15%">Cost</th>
+<th style="width: 15%">Amount</th>
+<th style="width: 15%">Total</th>
 </tr>
 </thead>
 
@@ -98,6 +100,18 @@
 <td id="points_td"></td>
 </tr>
 
+<tr>
+<td id="orderButton_td"><input type="submit" id="orderButton" name="orderButton" value="Order" /></td>
+</tr>
+
+</table>
+
+<table id="comment_table" style="margin-top: 20px">
+	<tr>
+	<th class="sortable" style="width:15%;">Customer</th>
+	<th class="sortable" style="width:15%;">Grade</th>
+	<th style="width:70%;">Text</th>
+	</tr>
 </table>
 
 </div>

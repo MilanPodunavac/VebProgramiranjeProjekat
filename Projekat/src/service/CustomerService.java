@@ -116,15 +116,16 @@ public class CustomerService extends ServiceTemplate {
 	@POST
 	@Path("/checkOut")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void checkOut(@Context HttpServletRequest request) {
+	public void checkOut(Restaurant restaurant, @Context HttpServletRequest request) {
 		Customer customer = (Customer)request.getSession().getAttribute("customer");
 		Delivery newDelivery = new Delivery();
 		newDelivery.setId(((DeliveryDao)context.getAttribute("deliveries")).generateId());
 		newDelivery.setCustomer(customer);
 		newDelivery.setDeliveryStatus(DeliveryStatus.processing);
-		newDelivery.setRestaurant(customer.getShoppingCart().getItems().get(0).getArticle().getRestaurant());
+		newDelivery.setRestaurant(restaurant);
 		newDelivery.setTime(new Date());
 		newDelivery.setTotalCost(customer.calculateDiscountedShoppingCartCost());
+		newDelivery.setItems(new ArrayList<>(customer.getShoppingCart().getItems()));
 		customer.addPoints((int)customer.calculateDiscountedShoppingCartCost()/1000 * 133);
 		customer.addDeliveries(newDelivery);
 		customer.getShoppingCart().removeAllItems();

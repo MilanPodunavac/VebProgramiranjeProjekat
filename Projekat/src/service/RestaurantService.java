@@ -133,4 +133,5 @@ public class RestaurantService extends ServiceTemplate {
 		CommentDao commentDao = (CommentDao)context.getAttribute("comments");
 		return commentDao.getRestaurantComments(restaurantDao.getRestaurantByNameAndLocation(name, cityName, streetName, streetNumber));
 	}
+	
 }

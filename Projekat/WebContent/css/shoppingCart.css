@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+#shoppingCart_table{
+	width: 50%; 
+	border:2px solid black;
+	margin-top: 20px;
+}
+
+#shoppingCart_table th{
+	border: 1px solid black;
+	border-bottom: 2px double black;
+	padding: 5px;
+}
+
+#shoppingCart_table td{
+	border: 1px solid black;
+	padding: 10px;
+}
+
+#shoppingCartItems_table {
+	width: 100%;
+	border:2px dotted black;
+}
+
+#shoppingCartItems_table th, #shoppingCartItems_table td {
+	border: none;
+	border-bottom: 1px dashed black;
+}
