@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $(profile).click(function(){
+    $("#profile").click(function(){
     	window.location = "customer_profile.html";
     })
 })

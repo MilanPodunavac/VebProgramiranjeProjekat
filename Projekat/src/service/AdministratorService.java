@@ -105,6 +105,9 @@ public class AdministratorService extends ServiceTemplate {
 		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
 		ManagerDao managerDao = (ManagerDao)context.getAttribute("managers");
 		if(restaurantDao.find(restaurant) == null) {
+			List<Article> articles = new ArrayList<>();
+			restaurant.setArticles(articles);
+			restaurant.setWorking(true);
 			(managerDao.getManagerByUsername(manager.getUsername())).setRestaurant(restaurant);
 			restaurantDao.getRestaurants().add(restaurant);
 			RestaurantSerializer restaurantSerializer = new RestaurantSerializer(context.getRealPath(""));
