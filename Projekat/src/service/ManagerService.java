@@ -35,6 +35,7 @@ import dao.ManagerDao;
 import dao.RestaurantDao;
 import dto.DeliveryDTO;
 import dto.DeliveryRequestDTO;
+import dto.PasswordChangeDTO;
 import serialize.AdministratorSerializer;
 import serialize.CommentSerializer;
 import serialize.CustomerSerializer;
@@ -71,6 +72,36 @@ public class ManagerService extends ServiceTemplate {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Manager getManager(@Context HttpServletRequest request) {
 		return (Manager) request.getSession().getAttribute("manager");
+	}
+	
+	@POST
+	@Path("/changeManager")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void changeManager(Manager manager, @Context HttpServletRequest request) {
+		Manager loggedManager = (Manager) request.getSession().getAttribute("manager");
+		if(loggedManager == null)return;
+		loggedManager.setUsername(manager.getUsername());
+		loggedManager.setName(manager.getName());
+		loggedManager.setSurname(manager.getSurname());
+		loggedManager.setGender(manager.getGender());
+		loggedManager.setDateOfBirth(manager.getDateOfBirth());
+		new ManagerSerializer(context.getRealPath("")).Save((ArrayList<Manager>)((ManagerDao)context.getAttribute("managers")).getManagers());
+	}
+	
+	@POST
+	@Path("/changePassword")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String changePassword(PasswordChangeDTO dto, @Context HttpServletRequest request) {
+		Manager loggedManager = (Manager) request.getSession().getAttribute("manager");
+		if(loggedManager == null)return "Error";
+		if(!loggedManager.getPassword().equals(dto.getOldPassword())) {
+			return "Invalid current password!";
+		}
+		loggedManager.setPassword(dto.getNewPassword());
+		new ManagerSerializer(context.getRealPath("")).Save((ArrayList<Manager>)((ManagerDao)context.getAttribute("managers")).getManagers());
+		return "Password changed!";
 	}
 	
 	//getRestaurantDeliveries

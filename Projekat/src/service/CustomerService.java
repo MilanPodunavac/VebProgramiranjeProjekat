@@ -36,6 +36,7 @@ import dao.DeliveryDao;
 import dao.DeliveryRequestDao;
 import dao.ManagerDao;
 import dao.RestaurantDao;
+import dto.PasswordChangeDTO;
 import serialize.AdministratorSerializer;
 import serialize.CommentSerializer;
 import serialize.CustomerSerializer;
@@ -71,6 +72,36 @@ public class CustomerService extends ServiceTemplate {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Customer getCustomer(@Context HttpServletRequest request) {
 		return (Customer) request.getSession().getAttribute("customer");
+	}
+	
+	@POST
+	@Path("/changeCustomer")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void changeCustomer(Customer customer, @Context HttpServletRequest request) {
+		Customer loggedCustomer = (Customer) request.getSession().getAttribute("customer");
+		if(loggedCustomer == null)return;
+		loggedCustomer.setUsername(customer.getUsername());
+		loggedCustomer.setName(customer.getName());
+		loggedCustomer.setSurname(customer.getSurname());
+		loggedCustomer.setGender(customer.getGender());
+		loggedCustomer.setDateOfBirth(customer.getDateOfBirth());
+		new CustomerSerializer(context.getRealPath("")).Save((ArrayList<Customer>)((CustomerDao)context.getAttribute("customers")).getCustomers());
+	}
+	
+	@POST
+	@Path("/changePassword")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String changePassword(PasswordChangeDTO dto, @Context HttpServletRequest request) {
+		Customer loggedCustomer = (Customer) request.getSession().getAttribute("customer");
+		if(loggedCustomer == null)return "Error";
+		if(!loggedCustomer.getPassword().equals(dto.getOldPassword())) {
+			return "Invalid current password!";
+		}
+		loggedCustomer.setPassword(dto.getNewPassword());
+		new CustomerSerializer(context.getRealPath("")).Save((ArrayList<Customer>)((CustomerDao)context.getAttribute("customers")).getCustomers());
+		return "Password changed!";
 	}
 	
 	@POST

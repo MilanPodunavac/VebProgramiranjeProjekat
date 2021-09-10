@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-		<title>Create new manager</title>
-		<script src="js/jquery-3.3.1.min.js"></script>
-		<script src="js/show_username.js"></script>
-	    <script src="js/signout.js"></script>
-	    <script src="js/createManager_administrator.js"></script>
-	    <script src="js/administrator.js"></script>
-	    
-	    <link rel="stylesheet" href="css/menu.css">
-	    <link rel="stylesheet" href="css/form_table.css">
+    <meta charset="UTF-8">
+    <title>Deliverer</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/show_username.js"></script>
+    <script src="js/signout.js"></script>
+    <script src="js/administrator.js"></script>
+    
+    <script src="js/administrator_profile.js"></script>
+    
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/form_table.css">
 </head>
+
 <body>
 <div class="menu">
 	<h2>Rade&Dunav</h2>
@@ -23,8 +26,10 @@
 		<li><a href="users_administrator.html">Users</a></li>
 	</ul>
 </div>
+
 <div id="form_table">
-	<table >
+	<h2>Administrator information</h2>
+    <table>
         <tr>
             <td>
                 Name:
@@ -46,15 +51,7 @@
                 Username:
             </td>
             <td>
-                <input type="text" name="username" id="username" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Password:
-            </td>
-            <td>
-                <input type="password" name="password" id="password" />
+                <input type="text" name="username" id="username"/>
             </td>
         </tr>
         <tr>
@@ -66,7 +63,7 @@
 						  <option value="male">male</option>
 						  <option value="female">female</option>
 						  <option value="other">other</option>
-					</select>
+				</select>
             </td>
         </tr>
         <tr>
@@ -86,6 +83,42 @@
             </td>
         </tr>
     </table>
+    <h2>Change password</h2>
+    <table>
+    	<tr>
+            <td>
+                Current Password:
+            </td>
+            <td>
+                <input type="password" name="currentPassword" id="currentPassword" />
+            </td>
+        </tr>
+    	<tr>
+            <td>
+                New Password:
+            </td>
+            <td>
+                <input type="password" name="newPassword" id="newPassword" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Confirm New Password:
+            </td>
+            <td>
+                <input type="password" name="confirmNewPassword" id="confirmNewPassword" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+            </td>
+            <td>
+                <input type="submit" name="confirmPasswordChange" id="confirmPasswordChange" value="Confirm" />
+            </td>
+        </tr>
+    </table>
 </div>
+	
 </body>
 </html>

@@ -15,6 +15,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import beans.Administrator;
 import beans.Article;
 import beans.Comment;
 import beans.Customer;
@@ -33,6 +34,7 @@ import dao.DeliveryRequestDao;
 import dao.ManagerDao;
 import dao.RestaurantDao;
 import dto.DeliveryDTO;
+import dto.PasswordChangeDTO;
 import serialize.AdministratorSerializer;
 import serialize.CommentSerializer;
 import serialize.CustomerSerializer;
@@ -68,6 +70,36 @@ public class DelivererService extends ServiceTemplate {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Deliverer getDeliverer(@Context HttpServletRequest request) {
 		return (Deliverer) request.getSession().getAttribute("deliverer");
+	}
+	
+	@POST
+	@Path("/changeDeliverer")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void changeDeliverer(Deliverer deliverer, @Context HttpServletRequest request) {
+		Deliverer loggedDeliverer = (Deliverer) request.getSession().getAttribute("deliverer");
+		if(loggedDeliverer == null)return;
+		loggedDeliverer.setUsername(deliverer.getUsername());
+		loggedDeliverer.setName(deliverer.getName());
+		loggedDeliverer.setSurname(deliverer.getSurname());
+		loggedDeliverer.setGender(deliverer.getGender());
+		loggedDeliverer.setDateOfBirth(deliverer.getDateOfBirth());
+		new DelivererSerializer(context.getRealPath("")).Save((ArrayList<Deliverer>)((DelivererDao)context.getAttribute("deliverers")).getDeliverers());
+	}
+	
+	@POST
+	@Path("/changePassword")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String changePassword(PasswordChangeDTO dto, @Context HttpServletRequest request) {
+		Deliverer loggedDeliverer = (Deliverer) request.getSession().getAttribute("deliverer");
+		if(loggedDeliverer == null)return "Error";
+		if(!loggedDeliverer.getPassword().equals(dto.getOldPassword())) {
+			return "Invalid current password!";
+		}
+		loggedDeliverer.setPassword(dto.getNewPassword());
+		new DelivererSerializer(context.getRealPath("")).Save((ArrayList<Deliverer>)((DelivererDao)context.getAttribute("deliverers")).getDeliverers());
+		return "Password changed!";
 	}
 	
 	//getInDelivery ???

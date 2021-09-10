@@ -33,6 +33,7 @@ import dao.DeliveryDao;
 import dao.DeliveryRequestDao;
 import dao.ManagerDao;
 import dao.RestaurantDao;
+import dto.PasswordChangeDTO;
 import dto.RestaurantCreationDTO;
 import serialize.AdministratorSerializer;
 import serialize.CommentSerializer;
@@ -60,6 +61,36 @@ public class AdministratorService extends ServiceTemplate {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Administrator getAdministrator(@Context HttpServletRequest request) {
 		return (Administrator) request.getSession().getAttribute("administrator");
+	}
+	
+	@POST
+	@Path("/changeAdmin")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void changeAdmin(Administrator admin, @Context HttpServletRequest request) {
+		Administrator loggedAdmin = (Administrator) request.getSession().getAttribute("administrator");
+		if(loggedAdmin == null)return;
+		loggedAdmin.setUsername(admin.getUsername());
+		loggedAdmin.setName(admin.getName());
+		loggedAdmin.setSurname(admin.getSurname());
+		loggedAdmin.setGender(admin.getGender());
+		loggedAdmin.setDateOfBirth(admin.getDateOfBirth());
+		new AdministratorSerializer(context.getRealPath("")).Save((ArrayList<Administrator>)((AdministratorDao)context.getAttribute("administrators")).getAdministrators());
+	}
+	
+	@POST
+	@Path("/changePassword")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String changePassword(PasswordChangeDTO dto, @Context HttpServletRequest request) {
+		Administrator loggedAdmin = (Administrator) request.getSession().getAttribute("administrator");
+		if(loggedAdmin == null)return "Error";
+		if(!loggedAdmin.getPassword().equals(dto.getOldPassword())) {
+			return "Invalid current password!";
+		}
+		loggedAdmin.setPassword(dto.getNewPassword());
+		new AdministratorSerializer(context.getRealPath("")).Save((ArrayList<Administrator>)((AdministratorDao)context.getAttribute("administrators")).getAdministrators());
+		return "Password changed!";
 	}
 	
 	//createNewRestaurant
