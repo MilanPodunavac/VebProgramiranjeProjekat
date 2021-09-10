@@ -22,7 +22,7 @@ $(document).ready(function(){
 			let delivererSurnameTd = document.getElementById("surname_td");
 			delivererSurnameTd.appendChild(document.createTextNode("Surname: " + deliverer.surname));
 			
-			delivery_list = document.getElementById("delivery_list");
+			delivery_list = document.getElementById("deliveries_list");
 			
 			for(let delivery of deliverer.deliveries){
 				let deliveryTr = document.createElement('tr');
