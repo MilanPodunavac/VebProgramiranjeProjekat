@@ -51,7 +51,8 @@ function getDeliveries(){
 				            	let rows = delivery_table.rows;
 				            	for(var i = 1 ; i <  rows.length ; i++){
 				            		if(rows[i].getElementsByTagName('td')[0].innerText == delivery.id){
-				            			delivery_table.rows[i].deleteCell(4);
+				            			delivery_table.rows[i].deleteCell(8);
+				            			(delivery_table.rows[i].getElementsByTagName('td'))[7].innerText = "delivered";
 				            			break;
 				            		}
 				            	}

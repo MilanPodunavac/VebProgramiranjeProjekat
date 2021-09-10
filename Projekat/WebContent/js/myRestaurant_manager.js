@@ -76,7 +76,7 @@ $(document).ready(function(){
 						articleEditButton.style.width = "70%";
 						articleEditButton.appendChild(document.createTextNode("Edit"));
 						$(articleEditButton).click(function(){
-							
+							window.location = "updateArticle_manager.html?name="+article.name;
 						})
 						
 						articleEditTd.appendChild(articleEditButton);
@@ -95,7 +95,7 @@ $(document).ready(function(){
 				}
 			})
 			$.get({
-				url: "rest/RestaurantService/getApprovedRestaurantComments?name=" + restaurant.name + "&cityName=" + restaurant_cityName + "&streetName=" + restaurant_streetName + "&streetNumber=" + restaurant_streetnumber,
+				url: "rest/ManagerService/getRestaurantComments",
 				contentType: 'application/json',
 				complete: function(message){
 					let comments = JSON.parse(message.responseText);
@@ -105,6 +105,17 @@ $(document).ready(function(){
 						let userNameTd = document.createElement('td');
 						let gradeTd = document.createElement('td');
 						let textTd = document.createElement('td');
+						let statusTd = document.createElement('td');
+						
+						if(comment.rejected == true){
+							statusTd.appendChild(document.createTextNode("Rejected"));
+						}
+						else if(comment.approved == true){
+							statusTd.appendChild(document.createTextNode("Approved"));
+						}
+						else{
+							statusTd.appendChild(document.createTextNode("Pending"));
+						}
 						
 						userNameTd.appendChild(document.createTextNode(comment.customer.username));
 						gradeTd.appendChild(document.createTextNode(comment.grade));
@@ -113,10 +124,14 @@ $(document).ready(function(){
 						commentTr.appendChild(userNameTd);
 						commentTr.appendChild(gradeTd);
 						commentTr.appendChild(textTd);
+						commentTr.appendChild(statusTd);
 						
 						commentTable.appendChild(commentTr);
 					}
 				}
+			})
+			$("#addArticle").click(function(){
+				window.location = "addArticle_manager.html";
 			})
 		}
 	})

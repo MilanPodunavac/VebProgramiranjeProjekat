@@ -33,6 +33,7 @@ import dao.DeliveryDao;
 import dao.DeliveryRequestDao;
 import dao.ManagerDao;
 import dao.RestaurantDao;
+import dto.ArticleEditDTO;
 import dto.DeliveryDTO;
 import dto.DeliveryRequestDTO;
 import dto.PasswordChangeDTO;
@@ -242,28 +243,43 @@ public class ManagerService extends ServiceTemplate {
 		return success;
 	}
 	
-	
+	@GET
+	@Path("/getArticle")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Article getArticle(@QueryParam("name") String name, @Context HttpServletRequest request) {
+		Manager manager = (Manager) request.getSession().getAttribute("manager");
+		Restaurant restaurant = manager.getRestaurant();
+		for(Article article : restaurant.getArticles()) {
+			if(article.getName().equals(name)) {
+				return article;
+			}
+		}
+		return null;
+	}
 	//updateArticle
 	@POST
 	@Path("/updateArticle")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean updateArticle(Article article, @Context HttpServletRequest request) {
+	public boolean updateArticle(ArticleEditDTO dto, @Context HttpServletRequest request) {
 		Manager manager = (Manager) request.getSession().getAttribute("manager");
 		Restaurant restaurant = manager.getRestaurant();
 		boolean success = false;
 		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
-		for(Restaurant ctxRestaurant : restaurantDao.getRestaurants()) {
-			if(restaurant.getName().equals(ctxRestaurant.getName()) && restaurant.getLocation().equals(ctxRestaurant.getLocation())) {
-				for(Article existingArticle : restaurant.getArticles()) {
-					if(article.getName().equals(existingArticle.getName())) {
-						article.setRestaurant(ctxRestaurant);
-						existingArticle = article;
-						(new RestaurantSerializer(context.getRealPath(""))).Update(ctxRestaurant);
-						success = true;
-						break;
-					}
-				}
+		Article article = dto.getArticle();
+		for(Article existingArticle : restaurant.getArticles()) {
+			if(dto.getOldArticleName().equals(existingArticle.getName())) {
+				existingArticle.setArticleType(article.getArticleType());
+				existingArticle.setName(article.getName());
+				existingArticle.setPrice(article.getPrice());
+				existingArticle.setSize(article.getSize());
+				existingArticle.setPicture(article.getPicture());
+				existingArticle.setDescription(article.getDescription());
+				RestaurantDao dao = (RestaurantDao)context.getAttribute("restaurants");
+				(new RestaurantSerializer(context.getRealPath(""))).Save(dao.getRestaurants());
+				success = true;
+				break;
 			}
 		}
 		return success;
