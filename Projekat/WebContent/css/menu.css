@@ -43,6 +43,11 @@
 
 .menu ul{
 	list-style-type: none;
+	
+}
+
+.menu ul li {
+	margin-bottom: 8px;
 }
 
 .main{
