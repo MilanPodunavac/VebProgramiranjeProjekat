@@ -13,6 +13,7 @@ $(document).ready(function(){
 					let deliveryTr = document.createElement('tr');
 					let idTd = document.createElement('td');
 					let restaurantTd = document.createElement('td');
+					let typeTd = document.createElement('td');
 					let articlesTd = document.createElement('td');
 					let dateTd = document.createElement('td');
 					let priceTd = document.createElement('td');
@@ -22,6 +23,7 @@ $(document).ready(function(){
 					
 					idTd.appendChild(document.createTextNode(delivery.id));
 					restaurantTd.appendChild(document.createTextNode(delivery.restaurant.name));
+					typeTd.appendChild(document.createTextNode(delivery.restaurant.restaurantType));
 					
 					var itemList = document.createElement('ul');
 					for(let item of delivery.items){
@@ -62,9 +64,11 @@ $(document).ready(function(){
 							window.location = "addComment.html?name=" + delivery.restaurant.name + "&cityName=" + delivery.restaurant.location.cityName + "&streetName=" + delivery.restaurant.location.streetName + "&streetNumber=" + delivery.restaurant.location.streetNumber;
 						})
 					}
+					cancelTd.style.textAlign = "center";
 					
 					deliveryTr.appendChild(idTd);
 					deliveryTr.appendChild(restaurantTd);
+					deliveryTr.appendChild(typeTd);
 					deliveryTr.appendChild(articlesTd);
 					deliveryTr.appendChild(dateTd);
 					deliveryTr.appendChild(priceTd);
