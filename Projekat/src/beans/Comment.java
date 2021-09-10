@@ -8,6 +8,7 @@ public class Comment {
    private boolean approved;
    private Customer customer;
    private Restaurant restaurant;
+   private boolean rejected;
    
    public Comment() {
 		super();
@@ -20,7 +21,9 @@ public class Comment {
 		this.approved = approved;
 		this.customer = customer;
 		this.restaurant = restaurant;
+		this.rejected = false;
 	}
+
 	public String getText() {
 		return text;
 	}
@@ -50,5 +53,11 @@ public class Comment {
 	}
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
+	}
+	public boolean isRejected() {
+		return rejected;
+	}
+	public void setRejected(boolean rejected) {
+		this.rejected = rejected;
 	}
 }

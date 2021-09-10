@@ -104,7 +104,7 @@ public class ServiceTemplate {
 		if(context.getAttribute("comments") == null) {
 			List<Comment> comments = new CommentSerializer(context.getRealPath("")).Load();
 			
-			for(Comment comment : comments) {
+			for(Comment comment : comments) {				
 				comment.setCustomer(((CustomerDao)context.getAttribute("customers")).find(comment.getCustomer().getUsername(), comment.getCustomer().getPassword()));
 				comment.setRestaurant(((RestaurantDao)context.getAttribute("restaurants")).find(comment.getRestaurant()));
 			}
