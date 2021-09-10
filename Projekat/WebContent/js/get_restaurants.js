@@ -36,13 +36,14 @@ $(document).ready(function(){
 								image.style.height = '70px';
 								
 								logoTd.appendChild(image);
-								logoTd.style.textAlign = "center";
+								
 							}
 						})
 					}
 					else{
 						logoTd.appendChild(document.createTextNode("No logo"));
 					}
+					logoTd.style.textAlign = "center";
 					
 					$.post({
 						url: "rest/RestaurantService/getAverageGrade",

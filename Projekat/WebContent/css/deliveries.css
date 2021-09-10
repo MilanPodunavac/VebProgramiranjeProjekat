@@ -22,10 +22,10 @@
 
 #deliveryRequest_table {
 	border: 2px solid black;
-	width: 60%;
+	width: 100%;
 }
 
-#deliveryRequest_table td {
+#deliveryRequest_table td, #deliveryRequest_table th {
 	border: 1px solid black;
 }
 

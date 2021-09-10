@@ -61,7 +61,28 @@ $(document).ready(function(){
 				})
 	
 				let restaurantLogoTd = document.getElementById("logo_td");
-				restaurantLogoTd.appendChild(document.createTextNode("Your logo goes here"));
+				//restaurantLogoTd.appendChild(document.createTextNode("Your logo goes here"));
+				
+				if(restaurant.imageId != ""){
+					$.get({
+						url: "rest/Image64Service/getImageData?id=" + restaurant.imageId,
+						complete: function(message){
+							let imageData64 = message.responseText;
+							console.log(imageData64);
+							var image = document.createElement('img');
+							image.src = imageData64;
+							image.style.width = 'auto';
+							image.style.height = '200px';
+							
+							restaurantLogoTd.appendChild(image);
+							
+						}
+					})
+				}
+				else{
+					restaurantLogoTd.appendChild(document.createTextNode("No logo"));
+				}
+				restaurantLogoTd.style.textAlign = "center";
 				
 				var discount;
 				var urlParts = window.location.href.split("/");
@@ -176,7 +197,29 @@ $(document).ready(function(){
 						sizeTd.appendChild(document.createTextNode(article.size + "ml"));
 					}
 					priceTd.appendChild(document.createTextNode(article.price));
-					pictureTd.appendChild(document.createTextNode(article.picture));
+					
+					//pictureTd.appendChild(document.createTextNode(article.picture));
+					if(article.imageId != ""){
+						$.get({
+							url: "rest/Image64Service/getImageData?id=" + article.imageId,
+							complete: function(message){
+								let imageData64 = message.responseText;
+								console.log(imageData64);
+								var image = document.createElement('img');
+								image.src = imageData64;
+								image.style.width = 'auto';
+								image.style.height = '70px';
+								
+								pictureTd.appendChild(image);
+								
+							}
+						})
+					}
+					else{
+						pictureTd.appendChild(document.createTextNode("No picture"));
+					}
+					pictureTd.style.textAlign = "center";
+					
 					descriptionTd.appendChild(document.createTextNode(article.description));
 					
 					
