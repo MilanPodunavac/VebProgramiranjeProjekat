@@ -11,7 +11,7 @@ public class Article {
 	private ArticleType articleType;
 	private int size;
 	private String description;
-	private Image picture;
+	private String imageId;
 	@JsonBackReference
 	private Restaurant restaurant;
 	private boolean deleted;
@@ -20,7 +20,7 @@ public class Article {
 		super();
 	}
 	
-	public Article(String name, double price, ArticleType articleType, int size, String description, Image picture,
+	public Article(String name, double price, ArticleType articleType, int size, String description, String imageId,
 			Restaurant restaurant) {
 	super();
 	this.name = name;
@@ -28,7 +28,7 @@ public class Article {
 	this.articleType = articleType;
 	this.size = size;
 	this.description = description;
-	this.picture = picture;
+	this.imageId = imageId;
 	this.restaurant = restaurant;
 	deleted = false;
 	}
@@ -82,12 +82,14 @@ public class Article {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Image getPicture() {
-		return picture;
+	public String getImageId() {
+		return imageId;
 	}
-	public void setPicture(Image picture) {
-		this.picture = picture;
+
+	public void setImageId(String imageId) {
+		this.imageId = imageId;
 	}
+
 	public boolean isDeleted() {
 		return deleted;
 	}

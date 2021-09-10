@@ -12,6 +12,7 @@ import beans.Customer;
 import beans.Deliverer;
 import beans.Delivery;
 import beans.DeliveryRequest;
+import beans.ImageBase64;
 import beans.Manager;
 import beans.Restaurant;
 import beans.ShoppingCartItem;
@@ -21,6 +22,7 @@ import dao.CustomerDao;
 import dao.DelivererDao;
 import dao.DeliveryDao;
 import dao.DeliveryRequestDao;
+import dao.ImageBase64Dao;
 import dao.ManagerDao;
 import dao.RestaurantDao;
 import serialize.AdministratorSerializer;
@@ -28,6 +30,7 @@ import serialize.CommentSerializer;
 import serialize.CustomerSerializer;
 import serialize.DelivererSerializer;
 import serialize.DeliveryRequestSerializer;
+import serialize.ImageBase64Serializer;
 import serialize.ManagerSerializer;
 import serialize.RestaurantSerializer;
 
@@ -113,6 +116,10 @@ public class ServiceTemplate {
 		if(context.getAttribute("deliveryRequests") == null) {
 			List<DeliveryRequest> deliveryRequests = new DeliveryRequestSerializer(context.getRealPath("")).Load();
 			context.setAttribute("deliveryRequests", new DeliveryRequestDao((ArrayList<DeliveryRequest>)deliveryRequests));
+		}
+		if(context.getAttribute("images64") == null) {
+			List<ImageBase64> images = new ImageBase64Serializer(context.getRealPath("")).Load();
+			context.setAttribute("images64", new ImageBase64Dao((ArrayList<ImageBase64>)images));
 		}
 	}
 }
