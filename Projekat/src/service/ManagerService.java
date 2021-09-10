@@ -274,7 +274,7 @@ public class ManagerService extends ServiceTemplate {
 				existingArticle.setName(article.getName());
 				existingArticle.setPrice(article.getPrice());
 				existingArticle.setSize(article.getSize());
-				existingArticle.setPicture(article.getPicture());
+				existingArticle.setImageId(article.getImageId());
 				existingArticle.setDescription(article.getDescription());
 				RestaurantDao dao = (RestaurantDao)context.getAttribute("restaurants");
 				(new RestaurantSerializer(context.getRealPath(""))).Save(dao.getRestaurants());

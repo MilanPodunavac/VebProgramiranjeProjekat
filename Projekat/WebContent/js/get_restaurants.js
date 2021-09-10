@@ -23,7 +23,27 @@ $(document).ready(function(){
 					nameTd.appendChild(document.createTextNode(restaurant.name));
 					typeTd.appendChild(document.createTextNode(restaurant.restaurantType));
 					locationTd.appendChild(document.createTextNode(restaurant.location.cityName + ", " + restaurant.location.streetName + " " + restaurant.location.streetNumber));
-					logoTd.appendChild(document.createTextNode(restaurant.logo));
+					//logoTd.appendChild(document.createTextNode(restaurant.logo));
+					if(restaurant.imageId != ""){
+						$.get({
+							url: "rest/Image64Service/getImageData?id=" + restaurant.imageId,
+							complete: function(message){
+								let imageData64 = message.responseText;
+								console.log(imageData64);
+								var image = document.createElement('img');
+								image.src = imageData64;
+								image.style.width = 'auto';
+								image.style.height = '70px';
+								
+								logoTd.appendChild(image);
+								logoTd.style.textAlign = "center";
+							}
+						})
+					}
+					else{
+						logoTd.appendChild(document.createTextNode("No logo"));
+					}
+					
 					$.post({
 						url: "rest/RestaurantService/getAverageGrade",
 						data: JSON.stringify(restaurant),
