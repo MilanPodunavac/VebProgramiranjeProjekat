@@ -195,6 +195,24 @@ public class ManagerService extends ServiceTemplate {
 			}
 		}
 	}
+	
+	@POST
+	@Path("/rejectComment")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void rejectComment(Comment comment) {
+		CommentDao commentDao = (CommentDao)context.getAttribute("comments");
+		for(Comment ctxComment : commentDao.getComments()) {
+			if(ctxComment.getText().equals(comment.getText()) 
+					&& comment.getGrade() == ctxComment.getGrade() 
+					&& comment.getCustomer().getUsername().equals(ctxComment.getCustomer().getUsername())) {
+				ctxComment.setRejected(true);
+				CommentSerializer commentSerializer = new CommentSerializer(context.getRealPath(""));
+				commentSerializer.Update(ctxComment);
+			}
+		}
+	}
+	
 	//addArticle
 	@PUT
 	@Path("/addArticle")

@@ -49,7 +49,7 @@ public class CommentDao {
 		List<Comment> restaurantComments = getRestaurantComments(restaurant);
 		List<Comment> notApprovedRestaurantComments = new ArrayList<Comment>();
 		for(Comment comment : restaurantComments) {
-			if(!comment.isApproved()) {
+			if(!comment.isApproved() && !comment.isRejected()) {
 				notApprovedRestaurantComments.add(comment);
 			}
 		}
