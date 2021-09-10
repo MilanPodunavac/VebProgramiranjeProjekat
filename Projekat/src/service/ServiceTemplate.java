@@ -46,7 +46,6 @@ public class ServiceTemplate {
 			context.setAttribute("restaurants", new RestaurantDao((ArrayList<Restaurant>)restaurants));
 		}
 		if(context.getAttribute("customers") == null) {
-		//	context.setAttribute("customers", new CustomerDao(new CustomerSerializer(context.getRealPath("")).Load()));
 			List<Customer> customers = new CustomerSerializer(context.getRealPath("")).Load();
 			RestaurantDao restaurantDao = (RestaurantDao)(context.getAttribute("restaurants"));
 			for(Customer customer : customers) {
