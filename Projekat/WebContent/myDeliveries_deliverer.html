@@ -30,10 +30,10 @@
 <div class="main">
 
 	<div style="height:100px">
-	<h2 class="selected">Deliveries</h2>
+	<h2 class="selected">My deliveries</h2>
 
 	<h3>Search</h3>
-	<table style="width:70%">
+	<table style="width:85%">
 	<tr style="height:80%">
 	<td>
 	<input type="text" id="search_restaurant" name="search_restaurant" placeholder="Restaurant name" style="margin: 15px"><br>
@@ -52,6 +52,8 @@
 	<label for="search_date_top">to </label>
 	<input type="date" id="search_date_top" name="search_date_top" style="margin: 5px; width: 135px;">
 	</div>
+	
+	<input id="search_customer" name="search_customer" placeholder="Customer name" style="margin: 15px"><br>
 	
 	</td>
 	
@@ -86,8 +88,6 @@
 	
 	</td>
 	
-	<td></td>
-	
 	<td>
 	<button id="search_button">Search</button>
 	</td>
@@ -103,7 +103,7 @@
 		<th>Articles</th>
 		<th class="sortable">Date</th>
 		<th class="sortable">Price</th>
-		<th>Customer</th>
+		<th class="sortable">Customer</th>
 		<th class="sortable">Status</th>
 		<th>Deliver?</th>
 	</tr>

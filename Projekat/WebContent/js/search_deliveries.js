@@ -3,6 +3,11 @@ $(document).ready(function(){
 		e.preventDefault();
 		var search_restaurant = $("#search_restaurant").val().toUpperCase();
 		var search_article = $("#search_article").val().toUpperCase();
+		var search_customer = "";
+		var search_customer_val =  $("#search_customer").val();
+		if(search_customer_val) {
+			search_customer = search_customer_val.toUpperCase();
+		}
 		
 		var search_price_bottom = parseInt($("#search_price_bottom").val());
 		if(search_price_bottom === NaN){
@@ -17,7 +22,11 @@ $(document).ready(function(){
 		var search_date_bottom =  new Date($("#search_date_bottom").val());
 		var search_date_top =  new Date($("#search_date_top").val());
 		
-		var status_filter = $('input[name=status_filter]:checked', '#status_filter').val().toUpperCase();
+		var status_filter = "ALL";
+		var status_filter_val = $('input[name=status_filter]:checked', '#status_filter').val();
+		if(status_filter_val) {
+			status_filter = status_filter_val.toUpperCase();
+		}
 		var type_filter = $('input[name=type_filter]:checked', '#type_filter').val().toUpperCase();
 		
 		var table = document.getElementById("delivery_table");
@@ -43,11 +52,17 @@ $(document).ready(function(){
 			let price_td = tr[i].getElementsByTagName('td')[5];
 			let delivery_price = parseFloat(price_td.textContent || price_td.innerText);
 			
+			let customer_td = tr[i].getElementsByTagName('td')[6];
+			let delivery_customer = customer_td.textContent || customer_td.innerText;
+			
 			let status_td = tr[i].getElementsByTagName('td')[7];
 			let delivery_status = status_td.textContent || status_td.innerText;
 			
 			tr[i].style.display = "";
 			if(restaurant_name.toUpperCase().indexOf(search_restaurant) === -1){
+				tr[i].style.display = "none";
+			}
+			else if(delivery_customer.toUpperCase().indexOf(search_customer) === -1){
 				tr[i].style.display = "none";
 			}
 			else if(type_filter != "ALL" && restaurant_type.toUpperCase().indexOf(type_filter) === -1){

@@ -8,6 +8,8 @@
 	    <script src="js/signout.js"></script>
 	    <script src="js/pendingDeliveries_deliverer.js"></script>
 	    <script src="js/deliverer.js"></script>
+	    <script src="js/search_deliveries.js"></script>
+	    <script src="js/sortable.js"></script>
 	    
 	    <link rel="stylesheet" href="css/menu.css">
 	    <link rel="stylesheet" href="css/deliveries.css">
@@ -25,13 +27,76 @@
 	</ul>
 </div>
 <div class="main">
-	<table id="delivery_table">
-		<tr>
-			<th>Customer</th>
-			<th>Total cost</th>
-			<th>Restaurant</th>
-		</tr>
+
+	<div style="height:100px">
+	<h2 class="selected">Deliveries</h2>
+
+	<h3>Search</h3>
+	<table style="width:70%">
+	<tr style="height:80%">
+	<td>
+	<input type="text" id="search_restaurant" name="search_restaurant" placeholder="Restaurant name" style="margin: 15px"><br>
+	<input id="search_article" name="search_article" placeholder="Article name" style="margin: 15px"><br>
+	
+	<div style="margin: 15px;">
+	<label for="search_price_bottom" >Price: </label>
+	<input id="search_price_bottom" name="search_price_bottom" placeholder="Lowest" style="margin: 5px; width: 135px;">
+	<label for="search_price_top">to </label>
+	<input id="search_price_top" name="search_price_top" placeholder="Highest" style="margin: 5px; width: 135px;">
+	</div>
+	
+	<div style="margin: 15px;">
+	<label for="search_date_bottom" >Date:  </label>
+	<input type="date" id="search_date_bottom" name="search_date_bottom" style="margin: 5px; width: 135px;">
+	<label for="search_date_top">to </label>
+	<input type="date" id="search_date_top" name="search_date_top" style="margin: 5px; width: 135px;">
+	</div>
+	
+	<input id="search_customer" name="search_customer" placeholder="Customer name" style="margin: 15px"><br>
+	
+	</td>
+	
+	<td rowspan="2" style="vertical-align:top; width:25%">
+	<h4>Type</h4>
+	<form id="type_filter">
+		<input type="radio" name="type_filter" value="all" checked /> All <br>
+		<input type="radio" name="type_filter" value="barbecue" /> Barbecue <br>
+		<input type="radio" name="type_filter" value="chinese" /> Chinese <br>
+		<input type="radio" name="type_filter" value="fastfood" /> Fastfood <br>
+		<input type="radio" name="type_filter" value="italian" /> Italian <br>
+		<input type="radio" name="type_filter" value="japanese" /> Japanese <br>
+		<input type="radio" name="type_filter" value="kfc" /> KFC <br>
+		<input type="radio" name="type_filter" value="mcDonalds" /> McDonalds <br>
+		<input type="radio" name="type_filter" value="seafood" /> Seafood <br>
+		<input type="radio" name="type_filter" value="thai" /> Thai
+	</form>
+	</td>
+	
+	
+	</tr>
+	
+	<tr style="height:20%">
+	<td>
+	
+	</td>
+	
+	<td></td>
+	
+	<td>
+	<button id="search_button">Search</button>
+	</td>
+	
 	</table>
+	</div>
+
+<table id="delivery_table">
+	<tr>
+		<th>Customer</th>
+		<th>Total cost</th>
+		<th>Restaurant</th>
+	</tr>
+</table>
+
 </div>
 </body>
 </html>
