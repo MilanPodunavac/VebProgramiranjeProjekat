@@ -126,6 +126,33 @@ $(document).ready(function(){
 						}
 					})
 				}
+				
+				if(lastUrlPart.startsWith("restaurant_index")){
+					$.get({
+						url: "rest/RestaurantService/getApprovedRestaurantComments?name=" + restaurant_name + "&cityName=" + restaurant_cityname + "&streetName=" + restaurant_streetname + "&streetNumber=" + restaurant_streetnumber,
+						contentType: 'application/json',
+						complete: function(message){
+							let comments = JSON.parse(message.responseText);
+							let commentTable = document.getElementById("comment_table");
+							for(let comment of comments){
+								let commentTr = document.createElement('tr');
+								let userNameTd = document.createElement('td');
+								let gradeTd = document.createElement('td');
+								let textTd = document.createElement('td');
+								
+								userNameTd.appendChild(document.createTextNode(comment.customer.username));
+								gradeTd.appendChild(document.createTextNode(comment.grade));
+								textTd.appendChild(document.createTextNode(comment.text));
+								
+								commentTr.appendChild(userNameTd);
+								commentTr.appendChild(gradeTd);
+								commentTr.appendChild(textTd);
+								
+								commentTable.appendChild(commentTr);
+							}
+						}
+					})
+				}
 
 				var articleTable = document.getElementById("article_table");
 				for(let article of restaurant.articles){

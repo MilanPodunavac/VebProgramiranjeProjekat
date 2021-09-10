@@ -1,8 +1,13 @@
 @charset "UTF-8";
 
+.sortable {
+	cursor: pointer;
+}
+
 #customer_list{
-	width: 80%; 
+	width: 100%; 
 	border:2px solid black;
+	margin-top: 300px;
 }
 
 #customer_list th{
@@ -17,8 +22,9 @@
 }
 
 #deliverer_list{
-	width: 80%; 
+	width: 100%; 
 	border:2px solid black;
+	margin-top: 20px;
 }
 
 #deliverer_list th{
@@ -33,8 +39,9 @@
 }
 
 #manager_list{
-	width: 80%; 
+	width: 100%; 
 	border:2px solid black;
+	margin-top: 20px;
 }
 
 #manager_list th{
