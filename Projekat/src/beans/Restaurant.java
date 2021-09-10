@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Restaurant {
 	private String name;
 	private boolean working;
-	private Image logo;
+	private String imageId;
 	private boolean deleted;
 	private RestaurantType restaurantType;
 	@JsonManagedReference
@@ -21,12 +21,12 @@ public class Restaurant {
 	}
    
    
-	public Restaurant(String name, boolean working, Image logo, RestaurantType restaurantType,
+	public Restaurant(String name, boolean working, String imageId, RestaurantType restaurantType,
 			List<Article> articles, Location location) {
 		super();
 		this.name = name;
 		this.working = working;
-		this.logo = logo;
+		this.imageId = imageId;
 		this.deleted = false;
 		this.restaurantType = restaurantType;
 		this.articles = articles;
@@ -56,19 +56,17 @@ public class Restaurant {
 	public void setWorking(boolean working) {
 		this.working = working;
 	}
+
 	
 	
-	
-	public Image getLogo() {
-		return logo;
+	public String getImageId() {
+		return imageId;
 	}
 
 
-
-	public void setLogo(Image logo) {
-		this.logo = logo;
+	public void setImageId(String imageId) {
+		this.imageId = imageId;
 	}
-
 
 
 	public boolean isDeleted() {
