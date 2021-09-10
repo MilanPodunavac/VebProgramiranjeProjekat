@@ -46,13 +46,13 @@ public class CustomerType {
 					retVal = true;
 				}
 			}
-			case "silver":{
+			case "Silver":{
 				if(points > 1500) {
 					name = "Gold";
 					neededPoints = 1500;
 					discount = 10;
 					retVal = true;
-				}else if(points < 1000) {
+				}else if(points <= 1000) {
 					name = "Bronze";
 					neededPoints = 1000;
 					discount = 0;
@@ -62,14 +62,36 @@ public class CustomerType {
 			case "Gold":{
 				if(points > 2500) {
 					name = "Platinum";
-					neededPoints = 5000;
+					neededPoints = 2500;
 					discount = 15;
 					retVal = true;
 				}
-				else if(points < 1500) {
+				else if(points <= 1500) {
 					name = "Silver";
-					neededPoints = 5000;
+					neededPoints = 1500;
 					discount = 5;
+					retVal = true;
+				}
+			}
+			case "Platinum":{
+				if(points > 5000) {
+					name = "Diamond";
+					neededPoints = 5000;
+					discount = 20;
+					retVal = true;
+				}
+				else if(points <= 1500) {
+					name = "Gold";
+					neededPoints = 1500;
+					discount = 10;
+					retVal = true;
+				}
+			}
+			case "Diamond":{
+				if(points < 5000) {
+					name = "Platinum";
+					neededPoints = 2500;
+					discount = 15;
 					retVal = true;
 				}
 			}

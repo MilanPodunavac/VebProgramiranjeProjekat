@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Managers</title>
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/show_username.js"></script>
+	    <script src="js/signout.js"></script>
+	    <script src="js/administrator_managers.js"></script>
+	    <script src="js/administrator.js"></script>
+	    <script src="js/search_users.js"></script>
+	    
+	    <link rel="stylesheet" href="css/menu.css">
+    	<link rel="stylesheet" href="css/users.css">
+
+</head>
+<body>
+<div class="menu">
+	<h2>Rade&Dunav</h2>
+	<h4 style="text-align:center;" id="username_label"></h4>
+	<input type="submit" id="profile" name="profile" value="Profile" />
+    <input type="submit" id="signout" name="signout" value="Signout" />
+	<ul>
+		<li><a href="administrator.html">Restaurants</a></li>
+		<li><a href="administrator_customers.html">Customers</a></li>
+		<li class="selected">Managers</li>
+		<li><a href="administrator_deliverers.html">Deliverers</a></li>
+	</ul>
+</div>
+
+<div class="main">
+
+<div style="height:100px">
+	<h2 class="selected">Managers</h2>
+
+	<h3>Search</h3>
+	<table style="width:70%">
+	<tr style="height:80%">
+	<td>
+	<input type="text" id="search_username" name="search_username" placeholder="Username" style="margin: 15px"><br>
+	<input id="search_name" name="search_name" placeholder="First name" style="margin: 15px"><br>
+	<input id="search_surname" name="search_surname" placeholder="Last name" style="margin: 15px"><br>
+	
+	</td>
+	
+	<td rowspan="1" style="vertical-align:top; width:25%">
+	<h4>Type</h4>
+	<form id="gender_filter">
+		<input type="radio" name="gender_filter" value="all" checked /> All <br>
+		<input type="radio" name="gender_filter" value="male" /> Male <br>
+		<input type="radio" name="gender_filter" value="female" /> Female <br>
+		<input type="radio" name="gender_filter" value="other" /> Other <br>
+	</form>
+	</td>
+	</tr>
+	
+	<tr style="height:20%">
+	<td>
+	
+	</td>
+	
+	<td>
+	<button id="search_button">Search</button>
+	</td>
+	
+	</table>
+</div>
+
+	<Button id="createManager" style="margin-top: 250px;">New manager</Button>
+	<table id="manager_list">
+	<tr>
+		<th class="sortable">Username</th>
+		<th class="sortable">Name</th>
+		<th class="sortable">Surname</th>
+		<th>Gender</th>
+		<th class="sortable">Date of birth</th>
+		<th class="sortable">Restaurant Name</th>
+	</tr>
+	</table>
+	
+</div>
+</body>
+</html>
