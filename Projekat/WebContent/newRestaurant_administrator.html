@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Administrator</title>
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/show_username.js"></script>
+	    <script src="js/signout.js"></script>
+	    
+		<script src="js/administrator.js"></script>
+		
+		<link rel="stylesheet" href="css/menu.css">
+    	<link rel="stylesheet" href="css/restaurant_list.css">
+	</head>
+<body>
+
+<div class="menu">
+	<h2>Rade&Dunav</h2>
+	<h4 style="text-align:center;" id="username_label"></h4>
+	<input type="submit" id="profile" name="profile" value="Profile" />
+    <input type="submit" id="signout" name="signout" value="Signout" />
+	<ul>
+		<li><a href="administrator.html">Restaurants</a></li>
+		<li><a href="administrator_customers.html">Customers</a></li>
+		<li><a href="administrator_managers.html">Managers</a></li>
+		<li><a href="administrator_deliverers.html">Deliverers</a></li>
+	</ul>
+</div>
+<div class="main">
+	<h2>New Restaurant</h2>
+    <table>
+        <tr>
+            <td>
+                Name:
+            </td>
+            <td>
+                <input type="text" name="name" id="name" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Logo:
+            </td>
+            <td>
+                <input type="text" name="logo" id="logo" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Type:
+            </td>
+            <td>
+                <select id="type" name="type">
+						  <option value="barbecue">barbecue</option>
+						  <option value="chinese">chinese</option>
+						  <option value="fastfood">fastfood</option>
+						  <option value="italian">italian</option>
+						  <option value="japanese">japanese</option>
+						  <option value="kfc">kfc</option>
+						  <option value="mcDonalds">mcDonalds</option>
+						  <option value="seafood">seafood</option>
+						  <option value="thai">thai</option>
+				</select>
+            </td>
+        </tr>
+	</table>
+	<h2>Location</h2>
+	<table>
+       <tr>
+            <td>
+                Latitude:
+            </td>
+            <td>
+                <input type="text" name="latitude" id="latitude" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Longitude:
+            </td>
+            <td>
+                <input type="text" name="longitude" id="longitude" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Street name:
+            </td>
+            <td>
+                <input type="text" name="streetName" id="streetName" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Street number:
+            </td>
+            <td>
+                <input type="text" name="streetNumber" id="streetNumber" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                City name:
+            </td>
+            <td>
+                <input type="text" name="cityName" id="cityName" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                City number:
+            </td>
+            <td>
+                <input type="text" name="cityNumber" id="cityNumber" />
+            </td>
+        </tr>
+	</table>
+	<input type="submit" name="confirm" id="confirm" value="Confirm"  style="margin-top: 25px;"/>
+</div>
+</body>
+</html>
