@@ -6,7 +6,7 @@ $(document).ready(function(){
             complete: function(message) {
                 var customer = JSON.parse(message.responseText);
 
-				let tabela = document.getElementById("deliveries_list");
+				let tabela = document.getElementById("delivery_table");
 
 				for (let delivery of customer.deliveries) {
 					

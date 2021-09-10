@@ -20,7 +20,7 @@ $(document).ready(function(){
 		var status_filter = $('input[name=status_filter]:checked', '#status_filter').val().toUpperCase();
 		var type_filter = $('input[name=type_filter]:checked', '#type_filter').val().toUpperCase();
 		
-		var table = document.getElementById("deliveries_list");
+		var table = document.getElementById("delivery_table");
 		var tr = table.getElementsByTagName("tr");
 		for(let i = 1; i < tr.length; i++){
 			let restaurant_name_td = tr[i].getElementsByTagName('td')[1];

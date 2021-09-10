@@ -1,11 +1,16 @@
 @charset "UTF-8";
 
+.sortable {
+	cursor: pointer;
+}
+
 #delivery_table {
+	margin-top: 300px; 
 	border: 2px solid black;
 	width: 100%;
 }
 
-#delivery_table td {
+#delivery_table td, #delivery_table th {
 	border: 1px solid black;
 }
 
