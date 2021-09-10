@@ -25,7 +25,7 @@ $(document).ready(function(){
 			let customerTypeTd = document.getElementById("customerType_td");
 			customerTypeTd.appendChild(document.createTextNode("Type: " + customer.customerType.name));
 			
-			delivery_list = document.getElementById("delivery_list");
+			delivery_list = document.getElementById("deliveries_list");
 			
 			for(let delivery of customer.deliveries){
 				let deliveryTr = document.createElement('tr');

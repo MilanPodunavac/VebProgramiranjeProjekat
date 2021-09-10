@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+#manager_info{
+	width: 30%; 
+	border:2px solid black;
+}
+
+#manager_info th{
+	border: 1px solid black;
+	border-bottom: 2px double black;
+	padding: 5px;
+}
+
+#manager_info td{
+	border: 1px solid black;
+	padding: 10px;
+}

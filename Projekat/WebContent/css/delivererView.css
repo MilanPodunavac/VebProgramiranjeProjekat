@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+#deliverer_info{
+	width: 30%; 
+	border:2px solid black;
+}
+
+#deliverer_info th{
+	border: 1px solid black;
+	border-bottom: 2px double black;
+	padding: 5px;
+}
+
+#deliverer_info td{
+	border: 1px solid black;
+	padding: 10px;
+}
+
+#deliveries_list{
+	width: 30%; 
+	border:2px solid black;
+}
+
+#deliveries_list th{
+	border: 1px solid black;
+	border-bottom: 2px double black;
+	padding: 5px;
+}
+
+#deliveries_list td{
+	border: 1px solid black;
+	padding: 10px;
+}
