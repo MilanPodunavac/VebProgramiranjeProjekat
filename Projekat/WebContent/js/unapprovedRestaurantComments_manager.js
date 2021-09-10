@@ -49,7 +49,31 @@ $(document).ready(function(){
 							})
 						})
 						
+						let rejectButton = document.createElement("button");
+						rejectButton.appendChild(document.createTextNode("Reject"));
+						
+						$(rejectButton).click(function(){
+							$.post({
+								url: "rest/ManagerService/rejectComment",
+								contentType: "application/json",
+								data: JSON.stringify(comment),
+								complete: function(message){
+									let rows = comment_table.rows;
+									name = comment.customer.name + " " + comment.customer.surname;
+									grade = comment.grade;
+									text = comment.text;
+									for(let i = 1; i<rows.length; i++){
+										if(name == rows[i].cells[0].innerText && grade == rows[i].cells[1].innerText && rows[i].cells[2].innerText == text){
+											comment_table.deleteRow(i);
+											break;
+										}
+									}
+								}
+							})
+						})
+						
 						buttonTd.appendChild(button);
+						buttonTd.appendChild(rejectButton);
 						
 						commentTr.appendChild(customerTd);
 						commentTr.appendChild(gradeTd);

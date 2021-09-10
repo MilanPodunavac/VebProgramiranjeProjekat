@@ -364,7 +364,6 @@ $(document).ready(function(){
 						}
 					})
 					$("#delete").click(function(e){
-						alert(JSON.stringify(restaurant));
 						$.ajax({
 							url: "rest/AdministratorService/deleteRestaurant",
 							type: 'DELETE',

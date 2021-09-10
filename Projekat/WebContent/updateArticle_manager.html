@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Edit Article</title>
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/show_username.js"></script>
+	    <script src="js/signout.js"></script>
+	    
+		<script src="js/manager.js"></script>
+		<script src="js/updateArticle_manager.js"></script>
+		
+		<link rel="stylesheet" href="css/menu.css">
+    	<link rel="stylesheet" href="css/restaurant_list.css">
+	</head>
+<body>
+
+<div class="menu">
+	<h2>Rade&Dunav</h2>
+	<h4 style="text-align:center;" id="username_label"></h4>
+	<input type="submit" id="profile" name="profile" value="Profile" />
+    <input type="submit" id="signout" name="signout" value="Signout" />
+	<ul>
+		<li><a href="manager.html">Restaurants</a></li>
+		<li><a href="deliveryRequests_manager.html">Delivery requests</a></li>
+		<li><a href="restaurantDeliveries_manager.html">Restaurant deliveries</a></li>
+		<li><a href="unapprovedRestaurantComments_manager.html">Unapproved comments</a>
+		<li><a href="myRestaurant_manager.html">My restaurant</a></li>
+	</ul>
+</div>
+<div class="main">
+	<table id="Article_table">
+		<tr>
+			<td>
+				Name: 
+			</td>
+			<td>
+				<input type="text" name="name" id="name" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Price: 
+			</td>
+			<td>
+				<input type="text" name="price" id="price" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Type: 
+			</td>
+			<td>
+				<select id="type" name="type">
+						  <option value="food">food</option>
+						  <option value="drink">drink</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Size: 
+			</td>
+			<td>
+				<input type="text" name="size" id="size" />
+			</td>
+		</tr>
+		<tr style="width: 100px; height: 100px">
+			<td>
+				Description: 
+			</td>
+			<td>
+				<textarea id="description" style="height: 100px; width: 170px; resize: none"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Image: 
+			</td>
+			<td>
+				<input type="text" name="price" id="price" />
+			</td>
+		</tr>
+	</table>
+	<button id="confirm">Confirm</button>
+</div>
+</body>
+</html>
