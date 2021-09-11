@@ -18,8 +18,8 @@ $(document).ready(function() {
                     contentType: 'application/json',
                     complete: (function(message) {
                         if (message.responseText === "true") {
-							alert("New manager created")
-                            window.location = "administrators_deliverers.html";
+							alert("New deliverer created")
+                            window.location = "administrator_deliverers.html";
                         }else{
 							alert("Username not available");
 						}

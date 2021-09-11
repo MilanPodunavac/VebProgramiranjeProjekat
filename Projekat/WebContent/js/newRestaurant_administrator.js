@@ -91,13 +91,11 @@ $(document).ready(function(){
 				var logoId = "";
 				
 				if(logoData != ""){
-					alert("hhh")
 					$.post({
 						url: "rest/Image64Service/addImage",
 						data: JSON.stringify({id: "0", base64Data: logoData}),
 						contentType: 'application/json',
 						complete: function(message){
-							alert(message.responseText)
 							logoId = message.responseText;
 							
 							let location = {longitude: longitude, latitude: latitude, cityName: cityName, cityNumber: cityNumber, streetName: streetName, streetNumber: streetNumber};
