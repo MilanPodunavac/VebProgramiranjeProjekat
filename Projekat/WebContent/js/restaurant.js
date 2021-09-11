@@ -63,7 +63,7 @@ $(document).ready(function(){
 				let restaurantLogoTd = document.getElementById("logo_td");
 				//restaurantLogoTd.appendChild(document.createTextNode("Your logo goes here"));
 				
-				if(restaurant.imageId != ""){
+				/*if(restaurant.imageId != ""){
 					$.get({
 						url: "rest/Image64Service/getImageData?id=" + restaurant.imageId,
 						complete: function(message){
@@ -79,9 +79,9 @@ $(document).ready(function(){
 						}
 					})
 				}
-				else{
+				else{*/
 					restaurantLogoTd.appendChild(document.createTextNode("No logo"));
-				}
+				//}
 				restaurantLogoTd.style.textAlign = "center";
 				
 				var discount;

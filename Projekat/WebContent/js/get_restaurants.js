@@ -24,7 +24,7 @@ $(document).ready(function(){
 					typeTd.appendChild(document.createTextNode(restaurant.restaurantType));
 					locationTd.appendChild(document.createTextNode(restaurant.location.cityName + ", " + restaurant.location.streetName + " " + restaurant.location.streetNumber));
 					//logoTd.appendChild(document.createTextNode(restaurant.logo));
-					if(restaurant.imageId != ""){
+					/*if(restaurant.imageId != ""){
 						$.get({
 							url: "rest/Image64Service/getImageData?id=" + restaurant.imageId,
 							complete: function(message){
@@ -39,9 +39,9 @@ $(document).ready(function(){
 							}
 						})
 					}
-					else{
+					else{*/
 						logoTd.appendChild(document.createTextNode("No logo"));
-					}
+					//}
 					logoTd.style.textAlign = "center";
 					
 					$.post({
