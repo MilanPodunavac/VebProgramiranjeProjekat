@@ -166,8 +166,6 @@ public class CustomerService extends ServiceTemplate {
 		new CustomerSerializer(context.getRealPath("")).Update(customer);
 		((DeliveryDao)context.getAttribute("deliveries")).getDeliveries().add(newDelivery);
 		CustomerDao customerDao = (CustomerDao)context.getAttribute("customers");
-		//Nisam siguran da ce se azurirati u contextu automatski, tj jel u session referenca na customera u contextu,
-		//pa za svaki slucaj
 		for(Customer ctxCustomer : customerDao.getCustomers()) {
 			if(customer.getUsername().equals(ctxCustomer.getUsername())) {
 				ctxCustomer = customer;
@@ -214,7 +212,6 @@ public class CustomerService extends ServiceTemplate {
 		return reviewableRestaurants;
 	}
 	
-	//getInProcessingDeliveries
 	@GET
 	@Path("/getInProcessingDeliveries")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -236,11 +233,4 @@ public class CustomerService extends ServiceTemplate {
 		new CustomerSerializer(context.getRealPath("")).Update(customer);
 	}
 	
-	
-/*	@GET
-	@Path("/idGenTest")
-	public String idGeneratorTest() {
-		DeliveryDao dao = (DeliveryDao)context.getAttribute("deliveries");
-		return dao.generateId();
-	}*/
 }
