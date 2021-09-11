@@ -19,7 +19,7 @@ $(document).ready(function() {
                     complete: (function(message) {
                         if (message.responseText === "true") {
 							alert("New manager created")
-                            window.location = "users_administrator.html";
+                            window.location = "administrators_deliverers.html";
                         }else{
 							alert("Username not available");
 						}

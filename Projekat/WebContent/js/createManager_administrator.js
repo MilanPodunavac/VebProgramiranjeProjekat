@@ -1,6 +1,8 @@
 $(document).ready(function() {
     $("#confirm").click(function(e) {
         e.preventDefault();
+		var url = window.location.href;
+		var parameters = url.split("?")[1];
         let name = $("#name").val();
         let surname = $("#surname").val();
         let username = $("#username").val();
@@ -19,7 +21,7 @@ $(document).ready(function() {
                     complete: (function(message) {
                         if (message.responseText === "true") {
 							alert("New manager created")
-                            window.location = "users_administrator.html";
+                            window.location = parameters;
                         }else{
 							alert("Username not available");
 						}

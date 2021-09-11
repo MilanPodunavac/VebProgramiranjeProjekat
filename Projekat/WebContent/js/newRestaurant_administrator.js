@@ -42,6 +42,10 @@ $(document).ready(function(){
 		}
 	})
 	
+	$("#createManager").click(function(){
+		window.location = "createManager_administrator.html?newRestaurant_administrator.html";
+	})
+	
 	$("#confirm").click(function(){
 		let name = $("#name").val();
         let type = $("#type").val();

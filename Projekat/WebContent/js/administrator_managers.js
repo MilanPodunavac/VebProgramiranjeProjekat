@@ -46,7 +46,7 @@ $(document).ready(function(){
 	})
 	
 	$("#createManager").click(function(){
-		window.location = "createManager_administrator.html";
+		window.location = "createManager_administrator.html?administrator_managers.html";
 	})
 	
 })
