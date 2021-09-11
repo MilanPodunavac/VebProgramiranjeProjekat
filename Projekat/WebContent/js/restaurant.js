@@ -205,7 +205,7 @@ $(document).ready(function(){
 							complete: function(message){
 								let imageData64 = message.responseText;
 								console.log(imageData64);
-								var image = document.createElement('img');
+								var image = new Image();
 								image.src = imageData64;
 								image.style.width = 'auto';
 								image.style.height = '70px';

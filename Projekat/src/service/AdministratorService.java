@@ -108,12 +108,13 @@ public class AdministratorService extends ServiceTemplate {
 			List<Article> articles = new ArrayList<>();
 			restaurant.setArticles(articles);
 			restaurant.setWorking(true);
-			(managerDao.getManagerByUsername(manager.getUsername())).setRestaurant(restaurant);
+			Manager realManager = managerDao.getManagerByUsername(manager.getUsername());
+			realManager.setRestaurant(restaurant);
 			restaurantDao.getRestaurants().add(restaurant);
 			RestaurantSerializer restaurantSerializer = new RestaurantSerializer(context.getRealPath(""));
 			restaurantSerializer.Add(restaurant);
 			ManagerSerializer managerSerializer = new ManagerSerializer(context.getRealPath(""));
-			managerSerializer.Update(manager);
+			managerSerializer.Update(realManager);
 			success = true;
 		}
 		return success;

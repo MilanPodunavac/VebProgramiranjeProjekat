@@ -27,7 +27,7 @@ public class Image64Service extends ServiceTemplate {
 	
 	@GET
 	@Path("/getImageData")
-	public String getAdministrator(@QueryParam("id") String id) {
+	public String getImageData(@QueryParam("id") String id) {
 		ImageBase64Dao imageBase64Dao = (ImageBase64Dao)context.getAttribute("images64");
 		return imageBase64Dao.getImageData(id);
 	}
@@ -36,11 +36,12 @@ public class Image64Service extends ServiceTemplate {
 	@Path("/addImage")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void addImage(ImageBase64 image) {
+	public String addImage(ImageBase64 image) {
 		ImageBase64Dao imageBase64Dao = (ImageBase64Dao)context.getAttribute("images64");
 		image.setId(imageBase64Dao.generateId());
 		imageBase64Dao.addImage(image);
 		new ImageBase64Serializer(context.getRealPath("")).Save(imageBase64Dao.getImages());
+		return image.getId();
 	}
 	
 	
