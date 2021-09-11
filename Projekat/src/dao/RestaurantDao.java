@@ -70,7 +70,8 @@ public class RestaurantDao {
 			if(restaurant.getName().equals(name) && 
 					restaurant.getLocation().getCityName().equals(cityName) &&
 					restaurant.getLocation().getStreetName().equals(streetName) &&
-					String.valueOf(restaurant.getLocation().getStreetNumber()).equals(streetNumber)) {
+					String.valueOf(restaurant.getLocation().getStreetNumber()).equals(streetNumber) &&
+					!restaurant.isDeleted()) {
 				return restaurant;
 			}
 		}

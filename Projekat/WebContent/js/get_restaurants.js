@@ -29,7 +29,6 @@ $(document).ready(function(){
 							url: "rest/Image64Service/getImageData?id=" + restaurant.imageId,
 							complete: function(message){
 								let imageData64 = message.responseText;
-								console.log(imageData64);
 								var image = document.createElement('img');
 								image.src = imageData64;
 								image.style.width = 'auto';

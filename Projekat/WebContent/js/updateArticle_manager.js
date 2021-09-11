@@ -49,7 +49,7 @@ $(document).ready(function(){
 					alert("Size must be greater than 0!");
 					return;
 				}
-				let newArticle = {name: name, price: priceFloat, articleType: type, size: sizeInt, description: description}
+				let newArticle = {name: name, price: priceFloat, articleType: type, size: sizeInt, description: description, imageId: article.imageId}
 				data = {article: newArticle, oldArticleName: article.name}
 				$.post({
 					url: "rest/ManagerService/updateArticle",

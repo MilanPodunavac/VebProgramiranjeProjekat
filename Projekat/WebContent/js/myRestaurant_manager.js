@@ -67,7 +67,29 @@ $(document).ready(function(){
 							sizeTd.appendChild(document.createTextNode(article.size + "ml"));
 						}
 						priceTd.appendChild(document.createTextNode(article.price));
-						pictureTd.appendChild(document.createTextNode(article.picture));
+						
+						//pictureTd.appendChild(document.createTextNode(article.picture));
+						if(article.imageId != ""){
+							$.get({
+								url: "rest/Image64Service/getImageData?id=" + article.imageId,
+								complete: function(message){
+									let imageData64 = message.responseText;
+									console.log(imageData64);
+									var image = new Image();
+									image.src = imageData64;
+									image.style.width = 'auto';
+									image.style.height = '70px';
+									
+									pictureTd.appendChild(image);
+									
+								}
+							})
+						}
+						else{
+							pictureTd.appendChild(document.createTextNode("No picture"));
+						}
+						pictureTd.style.textAlign = "center";
+						
 						descriptionTd.appendChild(document.createTextNode(article.description));
 						
 						articleEditTd = document.createElement("td");

@@ -29,7 +29,7 @@ $(document).ready(function(){
 			alert("Size must be greater than 0!");
 			return;
 		}
-		data = {name: name, price: priceFloat, articleType: type, size: sizeInt, description: description}
+		data = {name: name, price: priceFloat, articleType: type, size: sizeInt, description: description, imageId: ""}
 		$.ajax({
 			url: "rest/ManagerService/addArticle",
 			type: "PUT",

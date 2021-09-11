@@ -8,19 +8,39 @@ function getDeliveries(){
 			
 			for(let delivery of deliveries){
 				let deliveryTr = document.createElement("tr");
-				let customerTd = document.createElement("td");
-				let totalCostTd = document.createElement("td");
-				let restaurantTd = document.createElement("td");
+				let idTd = document.createElement('td');
+				let restaurantTd = document.createElement('td');
+				let typeTd = document.createElement('td');
+				let articlesTd = document.createElement('td');
+				let dateTd = document.createElement('td');
+				let priceTd = document.createElement('td');
+				let customerTd = document.createElement('td');
+				let statusTd = document.createElement('td');
 				let requestTd = document.createElement('td');
 				let button = document.createElement('button');
 				
-				let idTd = document.createElement('td');
 				idTd.hidden = true;
 				idTd.appendChild(document.createTextNode(delivery.id));
 				
-				customerTd.appendChild(document.createTextNode(delivery.customer.name + " " + delivery.customer.surname));
-				totalCostTd.appendChild(document.createTextNode(delivery.totalCost));
+				idTd.appendChild(document.createTextNode(delivery.id));
 				restaurantTd.appendChild(document.createTextNode(delivery.restaurant.name));
+				typeTd.appendChild(document.createTextNode(delivery.restaurant.restaurantType));
+				
+				var itemList = document.createElement('ul');
+				for(let item of delivery.items){
+					let itemLi = document.createElement('li');
+					
+					itemLi.appendChild(document.createTextNode(item.article.name + ", " + item.article.price + ", " + item.amount));
+					
+					itemList.appendChild(itemLi);
+				}
+				articlesTd.appendChild(itemList);
+				
+				let date = new Date(parseInt(delivery.time))
+				dateTd.appendChild(document.createTextNode(date.toLocaleString()));
+				priceTd.appendChild(document.createTextNode(delivery.totalCost));
+				customerTd.appendChild(document.createTextNode(delivery.customer.name + " " + delivery.customer.surname));
+				statusTd.appendChild(document.createTextNode(delivery.deliveryStatus));
 				
 				button.appendChild(document.createTextNode("request delivery"));
 				$(button).click(function(){
@@ -42,9 +62,13 @@ function getDeliveries(){
 				requestTd.appendChild(button);
 				
 				deliveryTr.appendChild(idTd);
-				deliveryTr.appendChild(customerTd);
-				deliveryTr.appendChild(totalCostTd);
 				deliveryTr.appendChild(restaurantTd);
+				deliveryTr.appendChild(typeTd);
+				deliveryTr.appendChild(articlesTd);
+				deliveryTr.appendChild(dateTd);
+				deliveryTr.appendChild(priceTd);
+				deliveryTr.appendChild(customerTd);
+				deliveryTr.appendChild(statusTd)
 				deliveryTr.appendChild(requestTd);
 				
 				delivery_table.appendChild(deliveryTr);

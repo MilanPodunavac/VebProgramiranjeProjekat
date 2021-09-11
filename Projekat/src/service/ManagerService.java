@@ -215,6 +215,7 @@ public class ManagerService extends ServiceTemplate {
 	public boolean addArticle(Article article, @Context HttpServletRequest request) {
 		Manager manager = (Manager) request.getSession().getAttribute("manager");
 		Restaurant restaurant = manager.getRestaurant();
+		article.setImageId("");
 		boolean success = false;
 		RestaurantDao restaurantDao = (RestaurantDao)context.getAttribute("restaurants");
 		for(Restaurant ctxRestaurant : restaurantDao.getRestaurants()) {

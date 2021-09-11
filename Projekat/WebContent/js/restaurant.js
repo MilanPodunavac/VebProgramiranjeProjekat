@@ -122,6 +122,11 @@ $(document).ready(function(){
 						}
 					})
 					
+					if(!restaurant.working){
+						let shoppingCartTable = document.getElementById("shoppingCart_table");
+						shoppingCartTable.hidden = true;
+					}
+					
 					$.get({
 						url: "rest/RestaurantService/getApprovedRestaurantComments?name=" + restaurant_name + "&cityName=" + restaurant_cityname + "&streetName=" + restaurant_streetname + "&streetNumber=" + restaurant_streetnumber,
 						contentType: 'application/json',
@@ -231,7 +236,7 @@ $(document).ready(function(){
 					articleTr.appendChild(descriptionTd);
 					
 					
-					if(lastUrlPart.startsWith("restaurant_customer")){
+					if(lastUrlPart.startsWith("restaurant_customer") && restaurant.working){
 						
 						let deliveryTd = document.createElement('td');
 						deliveryTd.style.textAlign = "center";
