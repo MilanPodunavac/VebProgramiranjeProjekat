@@ -139,8 +139,6 @@ public class LoginService extends ServiceTemplate {
 		DelivererDao deliverers = (DelivererDao)context.getAttribute("deliverers");
 		ManagerDao managers = (ManagerDao)context.getAttribute("managers");
 		boolean uniqueUsername = customers.IsUniqueUsername(username) && administrators.IsUniqueUsername(username) && deliverers.IsUniqueUsername(username) && managers.IsUniqueUsername(username);
-	//	UsernameChecker checker = new UsernameChecker();
-	//	if(checker.Check(user.getUsername(), context.getRealPath(""))
 		if(uniqueUsername){
 			Customer newCustomer = new Customer(user.getUsername(), user.getPassword(), user.getName(), user.getSurname(), user.getGender(), user.getDateOfBirth(),
 					0, new ArrayList<Delivery>(), null, new ShoppingCart());

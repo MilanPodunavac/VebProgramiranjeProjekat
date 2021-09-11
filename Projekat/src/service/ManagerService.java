@@ -66,7 +66,6 @@ public class ManagerService extends ServiceTemplate {
 		return managerDao.getManagerByUsername(username);
 	}
 
-	//getManager
 	@GET
 	@Path("/getManager")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -105,7 +104,6 @@ public class ManagerService extends ServiceTemplate {
 		return "Password changed!";
 	}
 	
-	//getRestaurantDeliveries
 	@GET
 	@Path("/getRestaurantDeliveries")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -121,7 +119,6 @@ public class ManagerService extends ServiceTemplate {
 		return dto;
 	}
 	
-	//setPreparationDeliveryStatus
 	@POST
 	@Path("/setDeliveryToPreparation")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -134,7 +131,6 @@ public class ManagerService extends ServiceTemplate {
 		customerSerializer.Update(ctxDelivery.getCustomer());
 	}
 	
-	//setWaitingDeliveryStatus
 	@POST
 	@Path("/setDeliveryToWaitingDelivery")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -147,7 +143,6 @@ public class ManagerService extends ServiceTemplate {
 		customerSerializer.Update(ctxDelivery.getCustomer());
 	}
 	
-	//setInDelivery (accept Request)
 	@POST
 	@Path("/setDeliveryToInDelivery")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -179,7 +174,6 @@ public class ManagerService extends ServiceTemplate {
 		deliveryRequestSerializer.Save(deliveryRequestDao.getDeliveryRequests());
 	}
 	
-	//approveRestaurantComment
 	@POST
 	@Path("/approveComment")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -214,7 +208,6 @@ public class ManagerService extends ServiceTemplate {
 		}
 	}
 	
-	//addArticle
 	@PUT
 	@Path("/addArticle")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -257,7 +250,7 @@ public class ManagerService extends ServiceTemplate {
 		}
 		return null;
 	}
-	//updateArticle
+	
 	@POST
 	@Path("/updateArticle")
 	@Consumes(MediaType.APPLICATION_JSON)

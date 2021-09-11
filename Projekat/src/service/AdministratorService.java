@@ -93,7 +93,6 @@ public class AdministratorService extends ServiceTemplate {
 		return "Password changed!";
 	}
 	
-	//createNewRestaurant
 	@PUT
 	@Path("/createNewRestaurant")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -134,7 +133,7 @@ public class AdministratorService extends ServiceTemplate {
 				&& customerDao.getCustomerByUsername(manager.getUsername()) == null) {
 			managerDao.getManagers().add(manager);
 			ManagerSerializer managerSerializer = new ManagerSerializer(context.getRealPath(""));
-			success = managerSerializer.Add(manager, context.getRealPath(""));//Vraca false ako username vec postoji, zato salje getRealPath, promeniti?
+			success = managerSerializer.Add(manager, context.getRealPath(""));
 		}
 		return success;
 	}
@@ -153,13 +152,11 @@ public class AdministratorService extends ServiceTemplate {
 				&& customerDao.getCustomerByUsername(deliverer.getUsername()) == null) {
 			delivererDao.getDeliverers().add(deliverer);
 			DelivererSerializer delivererSerializer = new DelivererSerializer(context.getRealPath(""));
-			success = delivererSerializer.Add(deliverer, context.getRealPath(""));//Vraca false ako username vec postoji, zato salje getRealPath, promeniti?
+			success = delivererSerializer.Add(deliverer, context.getRealPath(""));
 		}
 		return success;
 	}
 	
-	
-	//pregledSvihKorisnika
 	@GET
 	@Path("/getAllCustomers")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -202,12 +199,6 @@ public class AdministratorService extends ServiceTemplate {
 		return deliverers;
 	}
 	
-/*	@GET
-	@Path("/getAllAdmins")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Administrator> getAllAdmins(){
-		return ((AdministratorDao)context.getAttribute("customers")).getAdministrators();
-	}*/
 	
 	@GET
 	@Path("/getManagersWithoutRestaurant")
@@ -215,8 +206,6 @@ public class AdministratorService extends ServiceTemplate {
 	public List<Manager> getManagersWithoutRestaurant(){
 		return ((ManagerDao)context.getAttribute("managers")).getManagersWithoutRestaurant();
 	}
-	
-	//deleteEntities
 	@DELETE
 	@Path("/deleteCustomer")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -258,8 +247,4 @@ public class AdministratorService extends ServiceTemplate {
 		(new RestaurantSerializer(context.getRealPath(""))).Save(restaurantDao.getRestaurants());
 		
 	}
-	
-	//za 9-10 -- blokiranje korisnika
-	
-	//za 9-10 -- prikaz sumnjivih korisnika
 }

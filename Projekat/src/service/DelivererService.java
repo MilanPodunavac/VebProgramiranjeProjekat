@@ -102,7 +102,6 @@ public class DelivererService extends ServiceTemplate {
 		return "Password changed!";
 	}
 	
-	//getInDelivery ???
 	
 	@POST
 	@Path("/requestDelivery")
@@ -127,7 +126,6 @@ public class DelivererService extends ServiceTemplate {
 				ctxDelivery.setDeliveryStatus(DeliveryStatus.delivered);
 			}
 		}
-		//referencama se azuriraju, nadam se
 		DelivererSerializer delSer = new DelivererSerializer(context.getRealPath(""));
 		CustomerSerializer cusSer = new CustomerSerializer(context.getRealPath(""));
 		cusSer.Update(customerDao.getCustomerByUsername(delivery.getCustomer().getUsername()));
