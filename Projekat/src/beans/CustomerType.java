@@ -37,13 +37,14 @@ public class CustomerType {
 	}
 	public boolean changeCustomerType(int points) {
 		boolean retVal = false;
-		switch("name") {
+		switch(name) {
 			case "Bronze":{
 				if(points > 1000) {
 					name = "Silver";
 					neededPoints = 1000;
 					discount = 5;
 					retVal = true;
+					break;
 				}
 			}
 			case "Silver":{
@@ -52,11 +53,13 @@ public class CustomerType {
 					neededPoints = 1500;
 					discount = 10;
 					retVal = true;
+					break;
 				}else if(points <= 1000) {
 					name = "Bronze";
 					neededPoints = 1000;
 					discount = 0;
 					retVal = true;
+					break;
 				}
 			}
 			case "Gold":{
@@ -65,12 +68,14 @@ public class CustomerType {
 					neededPoints = 2500;
 					discount = 15;
 					retVal = true;
+					break;
 				}
 				else if(points <= 1500) {
 					name = "Silver";
 					neededPoints = 1500;
 					discount = 5;
 					retVal = true;
+					break;
 				}
 			}
 			case "Platinum":{
@@ -79,12 +84,14 @@ public class CustomerType {
 					neededPoints = 5000;
 					discount = 20;
 					retVal = true;
+					break;
 				}
 				else if(points <= 1500) {
 					name = "Gold";
 					neededPoints = 1500;
 					discount = 10;
 					retVal = true;
+					break;
 				}
 			}
 			case "Diamond":{
@@ -93,6 +100,7 @@ public class CustomerType {
 					neededPoints = 2500;
 					discount = 15;
 					retVal = true;
+					break;
 				}
 			}
 		}
